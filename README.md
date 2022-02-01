@@ -91,7 +91,6 @@ class Notebook {
     }
   }
 }
-
 ```
 
 
@@ -189,7 +188,6 @@ class Notebook {
     this.notes.splice(targetNoteIndex, 1);
   }
 }
-
 ```
 
 ### 2. Open/Closed (OCP)
@@ -243,7 +241,6 @@ class OperatingSystemInfo {
     }
   }
 }
-
 ```
 
 
@@ -297,5 +294,44 @@ class Macintosh implements OperatingSystemInfo {
     return 1984;
   };
 }
+```
 
+
+### 3. Liskov Substitution (LSP)
+
+:x: Before following LSP:
+
+```typescript
+class Tablet {
+  readBook(): void {
+    console.log("Enjoy reading!");
+  }
+
+  openBrowser(): void {
+    console.log("Start searching ...");
+  }
+}
+
+class KidsTablet extends Tablet {
+  override openBrowser(): Error {
+    throw Error("Kids haven't access to the browser!");
+  }
+}
+```
+
+
+:heavy_check_mark: After following LSP:
+
+```typescript
+class Tablet {
+  readBook(): void {
+    console.log("Enjoy reading!");
+  }
+}
+
+class AdultsTablet extends Tablet {
+  openBrowser(): void {
+    console.log("Start searching ...");
+  }
+}
 ```
