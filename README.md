@@ -19,6 +19,8 @@ This repository is a complete guide and tutorial for the principles and techniqu
 
 ### 1. Single Responsibility (SRP)
 
+> There should never be more than one reason for a class to change. Every class should have only one responsibility.
+
 :x: Before following SRP:
 
 ```typescript
@@ -192,6 +194,8 @@ class Notebook {
 
 ### 2. Open/Closed (OCP)
 
+> Software entities should be open for extension, but closed for modification.
+
 :x: Before following OCP:
 
 ```typescript
@@ -298,6 +302,8 @@ class Macintosh implements OperatingSystemInfo {
 
 
 ### 3. Liskov Substitution (LSP)
+
+> If `S` is a subtype of `T`, then objects of type `T` in a program may be replaced with objects of type `S` without altering any of the desirable properties of that program.
 
 :x: Before following LSP:
 
