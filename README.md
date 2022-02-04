@@ -17,9 +17,13 @@ This repository is a complete guide and tutorial for the principles and techniqu
 
 ## SOLID Principles
 
+<img src="https://user-images.githubusercontent.com/37804060/152614320-7c3b76d7-acdb-4266-b2c5-169fb1b4a9b3.png"/>
+
 ### 1. Single Responsibility (SRP)
 
 > There should never be more than one reason for a class to change. Every class should have only one responsibility.
+
+<img src="https://user-images.githubusercontent.com/37804060/152614337-e60665c6-b5b6-495b-98e0-3810a7c82542.png"/>
 
 :x: Before following SRP:
 
@@ -196,6 +200,8 @@ class Notebook {
 
 > Software entities should be open for extension, but closed for modification.
 
+<img src="https://user-images.githubusercontent.com/37804060/152614349-edd7952b-42c5-4530-b701-5f829df6dcee.png"/>
+
 :x: Before following OCP:
 
 ```typescript
@@ -305,6 +311,8 @@ class Macintosh implements OperatingSystemInfo {
 
 > If `S` is a subtype of `T`, then objects of type `T` in a program may be replaced with objects of type `S` without altering any of the desirable properties of that program.
 
+<img src="https://user-images.githubusercontent.com/37804060/152614359-347f6ab7-3ffe-4a90-b3b1-c0c3ac5d8f0d.png"/>
+
 :x: Before following LSP:
 
 ```typescript
@@ -346,6 +354,8 @@ class AdultsTablet extends Tablet {
 ### 4. Interface Segregation (ISP)
 
 > No code should be forced to depend on methods it does not use.
+
+<img src="https://user-images.githubusercontent.com/37804060/152614369-1a048ac3-0d05-4429-bd0c-aad0379a6b93.png"/>
 
 :x: Before following ISP:
 
