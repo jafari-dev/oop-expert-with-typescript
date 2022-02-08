@@ -17,13 +17,13 @@ This repository is a complete guide and tutorial for the principles and techniqu
 
 ## SOLID Principles
 
-<img src="https://user-images.githubusercontent.com/37804060/152614320-7c3b76d7-acdb-4266-b2c5-169fb1b4a9b3.png"/>
+<img src="https://user-images.githubusercontent.com/37804060/153056635-449fedb7-fcbf-4cb1-b642-5798d29b9c6f.jpg"/>
 
 ### 1. Single Responsibility (SRP)
 
 > There should never be more than one reason for a class to change. Every class should have only one responsibility.
 
-<img src="https://user-images.githubusercontent.com/37804060/152614337-e60665c6-b5b6-495b-98e0-3810a7c82542.png"/>
+<img src="https://user-images.githubusercontent.com/37804060/153056645-8760ddfa-01f3-4c21-9279-ab6ba669a0fc.jpg"/>
 
 :x: Before following SRP:
 
@@ -200,7 +200,7 @@ class Notebook {
 
 > Software entities should be open for extension, but closed for modification.
 
-<img src="https://user-images.githubusercontent.com/37804060/152614349-edd7952b-42c5-4530-b701-5f829df6dcee.png"/>
+<img src="https://user-images.githubusercontent.com/37804060/153056325-679b94dc-ea4f-4315-a682-93057845f9d5.jpg"/>
 
 :x: Before following OCP:
 
@@ -311,7 +311,7 @@ class Macintosh implements OperatingSystemInfo {
 
 > If `S` is a subtype of `T`, then objects of type `T` in a program may be replaced with objects of type `S` without altering any of the desirable properties of that program.
 
-<img src="https://user-images.githubusercontent.com/37804060/152614359-347f6ab7-3ffe-4a90-b3b1-c0c3ac5d8f0d.png"/>
+<img src="https://user-images.githubusercontent.com/37804060/153056329-914cbbba-685b-452b-9dcf-4fcf6a4faabc.jpg"/>
 
 :x: Before following LSP:
 
@@ -355,7 +355,7 @@ class AdultsTablet extends Tablet {
 
 > No code should be forced to depend on methods it does not use.
 
-<img src="https://user-images.githubusercontent.com/37804060/152614369-1a048ac3-0d05-4429-bd0c-aad0379a6b93.png"/>
+<img src="https://user-images.githubusercontent.com/37804060/153056335-7bf6d86f-da0b-4687-89fe-9ea97e2ec40e.jpg"/>
 
 :x: Before following ISP:
 
@@ -451,7 +451,7 @@ class Laptop implements CommonPorts {
 
 > High-level modules should not import anything from low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.
 
-<img src="https://user-images.githubusercontent.com/37804060/152614375-add2d2d6-bdbc-41d3-8b5e-82a1dfacca0d.png"/>
+<img src="https://user-images.githubusercontent.com/37804060/153056344-b32c3e4c-8dce-498c-8243-2aed646762f1.jpg"/>
 
 :x: Before following DIP:
 
