@@ -562,3 +562,107 @@ class Messenger {
   }
 }
 ```
+
+
+## Design Patterns
+
+There are 24 design patterns that are grouped into 3 categories:
+
+1. **Creational**: Creational patterns provide various object creation mechanisms, which increase flexibility and reuse of existing code.
+2. **Structural**: Structural patterns explain how to assemble objects and classes into larger structures while keeping these structures flexible and efficient.
+3. **Behavioral**: Behavioral design patterns are concerned with algorithms and the assignment of responsibilities between objects.
+
+
+* Creational:
+    * Abstract Factory
+    * Builder
+    * Factory Method
+    * Factory Method
+    * Prototype
+    * Singleton
+
+* Behavioral:
+    * Chain of Resp
+    * Command
+    * Interpreter
+    * Iterator
+    * Mediator
+    * Memento
+    * Observer
+    * State
+    * Strategy
+    * Template Method
+    * Visitor
+
+* Structural:
+    * Adapter
+    * Bridge
+    * Composite
+    * Decorator
+    * Facade
+    * Flyweight
+    * Proxy
+
+
+**Tip**: The order of design patterns isn't important. So, you can choose which one to learn, regardless of the category.
+
+## Creational
+
+### Singleton
+
+Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.
+
+
+```typescript
+class Config {
+  private static instance: Config | null = null;
+  
+  private volumn: number;
+  private theme: string;
+
+  private constructor() {
+    this.volumn = 50;
+    this.theme = "WHITE";
+  }
+
+  public static getInstance() {
+    if (this.instance === null) {
+      this.instance = new Config();
+    }
+
+    return this.instance;
+  }
+
+  public setVolumn(newVolumn: number): void {
+    if (newVolumn < 0) {
+      this.volumn = 0;
+    } else if (newVolumn > 100) {
+      this.volumn = 100;
+    } else {
+      this.volumn = newVolumn;
+    }
+  }
+
+  public setTheme(newTheme: string) {
+    const VALID_THEMES = ["WHITE", "YELLOW", "BLUE", "ORANGE", "CYAN", "BLACK"];
+
+    if (VALID_THEMES.includes(newTheme.toUpperCase())) {
+      this.theme = newTheme.toUpperCase();
+    } else {
+      this.theme = "WHITE";
+    }
+  }
+
+  public getVolumn(): number {
+    return this.volumn;
+  }
+
+  public getTheme(): string {
+    return this.theme;
+  }
+}
+
+// configOne === configTwo
+const configOne = Config.getInstance();
+const configTwo = Config.getInstance();
+```
