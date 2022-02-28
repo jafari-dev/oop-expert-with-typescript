@@ -759,3 +759,38 @@ const productTwo = productOne.clone();
   but their fields value are exactly the same!
 */
 ```
+
+
+### Builder
+
+> Builder is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.
+
+```typescript
+interface IBuilder {
+  buildGallary: () => void;
+  buildPayment: () => void;
+  buildNews: () => void;
+}
+
+class Page implements IBuilder {
+  private fixedSections: string[];
+  private dynamicSections: string[];
+
+  constructor() {
+    this.fixedSections = ["HEADER", "BODY", "FOOTER", "MENU", "ABOUT_US"];
+    this.dynamicSections = [];
+  }
+
+  public buildGallary(): void {
+    this.dynamicSections = [...this.dynamicSections, "GALLARY"];
+  }
+
+  public buildPayment(): void {
+    this.dynamicSections = [...this.dynamicSections, "PAYMENT"];
+  }
+
+  public buildNews(): void {
+    this.dynamicSections = [...this.dynamicSections, "NEWS"];
+  }
+}
+```
