@@ -1,71 +1,89 @@
-interface IPhoto {
-  getImage: () => File;
+interface INotifier {
+  sendMessage: (message: string) => void;
+  setUsers: (users: string[]) => void;
+  getUsers: () => string[];
 }
 
-class Photo implements IPhoto {
-  private file: File;
+class Notifier implements INotifier {
+  private users: string[];
 
-  constructor(file: File) {
-    this.file = file;
+  constructor(users: string[]) {
+    this.users = users;
   }
 
-  public getImage(): File {
-    return this.file;
-  }
-}
-
-class PhotoDecorator implements IPhoto {
-  protected photo: IPhoto;
-
-  constructor(photo: IPhoto) {
-    this.photo = photo;
+  public sendMessage(message: string) {
+    this.users.forEach((user) => {
+      // Show the `message` to the `user` on Web Application
+    });
   }
 
-  public getImage() {
-    return this.photo.getImage();
+  public setUsers(users: string[]) {
+    this.users = users;
   }
-}
 
-class PhotoCompressorDecorator extends PhotoDecorator {
-  public getImage() {
-    const newImage = this.photo.getImage();
-    // Do some processes on the new image and compress it
-    return newImage;
+  public getUsers() {
+    return this.users;
   }
 }
 
-class PhotoConverterDecorator extends PhotoDecorator {
-  public getImage() {
-    const newImage = this.photo.getImage();
-    // Do some processes on the new image and convert its format
-    return newImage;
+abstract class NotifierDecorator implements INotifier {
+  protected notifier: INotifier;
+
+  constructor(notifier: INotifier) {
+    this.notifier = notifier;
+  }
+
+  public abstract sendMessage(message: string);
+
+  public getUsers() {
+    return this.notifier.getUsers();
+  }
+
+  public setUsers(users: string[]) {
+    this.notifier.setUsers(users);
   }
 }
 
-class PhotoEnhancerDecorator extends PhotoDecorator {
-  public getImage() {
-    const newImage = this.photo.getImage();
-    // Do some processes on the new image and enhance its quality
-    return newImage;
+class EmailNotifier extends NotifierDecorator {
+  sendMessage(message: string) {
+    notifier.getUsers().forEach((user) => {
+      // Send the `message` to the `user` via Email
+    });
+
+    this.notifier.sendMessage(message);
   }
 }
 
-const myPhoto = new Photo(new File([], "myPhoto.jpg"));
+class SlackNotifier extends NotifierDecorator {
+  sendMessage(message: string) {
+    this.notifier.getUsers().forEach((user) => {
+      // Send the `message` to the `user` via Slack
+    });
 
-const compressedImage = new PhotoCompressorDecorator(myPhoto);
-const convertedImage = new PhotoConverterDecorator(myPhoto);
-const enhancedImage = new PhotoEnhancerDecorator(myPhoto);
+    this.notifier.sendMessage(message);
+  }
+}
 
-const compressedConvertedImage = new PhotoConverterDecorator(
-  new PhotoCompressorDecorator(myPhoto)
-);
-const compressedEnhancedImage = new PhotoEnhancerDecorator(
-  new PhotoCompressorDecorator(myPhoto)
-);
-const convertedEnhancedImage = new PhotoEnhancerDecorator(
-  new PhotoConverterDecorator(myPhoto)
-);
+class SmsNotifier extends NotifierDecorator {
+  sendMessage(message: string) {
+    this.notifier.getUsers().forEach((user) => {
+      // Send the `message` to the `user` via SMS
+    });
 
-const compressedConvertedEnhancedImage = new PhotoEnhancerDecorator(
-  new PhotoConverterDecorator(new PhotoCompressorDecorator(myPhoto))
+    this.notifier.sendMessage(message);
+  }
+}
+
+const notifier = new Notifier(["Ahmad", "Artin", "Ghazaleh"]);
+
+const notifierByEmail = new EmailNotifier(notifier);
+const notifierBySlack = new SlackNotifier(notifier);
+const notifierBySMS = new SmsNotifier(notifier);
+
+const notifierByEmailAndSlack = new EmailNotifier(new SlackNotifier(notifier));
+const notifierByEmailAndSMS = new EmailNotifier(new SmsNotifier(notifier));
+const notifierBySlackAndSMS = new SlackNotifier(new SmsNotifier(notifier));
+
+const notifierByEmailAndSlackAndSMS = new EmailNotifier(
+  new SlackNotifier(new SmsNotifier(notifier))
 );
