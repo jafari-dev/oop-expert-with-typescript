@@ -8,6 +8,16 @@ This repository is a complete guide and tutorial for the principles and techniqu
 </p>
 
 
+## Table of Contents
+
+1. [Pillars of OOP](#pillars-of-oop)
+2. [SOLID Principles](#solid-principles)
+    * [Single Responsibility (SRP)](#1-single-responsibility-srp)
+    * [Open/Closed (OCP)](#2-openclosed-ocp)
+    * [Liskov Substitution (LSP)](#3-liskov-substitution-lsp)
+    * [Interface Segregation (ISP)](#4-interface-segregation-isp)
+    * [Dependency Inversion (DIP)](#5-dependency-inversion-dip)
+
 ## Pillars of OOP
 
 1. <strong>Abstraction</strong>
