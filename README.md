@@ -572,12 +572,7 @@ In software engineering, a software design pattern is a general, reusable soluti
 
 There are 24 design patterns that are grouped into 3 categories:
 
-1. **Creational**: Creational patterns provide various object creation mechanisms, which increase flexibility and reuse of existing code.
-2. **Structural**: Structural patterns explain how to assemble objects and classes into larger structures while keeping these structures flexible and efficient.
-3. **Behavioral**: Behavioral design patterns are concerned with algorithms and the assignment of responsibilities between objects.
-
-
-* Creational:
+1. **Creational**: Creational patterns provide various object creation mechanisms, which increase flexibility and reuse of existing code. Includes:
     * Abstract Factory
     * Builder
     * Factory Method
@@ -585,7 +580,7 @@ There are 24 design patterns that are grouped into 3 categories:
     * Prototype
     * Singleton
 
-* Structural:
+2. **Structural**: Structural patterns explain how to assemble objects and classes into larger structures while keeping these structures flexible and efficient. Includes:
     * Adapter
     * Bridge
     * Composite
@@ -594,7 +589,7 @@ There are 24 design patterns that are grouped into 3 categories:
     * Flyweight
     * Proxy
 
-* Behavioral:
+3. **Behavioral**: Behavioral design patterns are concerned with algorithms and the assignment of responsibilities between objects. Includes:
     * Chain of Resp
     * Command
     * Interpreter
