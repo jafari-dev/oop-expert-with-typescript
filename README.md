@@ -18,12 +18,17 @@ This repository is a complete guide and tutorial for the principles and techniqu
     * [Interface Segregation (ISP)](#4-interface-segregation-isp)
     * [Dependency Inversion (DIP)](#5-dependency-inversion-dip)
 
-## Pillars of OOP
+
+## Fundamentals
+### What's Object-oriented-programming?
+
+Object-oriented programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code: data in the form of fields (often known as attributes or properties), and code, in the form of procedures (often known as methods). There are 4 pillars of OOP, includes:
 
 1. <strong>Abstraction</strong>
 2. <strong>Encapsulation</strong>
 3. <strong>Inheritance</strong>
 4. <strong>Polymorphism</strong>
+
 
 ## SOLID Principles
 
