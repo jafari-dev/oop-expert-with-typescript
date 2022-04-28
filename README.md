@@ -585,6 +585,15 @@ There are 24 design patterns that are grouped into 3 categories:
     * Prototype
     * Singleton
 
+* Structural:
+    * Adapter
+    * Bridge
+    * Composite
+    * Decorator
+    * Facade
+    * Flyweight
+    * Proxy
+
 * Behavioral:
     * Chain of Resp
     * Command
@@ -597,15 +606,6 @@ There are 24 design patterns that are grouped into 3 categories:
     * Strategy
     * Template Method
     * Visitor
-
-* Structural:
-    * Adapter
-    * Bridge
-    * Composite
-    * Decorator
-    * Facade
-    * Flyweight
-    * Proxy
 
 
 **Tip**: The order of design patterns isn't important. So, you can choose which one to learn, regardless of the category.
