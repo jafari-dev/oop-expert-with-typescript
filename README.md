@@ -660,6 +660,8 @@ There are 24 design patterns that are grouped into 3 categories:
 
 > Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.
 
+<img src="https://user-images.githubusercontent.com/37804060/165857698-b1cbb582-4e8c-4cb7-af89-b11edc687626.png"/>
+
 ```typescript
 class Config {
   private static instance: Config | null = null;
@@ -719,6 +721,8 @@ const configTwo = Config.getInstance();
 ### Prototype
 
 > Prototype is a creational design pattern that lets you copy existing objects without making your code dependent on their classes.
+
+<img src="https://user-images.githubusercontent.com/37804060/165857765-643633b0-72eb-43ed-9f0c-9dca50c0939b.png"/>
 
 ```typescript
 interface IPrototype {
@@ -815,6 +819,8 @@ const productTwo = productOne.clone();
 
 > Builder is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.
 
+<img src="https://user-images.githubusercontent.com/37804060/165857814-d11b7310-ec21-4596-9d53-26fc2acf1a57.png"/>
+
 ```typescript
 interface IBuilder {
   buildGallery: () => void;
@@ -850,6 +856,8 @@ class Page implements IBuilder {
 ### Factory Method
 
 > Factory Method is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
+
+<img src="https://user-images.githubusercontent.com/37804060/165857922-b719ba3a-458c-4761-8e98-f0d05a93940c.png"/>
 
 ```typescript
 interface PaymentService {
@@ -897,6 +905,8 @@ class MasterCardFactory extends PaymentServiceFactory {
 ### Abstract Factory
 
 > Abstract Factory is a creational design pattern that lets you produce families of related objects without specifying their concrete classes.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858016-40c37caf-d0c4-421c-8fca-a423d5add360.png"/>
 
 ```typescript
 interface Movie {
@@ -973,6 +983,8 @@ class ChildrenPackageOfferor implements PackageOfferor {
 
 > Composite is a structural design pattern that lets you compose objects into tree structures and then work with these structures as if they were individual objects.
 
+<img src="https://user-images.githubusercontent.com/37804060/165858367-a2ba0672-4bb3-4b11-a63c-7843df0cfb7c.png"/>
+
 ```typescript
 interface Composite {
   getAverage: () => number;
@@ -1025,6 +1037,8 @@ class School implements Composite {
 ### Adapter (Wrapper)
 
 > Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858390-a0bdcf53-22bb-42b3-b499-70b51384a61c.png"/>
 
 ```typescript
 interface StandardUser {
@@ -1117,6 +1131,8 @@ class UserAdapter implements StandardUser {
 ### Decorator (Wrapper)
 
 > Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858382-6ece64aa-4c9f-4e4e-944e-f7a67fcdd162.png"/>
 
 ```typescript
 interface INotifier {
@@ -1216,6 +1232,8 @@ const notifierByEmailAndSlackAndSMS = new EmailNotifier(
 
 > Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
 
+<img src="https://user-images.githubusercontent.com/37804060/165858377-16fc76a5-3b79-4837-bf3c-3f38539a4ac3.png"/>
+
 ```typescript
 class Sound {
   constructor(soundLocation: string) {
@@ -1276,6 +1294,8 @@ class DrawSoundSpectrum {
 
 > Proxy is a structural design pattern that lets you provide a substitute or placeholder for another object. A proxy controls access to the original object, allowing you to perform something either before or after the request gets through to the original object.
 
+<img src="https://user-images.githubusercontent.com/37804060/165858391-e373f505-107c-492d-b354-6a10d6441e35.png"/>
+
 ```typescript
 interface IYouTube {
   getPlaylistVideos: (playlistId: string) => unknown[];
@@ -1330,6 +1350,8 @@ class YouTubeProxy implements IYouTube {
 ### Bridge
 
 > Bridge is a structural design pattern that lets you split a large class or a set of closely related classes into two separate hierarchies—abstraction and implementation—which can be developed independently of each other.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858360-9b8ab73c-9b08-41d1-b7b9-84a2e5ef5028.png"/>
 
 ```typescript
 interface BrokerageAccount {
@@ -1398,6 +1420,8 @@ class SpecialTradeAccount extends TradingAccount {
 ### Flyweight (Cache)
 
 > Flyweight is a structural design pattern that lets you fit more objects into the available amount of RAM by sharing common parts of state between multiple objects instead of keeping all of the data in each object.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858370-1ec33962-9bad-4f5d-8078-132bf7d9da29.png"/>
 
 ```typescript
 enum Weapon {
