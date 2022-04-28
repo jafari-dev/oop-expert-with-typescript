@@ -48,6 +48,7 @@ Object-oriented programming (OOP) is a programming paradigm based on the concept
 3. <strong>Inheritance</strong>
 4. <strong>Polymorphism</strong>
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ## SOLID Principles
 
@@ -56,6 +57,8 @@ Object-oriented programming (OOP) is a programming paradigm based on the concept
 In software engineering, SOLID is a mnemonic acronym for five design principles intended to make software designs more understandable, flexible, and maintainable. The principles are a subset of many principles promoted by American software engineer and instructor Robert C. Martin, first introduced in his 2000 paper Design Principles and Design Patterns.
 
 <img src="https://user-images.githubusercontent.com/37804060/153056635-449fedb7-fcbf-4cb1-b642-5798d29b9c6f.jpg"/>
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 1. Single Responsibility (SRP)
 
@@ -234,6 +237,8 @@ class Notebook {
 }
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
 ### 2. Open/Closed (OCP)
 
 > Software entities should be open for extension, but closed for modification.
@@ -344,6 +349,7 @@ class Macintosh implements OperatingSystemInfo {
 }
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 3. Liskov Substitution (LSP)
 
@@ -388,6 +394,7 @@ class AdultsTablet extends Tablet {
 }
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 4. Interface Segregation (ISP)
 
@@ -484,6 +491,8 @@ class Laptop implements CommonPorts {
   };
 }
 ```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 5. Dependency Inversion (DIP)
 
@@ -601,6 +610,7 @@ class Messenger {
 }
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ## Design Patterns
 
@@ -641,6 +651,8 @@ There are 24 design patterns that are grouped into 3 categories:
 
 
 **Tip**: The order of design patterns isn't important. So, you can choose which one to learn, regardless of the category.
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ## Creational
 
@@ -702,6 +714,7 @@ const configOne = Config.getInstance();
 const configTwo = Config.getInstance();
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Prototype
 
@@ -796,6 +809,7 @@ const productTwo = productOne.clone();
 */
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Builder
 
@@ -831,6 +845,7 @@ class Page implements IBuilder {
 }
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Factory Method
 
@@ -877,6 +892,7 @@ class MasterCardFactory extends PaymentServiceFactory {
 }
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Abstract Factory
 
@@ -949,6 +965,7 @@ class ChildrenPackageOfferor implements PackageOfferor {
 }
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ## Structural 
 
@@ -1002,6 +1019,8 @@ class School implements Composite {
   }
 }
 ```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Adapter (Wrapper)
 
@@ -1093,6 +1112,7 @@ class UserAdapter implements StandardUser {
 }
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Decorator (Wrapper)
 
@@ -1190,6 +1210,7 @@ const notifierByEmailAndSlackAndSMS = new EmailNotifier(
 );
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Facade
 
@@ -1249,6 +1270,7 @@ class DrawSoundSpectrum {
 }
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Proxy
 
@@ -1303,6 +1325,7 @@ class YouTubeProxy implements IYouTube {
 }
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Bridge
 
@@ -1370,6 +1393,7 @@ class SpecialTradeAccount extends TradingAccount {
 }
 ```
 
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Flyweight (Cache)
 
@@ -1467,3 +1491,5 @@ class Soldier {
   }
 }
 ```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
