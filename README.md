@@ -10,13 +10,32 @@ This repository is a complete guide and tutorial for the principles and techniqu
 
 ## Table of Contents
 
-1. [Pillars of OOP](#pillars-of-oop)
+1. [Fundamentals](#fundamentals)
+    * [What's Object-Oriented-Programming?](#whats-object-oriented-programming)
 2. [SOLID Principles](#solid-principles)
+    * [What's SOLID Meaning?](#whats-solid-meaning)
     * [Single Responsibility (SRP)](#1-single-responsibility-srp)
     * [Open/Closed (OCP)](#2-openclosed-ocp)
     * [Liskov Substitution (LSP)](#3-liskov-substitution-lsp)
     * [Interface Segregation (ISP)](#4-interface-segregation-isp)
     * [Dependency Inversion (DIP)](#5-dependency-inversion-dip)
+3. [Design Patterns](#design-patterns)
+    * [What's a Design Pattern?](#whats-a-design-pattern)
+    * [Creational Design Patterns](#creational)
+        * [Singleton](#singleton)
+        * [Prototype](#prototype)
+        * [Builder](#builder)
+        * [Factory Method](#factory-method)
+        * [Abstract Factory](#abstract-factory)
+    * [Structural Design Patterns](#structural)
+        * [Composite (Object Tree)](#composite-object-tree)
+        * [Adapter (Wrapper)](#adapter-wrapper)
+        * [Decorator (Wrapper)](#decorator-wrapper)
+        * [Facade](#facade)
+        * [Proxy](#proxy)
+        * [Bridge](#bridge)
+        * [Flyweight (Cache)](#flyweight-cache)
+
 
 
 ## Fundamentals
@@ -594,7 +613,6 @@ There are 24 design patterns that are grouped into 3 categories:
 1. **Creational**: Creational patterns provide various object creation mechanisms, which increase flexibility and reuse of existing code. Includes:
     * Abstract Factory
     * Builder
-    * Factory Method
     * Factory Method
     * Prototype
     * Singleton
