@@ -1,11 +1,11 @@
 interface OperatingSystemInfo {
-  getFilesExtention: () => string;
+  getFilesExtension: () => string;
   getCreator: () => string;
   getBornDate: () => number;
 }
 
 class Windows implements OperatingSystemInfo {
-  getFilesExtention() {
+  getFilesExtension() {
     return "exe";
   }
 
@@ -19,7 +19,7 @@ class Windows implements OperatingSystemInfo {
 }
 
 class Linux implements OperatingSystemInfo {
-  getFilesExtention() {
+  getFilesExtension() {
     return "deb";
   }
 
@@ -33,7 +33,7 @@ class Linux implements OperatingSystemInfo {
 }
 
 class Macintosh implements OperatingSystemInfo {
-  getFilesExtention() {
+  getFilesExtension() {
     return "dmg";
   }
 

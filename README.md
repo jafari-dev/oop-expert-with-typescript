@@ -206,7 +206,7 @@ class Notebook {
 
 ```typescript
 class OperatingSystemInfo {
-  getFilesExtention(os: string): string {
+  getFilesExtension(os: string): string {
     if (os === "Windows") {
       return "exe";
     }
@@ -258,13 +258,13 @@ class OperatingSystemInfo {
 
 ```typescript
 interface OperatingSystemInfo {
-  getFilesExtention: () => string;
+  getFilesExtension: () => string;
   getCreator: () => string;
   getBornDate: () => number;
 }
 
 class Windows implements OperatingSystemInfo {
-  getFilesExtention() {
+  getFilesExtension() {
     return "exe";
   }
 
@@ -278,7 +278,7 @@ class Windows implements OperatingSystemInfo {
 }
 
 class Linux implements OperatingSystemInfo {
-  getFilesExtention() {
+  getFilesExtension() {
     return "deb";
   }
 
@@ -292,7 +292,7 @@ class Linux implements OperatingSystemInfo {
 }
 
 class Macintosh implements OperatingSystemInfo {
-  getFilesExtention() {
+  getFilesExtension() {
     return "dmg";
   }
 
@@ -458,7 +458,7 @@ class Laptop implements CommonPorts {
 ```typescript
 class TelegramApi {
   start() {
-    console.log("You are connected to Telegeram API!");
+    console.log("You are connected to Telegram API!");
   }
 
   messageTo(targetId: number, message: string) {
@@ -471,7 +471,7 @@ class WhatsappApi {
     console.log("You are connected to Whatsapp API!");
   }
 
-  pushMeesage(message: string, targetId: number) {
+  pushMessage(message: string, targetId: number) {
     console.log(message + " sent to " + targetId + " by Whatsapp!");
   }
 }
@@ -500,7 +500,7 @@ class Messenger {
     }
     else if (this.api instanceof WhatsappApi) {
       this.api.setup();
-      this.api.pushMeesage(message, targetId);
+      this.api.pushMessage(message, targetId);
     }
     else {
       this.api.open();
@@ -521,7 +521,7 @@ interface MessengerApi {
 
 class TelegramApi implements MessengerApi {
   connect() {
-    console.log("You are connected to Telegeram API!");
+    console.log("You are connected to Telegram API!");
   }
 
   send(targetId: string, message: string) {
@@ -616,11 +616,11 @@ There are 24 design patterns that are grouped into 3 categories:
 class Config {
   private static instance: Config | null = null;
   
-  private volumn: number;
+  private volume: number;
   private theme: string;
 
   private constructor() {
-    this.volumn = 50;
+    this.volume = 50;
     this.theme = "WHITE";
   }
 
@@ -632,13 +632,13 @@ class Config {
     return this.instance;
   }
 
-  public setVolumn(newVolumn: number): void {
-    if (newVolumn < 0) {
-      this.volumn = 0;
-    } else if (newVolumn > 100) {
-      this.volumn = 100;
+  public setVolume(newVolume: number): void {
+    if (newVolume < 0) {
+      this.volume = 0;
+    } else if (newVolume > 100) {
+      this.volume = 100;
     } else {
-      this.volumn = newVolumn;
+      this.volume = newVolume;
     }
   }
 
@@ -652,8 +652,8 @@ class Config {
     }
   }
 
-  public getVolumn(): number {
-    return this.volumn;
+  public getVolume(): number {
+    return this.volume;
   }
 
   public getTheme(): string {
@@ -727,11 +727,11 @@ class Product implements IPrototype {
     }
   }
 
-  public setNumberOfProdcut(numberOfProdcut: number): void {
-    if (numberOfProdcut <= 0) {
+  public setNumberOfProduct(numberOfProduct: number): void {
+    if (numberOfProduct <= 0) {
       this.number = 0;
     } else {
-      this.number = numberOfProdcut;
+      this.number = numberOfProduct;
     }
   }
 
@@ -767,7 +767,7 @@ const productTwo = productOne.clone();
 
 ```typescript
 interface IBuilder {
-  buildGallary: () => void;
+  buildGallery: () => void;
   buildPayment: () => void;
   buildNews: () => void;
 }
@@ -781,8 +781,8 @@ class Page implements IBuilder {
     this.dynamicSections = [];
   }
 
-  public buildGallary(): void {
-    this.dynamicSections = [...this.dynamicSections, "GALLARY"];
+  public buildGallery(): void {
+    this.dynamicSections = [...this.dynamicSections, "GALLERY"];
   }
 
   public buildPayment(): void {

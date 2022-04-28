@@ -1,5 +1,5 @@
 class OperatingSystemInfo {
-  getFilesExtention(os: string): string {
+  getFilesExtension(os: string): string {
     if (os === "Windows") {
       return "exe";
     }

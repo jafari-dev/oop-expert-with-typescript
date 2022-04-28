@@ -53,11 +53,11 @@ class Product implements IPrototype {
     }
   }
 
-  public setNumberOfProdcut(numberOfProdcut: number): void {
-    if (numberOfProdcut <= 0) {
+  public setNumberOfProduct(numberOfProduct: number): void {
+    if (numberOfProduct <= 0) {
       this.number = 0;
     } else {
-      this.number = numberOfProdcut;
+      this.number = numberOfProduct;
     }
   }
 

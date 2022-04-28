@@ -1,5 +1,5 @@
 interface IBuilder {
-  buildGallary: () => void;
+  buildGallery: () => void;
   buildPayment: () => void;
   buildNews: () => void;
 }
@@ -13,8 +13,8 @@ class Page implements IBuilder {
     this.dynamicSections = [];
   }
 
-  public buildGallary(): void {
-    this.dynamicSections = [...this.dynamicSections, "GALLARY"];
+  public buildGallery(): void {
+    this.dynamicSections = [...this.dynamicSections, "GALLERY"];
   }
 
   public buildPayment(): void {

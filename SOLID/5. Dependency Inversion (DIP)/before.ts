@@ -1,6 +1,6 @@
 class TelegramApi {
   start() {
-    console.log("You are connected to Telegeram API!");
+    console.log("You are connected to Telegram API!");
   }
 
   messageTo(targetId: number, message: string) {
@@ -13,7 +13,7 @@ class WhatsappApi {
     console.log("You are connected to Whatsapp API!");
   }
 
-  pushMeesage(message: string, targetId: number) {
+  pushMessage(message: string, targetId: number) {
     console.log(message + " sent to " + targetId + " by Whatsapp!");
   }
 }
@@ -42,7 +42,7 @@ class Messenger {
     }
     else if (this.api instanceof WhatsappApi) {
       this.api.setup();
-      this.api.pushMeesage(message, targetId);
+      this.api.pushMessage(message, targetId);
     }
     else {
       this.api.open();

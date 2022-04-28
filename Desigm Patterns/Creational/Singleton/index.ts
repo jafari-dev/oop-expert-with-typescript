@@ -1,11 +1,11 @@
 class Config {
   private static instance: Config | null = null;
   
-  private volumn: number;
+  private volume: number;
   private theme: string;
 
   private constructor() {
-    this.volumn = 50;
+    this.volume = 50;
     this.theme = "WHITE";
   }
 
@@ -17,13 +17,13 @@ class Config {
     return this.instance;
   }
 
-  public setVolumn(newVolumn: number): void {
-    if (newVolumn < 0) {
-      this.volumn = 0;
-    } else if (newVolumn > 100) {
-      this.volumn = 100;
+  public setVolume(newVolume: number): void {
+    if (newVolume < 0) {
+      this.volume = 0;
+    } else if (newVolume > 100) {
+      this.volume = 100;
     } else {
-      this.volumn = newVolumn;
+      this.volume = newVolume;
     }
   }
 
@@ -38,7 +38,7 @@ class Config {
   }
 
   public getVolumn(): number {
-    return this.volumn;
+    return this.volume;
   }
 
   public getTheme(): string {

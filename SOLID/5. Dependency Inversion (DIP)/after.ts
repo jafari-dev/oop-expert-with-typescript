@@ -5,7 +5,7 @@ interface MessengerApi {
 
 class TelegramApi implements MessengerApi {
   connect() {
-    console.log("You are connected to Telegeram API!");
+    console.log("You are connected to Telegram API!");
   }
 
   send(targetId: string, message: string) {
