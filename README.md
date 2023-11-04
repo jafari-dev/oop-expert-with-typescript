@@ -747,8 +747,10 @@ class Product implements IPrototype {
 
     this.name = name;
     this.number = number;
-    this.price.real = realPrice;
-    this.price.final = finalPrice;
+    this.price = {
+      real: realPrice,
+      final: finalPrice
+    }
   }
 
   public clone() {
