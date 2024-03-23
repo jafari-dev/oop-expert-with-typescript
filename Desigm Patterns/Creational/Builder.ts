@@ -43,7 +43,7 @@ class PersonalBlogPageBuilder implements PageBuilder {
   constructor() {
     this.page = new Page();
   }
-  
+
   public getPage() {
     return this.page;
   }

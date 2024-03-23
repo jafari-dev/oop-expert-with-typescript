@@ -1,23 +1,26 @@
 class Weather {
-  private static instance: Weather | null = null
+  private static instance: Weather | null = null;
 
-  private citiesData: { city: string; temperature: number }[]
+  private statusOfCities: {
+    city: string;
+    status: "SUNNY" | "CLOUDY" | "RAINY" | "SNOWY";
+  }[];
 
   private constructor() {
     const data = []; // Get data from API
-    this.citiesData = data
+    this.statusOfCities = data;
   }
 
   public getTemperatureByCity(city: string) {
-    return this.citiesData.find((data) => data.city === city)
+    return this.statusOfCities.find((data) => data.city === city);
   }
 
   public static getInstance() {
-    if (this.instance === null) {
-      this.instance = new Weather()
+    if (this.instance == null) {
+      this.instance = new Weather();
     }
 
-    return this.instance
+    return this.instance;
   }
 }
 

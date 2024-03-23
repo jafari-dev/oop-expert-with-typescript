@@ -1,29 +1,52 @@
-type Movie = unknown; // You can use your own type
-type AudioTrack = unknown; // You can use your own type
+interface Movie {
+  title: string;
+  artists: string[];
+  director: string;
+  releaseYear: number;
+  awards: string[];
+  duration: number;
+}
+
+interface AudioTrack {
+  title: string;
+  artist: string;
+  genre: string;
+  mood: string;
+  lyric: string;
+  duration: number;
+}
 
 interface MovieApi {
-  searchByName: (name: string) => Movie[];
+  searchByTitle: (name: string) => Movie[];
   searchByActors: (actors: string[]) => Movie[];
   searchByAwards: (awards: string[]) => Movie[];
   searchByDirector: (director: string) => Movie[];
-  searchByReleaseDate: (releaseDate: Date) => Movie[];
+  releaseYear: (releaseYear: Date) => Movie[];
 }
 
 interface AudioApi {
-  searchByName: (name: string) => AudioTrack[];
+  searchByTitle: (name: string) => AudioTrack[];
   searchByArtist: (artist: string) => AudioTrack[];
   searchByMood: (mood: string) => AudioTrack[];
   searchByGenre: (genre: string) => AudioTrack[];
-  searchByLyric: (anyPartOfLyric: string) => AudioTrack[];
+  searchByLyric: (text: string) => AudioTrack[];
 }
 
-class NormalMovieApiProvider implements MovieApi { /* Implementation */ }
+class NormalMovieApiProvider implements MovieApi {
+  // Implementation
+}
 
-class NormalAudioApiProvider implements AudioApi { /* Implementation */ }
+class NormalAudioApiProvider implements AudioApi {
+  // Implementation
+}
 
-class PremiumMovieApiProvider implements MovieApi { /* Implementation */ }
+class PremiumMovieApiProvider implements MovieApi {
+  // Implementation
+}
 
-class PremiumAudioApiProvider implements AudioApi { /* Implementation */ }
+class PremiumAudioApiProvider implements AudioApi {
+  // Implementation
+}
 
 interface ApiProviderFactory {
   createMovieApiProvider: () => MovieApi;
