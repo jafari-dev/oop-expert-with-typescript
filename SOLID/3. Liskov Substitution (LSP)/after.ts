@@ -1,11 +1,19 @@
 class Tablet {
   readBook(): void {
-    console.log("Enjoy reading!");
+    // Read a book
+  }
+
+  playCartoon(): void {
+    // Play a cartoon
   }
 }
 
 class AdultsTablet extends Tablet {
+  playMovie(): void {
+    // Play a movie
+  }
+
   openBrowser(): void {
-    console.log("Start searching ...");
+    // Open a browser
   }
 }

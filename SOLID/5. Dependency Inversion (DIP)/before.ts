@@ -23,7 +23,7 @@ class SignalApi {
     console.log("You are connected to Signal API!");
   }
 
-  postMessage(params: { id: number, text: string }) {
+  postMessage(params: { id: number; text: string }) {
     console.log(params.text + " sent to " + params.id + " by Signal!");
   }
 }
@@ -39,12 +39,10 @@ class Messenger {
     if (this.api instanceof TelegramApi) {
       this.api.start();
       this.api.messageTo(targetId, message);
-    }
-    else if (this.api instanceof WhatsappApi) {
+    } else if (this.api instanceof WhatsappApi) {
       this.api.setup();
       this.api.pushMessage(message, targetId);
-    }
-    else {
+    } else {
       this.api.open();
       this.api.postMessage({ id: targetId, text: message });
     }

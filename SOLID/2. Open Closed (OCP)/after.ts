@@ -1,10 +1,10 @@
-interface OperatingSystemInfo {
+interface OperatingSystem {
   getFilesExtension: () => string;
   getCreator: () => string;
   getBornDate: () => number;
 }
 
-class Windows implements OperatingSystemInfo {
+class Windows implements OperatingSystem {
   getFilesExtension() {
     return "exe";
   }
@@ -15,10 +15,10 @@ class Windows implements OperatingSystemInfo {
 
   getBornDate() {
     return 1985;
-  };
+  }
 }
 
-class Linux implements OperatingSystemInfo {
+class Linux implements OperatingSystem {
   getFilesExtension() {
     return "deb";
   }
@@ -29,10 +29,10 @@ class Linux implements OperatingSystemInfo {
 
   getBornDate() {
     return 1991;
-  };
+  }
 }
 
-class Macintosh implements OperatingSystemInfo {
+class Macintosh implements OperatingSystem {
   getFilesExtension() {
     return "dmg";
   }
@@ -43,5 +43,5 @@ class Macintosh implements OperatingSystemInfo {
 
   getBornDate() {
     return 1984;
-  };
+  }
 }
