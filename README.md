@@ -1,4 +1,4 @@
-# Object Oriented Programming Expert With TypeScript
+# Object Oriented Programming Expert with TypeScript
 
 This repository is a complete guide and tutorial for the principles and techniques of object-oriented programming. It can be a reference for all interested in programming and software developers. You will find simple and practical examples in all sections to make the concepts easier to understand.
 
@@ -51,6 +51,8 @@ This repository is a complete guide and tutorial for the principles and techniqu
      - [Strategy](#strategy)
      - [Template Method](#template-method)
      - [Visitor](#visitor)
+4. [References](#references)
+5. [Contributing and Supporting](#contributing-and-supporting)
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
@@ -60,12 +62,12 @@ This repository is a complete guide and tutorial for the principles and techniqu
 
 Object-oriented programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code: data in the form of fields (often known as attributes or properties), and code, in the form of procedures (often known as methods). There are 6 pillars of OOP, includes:
 
-1. <strong>Class</strong>
-2. <strong>Objects</strong>
-3. <strong>Data Abstraction</strong>
-4. <strong>Encapsulation</strong>
-5. <strong>Inheritance</strong>
-6. <strong>Polymorphism</strong>
+1. *Class*
+2. *Objects*
+3. *Data Abstraction*
+4. *Encapsulation*
+5. *Inheritance*
+6. *Polymorphism*
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
@@ -144,7 +146,7 @@ We demonstrate marking task1 as completed and then output the details of both ta
 
 > It is a basic unit of Object-Oriented Programming and represents the real-life entities. An Object is an instance of a Class. When a class is defined, no memory is allocated but when it is instantiated (i.e. an object is created) memory is allocated. An object has an identity, state, and behavior. Each object contains data and code to manipulate the data. Objects can interact without having to know details of each other’s data or code, it is sufficient to know the type of message accepted and type of response returned by the objects.
 
-For example <strong>Dog</strong> is a real-life object, which has some characteristics like color, breed, bark, sleep, and eats.
+For example *Dog* is a real-life object, which has some characteristics like color, breed, bark, sleep, and eats.
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
@@ -1846,5 +1848,41 @@ const proxyRequestHandler = new RequestHandlerProxy(realRequestHandler);
 
 proxyRequestHandler.sendRequest("GET", "/api/users");
 ```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+## References
+
+In creating this repository, I aimed to provide original examples to facilitate learning about object-oriented programming (OOP) pillars, SOLID principles, and design patterns using TypeScript. While there may be similarities between examples found in this repository and those in other resources, it's essential to emphasize that all code and documentation within this repository are original creations.
+
+The following list includes resources that have inspired and informed my understanding of OOP, SOLID principles, and design patterns:
+
+1. Head First Design Patterns (by Eric Freeman and Elisabeth Robson)
+2. Dive Into Design Patterns (by Alexander Shvets)
+3. [GeeksForGeeks Website](https://www.geeksforgeeks.org/)
+4. [WikiPedia Website](https://www.wikipedia.org/)
+5. +5 years of experience in the software development industry
+
+The resources for the images in the repository are:
+
+1. [The S.O.L.I.D Principles in Pictures](https://medium.com/backticks-tildes/the-s-o-l-i-d-principles-in-pictures-b34ce2f1e898)
+2. [Refactoring.guru Website](https://refactoring.guru/)
+3. Google!
+
+> Please note that while the concepts discussed in these resources may overlap with the content of this repository, all examples and code within this repository have been independently developed by myself with the goal of providing real-world scenarios and applications.
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+## Contributing and Supporting
+
+Thank you for exploring **OOP Expert with TypeScript**. This repository serves as a comprehensive resource for mastering object-oriented programming principles, SOLID design, and design patterns through the lens of TypeScript.
+
+Your contributions can enhance the learning experience for countless individuals. Whether it's correcting a typo, suggesting improvements to code examples, or adding new content, your input is invaluable in ensuring the repository remains a top-notch educational tool.
+
+By collaborating with me, you not only enrich the learning journey for others but also sharpen your own skills. Every line of code, every explanation, and every suggestion can make a significant difference.
+
+If you've found this repository helpful, kindly consider giving it a :star:. Your support encourages me to continue refining and expanding its content, benefitting the entire community of developers striving to master object-oriented programming with TypeScript.
+
+Let's work together to cultivate a vibrant learning environment where knowledge is shared, refined, and celebrated. Your contributions are deeply appreciated. Thank you for being a part of this journey.
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)

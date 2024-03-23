@@ -1,4 +1,4 @@
-# Object Oriented Programming Expert With TypeScript
+# Object Oriented Programming Expert with TypeScript
 
 This repository is a complete guide and tutorial for the principles and techniques of object-oriented programming. It can be a reference for all interested in programming and software developers. You will find simple and practical examples in all sections to make the concepts easier to understand.
 
@@ -51,3 +51,5 @@ This repository is a complete guide and tutorial for the principles and techniqu
      - [Strategy](#strategy)
      - [Template Method](#template-method)
      - [Visitor](#visitor)
+4. [References](#references)
+5. [Contributing and Supporting](#contributing-and-supporting)
