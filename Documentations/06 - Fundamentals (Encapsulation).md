@@ -44,5 +44,3 @@ In this example:
 - We provide public methods `authenticate()` to verify the user's password and `changePassword()` to allow users to change their password.
 - Accessing or modifying the password property directly from outside the class is not allowed due to its private access modifier.
 - Encapsulation ensures that sensitive data (password) is hidden and can only be accessed or modified through controlled methods, enhancing security and preventing unauthorized access or manipulation.
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

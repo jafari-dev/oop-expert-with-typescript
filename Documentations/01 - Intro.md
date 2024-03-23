@@ -10,6 +10,8 @@ This repository is a complete guide and tutorial for the principles and techniqu
 
 1. [Fundamentals](#fundamentals)
    - [What's Object-Oriented-Programming?](#whats-object-oriented-programming)
+   - [Class](#class)
+   - [Objects](#objects)
    - [Abstraction](#abstraction)
    - [Encapsulation](#encapsulation)
    - [Inheritance](#inheritance)

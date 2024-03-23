@@ -92,5 +92,3 @@ class OnlineShopPageBuilder implements PageBuilder {
   }
 }
 ```
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

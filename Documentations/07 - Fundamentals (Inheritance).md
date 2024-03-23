@@ -44,5 +44,3 @@ class Circle extends Shape {
 In this example, `Circle` is the subclass, and it extends the `Shape` class. By using the extends keyword, Circle inherits all properties and methods from Shape. Additionally, Circle has its own property `radius` and method `area()` specific to circles.
 
 By utilizing inheritance, you can create a hierarchy of classes where subclasses inherit and extend the functionality of their superclass, promoting code reusability and maintaining a logical structure in your programs.
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

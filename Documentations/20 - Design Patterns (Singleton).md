@@ -35,5 +35,3 @@ const instanceOne = Weather.getInstance();
 const instanceTwo = Weather.getInstance();
 // instanceOne is equal to instanceTwo (instanceOne === instanceTwo)
 ```
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

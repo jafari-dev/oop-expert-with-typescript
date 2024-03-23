@@ -33,5 +33,3 @@ const productTwo = productOne.clone();
 
 // productOne !== productTwo but their properties are the same
 ```
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

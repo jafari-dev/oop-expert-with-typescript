@@ -49,5 +49,3 @@ We have a `Car` class with attributes like `make`, `model`, and `speed`.
 We define methods like `accelerate` and `brake` to manipulate the speed of the car.
 The user interacts with the car object through these methods without needing to know how they are implemented internally.
 So, in essence, abstraction allows us to think about objects at a higher level of understanding, focusing on what they do rather than how they do it.
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

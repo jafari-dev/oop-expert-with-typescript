@@ -10,5 +10,3 @@ Object-oriented programming (OOP) is a programming paradigm based on the concept
 4. <strong>Encapsulation</strong>
 5. <strong>Inheritance</strong>
 6. <strong>Polymorphism</strong>
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

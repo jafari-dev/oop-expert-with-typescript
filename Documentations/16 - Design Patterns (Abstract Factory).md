@@ -80,5 +80,3 @@ class PremiumApiProviderFactory implements ApiProviderFactory {
   }
 }
 ```
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

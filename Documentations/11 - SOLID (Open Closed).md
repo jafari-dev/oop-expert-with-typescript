@@ -97,5 +97,3 @@ class Macintosh implements OperatingSystem {
   }
 }
 ```
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

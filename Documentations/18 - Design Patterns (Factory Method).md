@@ -79,5 +79,3 @@ bitcoinService.payMoney(200); // You paid 200 dollars by Bitcoin.
 const visaCardService = getPaymentFactory(PaymentType.VisaCard).createService();
 visaCardService.payMoney(300); // You paid 300 dollars by VisaCard.
 ```
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

@@ -10,6 +10,8 @@ This repository is a complete guide and tutorial for the principles and techniqu
 
 1. [Fundamentals](#fundamentals)
    - [What's Object-Oriented-Programming?](#whats-object-oriented-programming)
+   - [Class](#class)
+   - [Objects](#objects)
    - [Abstraction](#abstraction)
    - [Encapsulation](#encapsulation)
    - [Inheritance](#inheritance)
@@ -48,6 +50,7 @@ This repository is a complete guide and tutorial for the principles and techniqu
      - [Strategy](#strategy)
      - [Template Method](#template-method)
      - [Visitor](#visitor)
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ## Fundamentals
 
@@ -61,7 +64,6 @@ Object-oriented programming (OOP) is a programming paradigm based on the concept
 4. <strong>Encapsulation</strong>
 5. <strong>Inheritance</strong>
 6. <strong>Polymorphism</strong>
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Class
@@ -132,7 +134,6 @@ In this example:
 We define a Task class with properties `id`, `title`, `description`, `dueDate`, and `completed`, along with methods `complete()` and `incomplete()` to mark tasks as completed or incomplete.
 We create instances of the Task class (task1 and task2) representing different tasks.
 We demonstrate marking task1 as completed and then output the details of both tasks.
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Objects
@@ -140,7 +141,6 @@ We demonstrate marking task1 as completed and then output the details of both ta
 > It is a basic unit of Object-Oriented Programming and represents the real-life entities. An Object is an instance of a Class. When a class is defined, no memory is allocated but when it is instantiated (i.e. an object is created) memory is allocated. An object has an identity, state, and behavior. Each object contains data and code to manipulate the data. Objects can interact without having to know details of each other’s data or code, it is sufficient to know the type of message accepted and type of response returned by the objects.
 
 For example <strong>Dog</strong> is a real-life object, which has some characteristics like color, breed, bark, sleep, and eats.
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Abstraction
@@ -194,7 +194,6 @@ We have a `Car` class with attributes like `make`, `model`, and `speed`.
 We define methods like `accelerate` and `brake` to manipulate the speed of the car.
 The user interacts with the car object through these methods without needing to know how they are implemented internally.
 So, in essence, abstraction allows us to think about objects at a higher level of understanding, focusing on what they do rather than how they do it.
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Encapsulation
@@ -243,7 +242,6 @@ In this example:
 - We provide public methods `authenticate()` to verify the user's password and `changePassword()` to allow users to change their password.
 - Accessing or modifying the password property directly from outside the class is not allowed due to its private access modifier.
 - Encapsulation ensures that sensitive data (password) is hidden and can only be accessed or modified through controlled methods, enhancing security and preventing unauthorized access or manipulation.
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Inheritance
@@ -292,7 +290,6 @@ class Circle extends Shape {
 In this example, `Circle` is the subclass, and it extends the `Shape` class. By using the extends keyword, Circle inherits all properties and methods from Shape. Additionally, Circle has its own property `radius` and method `area()` specific to circles.
 
 By utilizing inheritance, you can create a hierarchy of classes where subclasses inherit and extend the functionality of their superclass, promoting code reusability and maintaining a logical structure in your programs.
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Polymorphism
@@ -357,7 +354,6 @@ console.log("Area of Triangle:", calculateShapeArea(triangle)); // Outputs: 12
 ```
 
 In this example, `Shape` is the superclass, and `Rectangle`, `Circle`, and `Triangle` are its subclasses. They all implement the `calculateArea()` method differently according to their specific shapes. When we call `calculateShapeArea()` with different shape objects, polymorphism allows the correct version of `calculateArea()` to be called based on the type of shape passed. This demonstrates how polymorphism enables code to handle different types of objects in a unified manner.
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ## SOLID Principles
@@ -367,7 +363,6 @@ In this example, `Shape` is the superclass, and `Rectangle`, `Circle`, and `Tria
 In software engineering, SOLID is a mnemonic acronym for five design principles intended to make software designs more understandable, flexible, and maintainable. The principles are a subset of many principles promoted by American software engineer and instructor Robert C. Martin, first introduced in his 2000 paper Design Principles and Design Patterns.
 
 <img src="https://user-images.githubusercontent.com/37804060/153056635-449fedb7-fcbf-4cb1-b642-5798d29b9c6f.jpg"/>
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 1. Single Responsibility (SRP)
@@ -461,7 +456,6 @@ class Profile {
   }
 }
 ```
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 2. Open/Closed (OCP)
@@ -563,7 +557,6 @@ class Macintosh implements OperatingSystem {
   }
 }
 ```
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 3. Liskov Substitution (LSP)
@@ -627,7 +620,6 @@ class AdultsTablet extends Tablet {
   }
 }
 ```
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 4. Interface Segregation (ISP)
@@ -724,7 +716,6 @@ class Laptop implements CommonPorts {
   }
 }
 ```
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 5. Dependency Inversion (DIP)
@@ -839,7 +830,6 @@ class Messenger {
   }
 }
 ```
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ## Design Patterns
@@ -883,7 +873,6 @@ There are 23 design patterns that are grouped into 3 categories:
    - Visitor
 
 **Tip**: The order of design patterns isn't important. So, you can choose which one to learn, regardless of the category.
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Abstract Factory
@@ -968,7 +957,6 @@ class PremiumApiProviderFactory implements ApiProviderFactory {
   }
 }
 ```
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Builder
@@ -1065,7 +1053,6 @@ class OnlineShopPageBuilder implements PageBuilder {
   }
 }
 ```
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Factory Method
@@ -1149,7 +1136,6 @@ bitcoinService.payMoney(200); // You paid 200 dollars by Bitcoin.
 const visaCardService = getPaymentFactory(PaymentType.VisaCard).createService();
 visaCardService.payMoney(300); // You paid 300 dollars by VisaCard.
 ```
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Prototype
@@ -1187,7 +1173,6 @@ const productTwo = productOne.clone();
 
 // productOne !== productTwo but their properties are the same
 ```
-
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Singleton
@@ -1227,5 +1212,3 @@ const instanceOne = Weather.getInstance();
 const instanceTwo = Weather.getInstance();
 // instanceOne is equal to instanceTwo (instanceOne === instanceTwo)
 ```
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

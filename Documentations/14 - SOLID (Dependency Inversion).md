@@ -110,5 +110,3 @@ class Messenger {
   }
 }
 ```
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

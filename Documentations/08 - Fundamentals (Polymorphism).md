@@ -60,5 +60,3 @@ console.log("Area of Triangle:", calculateShapeArea(triangle)); // Outputs: 12
 ```
 
 In this example, `Shape` is the superclass, and `Rectangle`, `Circle`, and `Triangle` are its subclasses. They all implement the `calculateArea()` method differently according to their specific shapes. When we call `calculateShapeArea()` with different shape objects, polymorphism allows the correct version of `calculateArea()` to be called based on the type of shape passed. This demonstrates how polymorphism enables code to handle different types of objects in a unified manner.
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

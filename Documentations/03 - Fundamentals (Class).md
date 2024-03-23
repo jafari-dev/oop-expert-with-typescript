@@ -66,5 +66,3 @@ In this example:
 We define a Task class with properties `id`, `title`, `description`, `dueDate`, and `completed`, along with methods `complete()` and `incomplete()` to mark tasks as completed or incomplete.
 We create instances of the Task class (task1 and task2) representing different tasks.
 We demonstrate marking task1 as completed and then output the details of both tasks.
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

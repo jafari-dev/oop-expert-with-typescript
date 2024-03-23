@@ -89,5 +89,3 @@ class Profile {
   }
 }
 ```
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

@@ -39,5 +39,3 @@ There are 23 design patterns that are grouped into 3 categories:
    - Visitor
 
 **Tip**: The order of design patterns isn't important. So, you can choose which one to learn, regardless of the category.
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

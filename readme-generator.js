@@ -13,6 +13,7 @@ const documentationContents = documentationFileNames.map((fileName, index) => {
   return fileContent.trim();
 });
 
-const fullDocumentation = documentationContents.join("\n\n");
+const JOINER = "\n[`⬆ BACK TO TOP ⬆`](#table-of-contents)\n\n";
+const fullDocumentation = documentationContents.join(JOINER);
 
 fs.writeFileSync("./README.md", fullDocumentation);

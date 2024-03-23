@@ -92,5 +92,3 @@ class Laptop implements CommonPorts {
   }
 }
 ```
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)

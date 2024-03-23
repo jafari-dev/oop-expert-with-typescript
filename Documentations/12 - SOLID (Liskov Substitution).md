@@ -59,5 +59,3 @@ class AdultsTablet extends Tablet {
   }
 }
 ```
-
-[`⬆ BACK TO TOP ⬆`](#table-of-contents)
