@@ -1851,6 +1851,675 @@ proxyRequestHandler.sendRequest("GET", "/api/users");
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
+### Chain of Responsibility
+
+> Chain of Responsibility is a behavioral design pattern that lets you pass requests along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.
+
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/2bea3788-2ba7-49e9-87d2-a9aa8d81e43e"/>
+
+```typescript
+interface IResponse {
+  statusCode: number;
+  body: Record<string, unknown>;
+  authentication: Record<string, string>;
+  message?: string;
+}
+
+class ResponseHandler {
+  private nextHandler?: ResponseHandler;
+
+  protected process(response: IResponse) {
+    return response;
+  }
+
+  public setNext(ResponseHandler: ResponseHandler): ResponseHandler {
+    this.nextHandler = ResponseHandler;
+
+    return ResponseHandler;
+  }
+
+  public handle(response: IResponse): IResponse {
+    const processedResponse = this.process(response);
+
+    if (this.nextHandler != null) {
+      return this.nextHandler.handle(processedResponse);
+    } else {
+      return processedResponse;
+    }
+  }
+}
+
+class Encryptor extends ResponseHandler {
+  private encryptTokens(response: IResponse) {
+    const { authentication } = response;
+    const encryptedAuthTokens: Record<string, string> = {};
+
+    for (const key in authentication) {
+      encryptedAuthTokens[key] = `encrypted-${authentication[key]}`;
+    }
+
+    return { ...response, authentication: encryptedAuthTokens };
+  }
+
+  protected process(response: IResponse) {
+    const encryptedResponse = this.encryptTokens(response);
+
+    return encryptedResponse;
+  }
+}
+
+class BodyFormatter extends ResponseHandler {
+  private transformKeysToCamelCase(body: Record<string, unknown>) {
+    const newBody: Record<string, unknown> = {};
+
+    for (const key in body) {
+      const camelCaseKey = key.replace(/_([a-z])/g, (subString) =>
+        subString[1].toUpperCase()
+      );
+      newBody[camelCaseKey] = body[key];
+    }
+
+    return newBody;
+  }
+
+  protected process(response: IResponse) {
+    const clonedResponseBody = JSON.parse(JSON.stringify(response.body));
+    const formattedBody = this.transformKeysToCamelCase(clonedResponseBody);
+    const formattedResponse = { ...response, body: formattedBody };
+
+    return formattedResponse;
+  }
+}
+
+class MetadataAdder extends ResponseHandler {
+  private getResponseMetadata(statusCode: number) {
+    if (statusCode < 200) return "Informational";
+    else if (statusCode < 300) return "Success";
+    else if (statusCode < 400) return "Redirection";
+    else if (statusCode < 500) return "Client Error";
+    else return "Server Error";
+  }
+
+  protected process(response: IResponse) {
+    const updatedResponse = {
+      ...response,
+      message: this.getResponseMetadata(response.statusCode),
+    };
+
+    return updatedResponse;
+  }
+}
+
+// Usage
+const response: IResponse = {
+  statusCode: 200,
+  body: {
+    design_pattern_name: "Chain of Responsibility",
+    pattern_category: "Behavioral",
+    complexity_percentage: 80,
+  },
+  authentication: {
+    api_token: "12345678",
+    refresh_token: "ABCDEFGH",
+  },
+};
+
+const responseHandler = new ResponseHandler();
+const encryptor = new Encryptor();
+const bodyFormatter = new BodyFormatter();
+const metadataAdder = new MetadataAdder();
+
+responseHandler
+  .setNext(encryptor)
+  .setNext(bodyFormatter)
+  .setNext(metadataAdder);
+
+const resultResponse = responseHandler.handle(response);
+
+console.log(resultResponse);
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Command
+
+> Command is a behavioral design pattern that turns a request into a stand-alone object that contains all information about the request. This transformation lets you pass requests as a method arguments, delay or queue a request’s execution, and support undoable operations.
+
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/c685b9d8-f7a5-4915-b75c-4e897fe70014"/>
+
+```typescript
+interface Command {
+  execute(): void;
+  undo(): void;
+}
+
+class AddTextCommand implements Command {
+  private prevText: string;
+
+  constructor(private editor: TextEditor, private text: string) {}
+
+  execute() {
+    this.prevText = this.editor.content;
+    this.editor.content += this.text;
+  }
+
+  undo() {
+    this.editor.content = this.prevText;
+  }
+}
+
+class DeleteTextCommand implements Command {
+  private prevText: string;
+
+  constructor(private editor: TextEditor) {}
+
+  execute() {
+    this.prevText = this.editor.content;
+    this.editor.content = "";
+  }
+
+  undo() {
+    this.editor.content = this.prevText;
+  }
+}
+
+class TextEditor {
+  content: string = "";
+}
+
+class CommandInvoker {
+  private commandHistory: Command[] = [];
+  private currentCommandIndex: number = -1;
+
+  executeCommand(command: Command) {
+    if (this.currentCommandIndex < this.commandHistory.length - 1) {
+      this.commandHistory = this.commandHistory.slice(
+        0,
+        this.currentCommandIndex + 1
+      );
+    }
+
+    command.execute();
+    this.commandHistory.push(command);
+    this.currentCommandIndex++;
+  }
+
+  undo() {
+    if (this.currentCommandIndex >= 0) {
+      const command = this.commandHistory[this.currentCommandIndex];
+      command.undo();
+      this.currentCommandIndex--;
+    } else {
+      console.log("Nothing to undo.");
+    }
+  }
+
+  redo() {
+    if (this.currentCommandIndex < this.commandHistory.length - 1) {
+      const command = this.commandHistory[this.currentCommandIndex + 1];
+      command.execute();
+      this.currentCommandIndex++;
+    } else {
+      console.log("Nothing to redo.");
+    }
+  }
+}
+
+// Client Code
+const editor = new TextEditor();
+const invoker = new CommandInvoker();
+
+const addTextCmd = new AddTextCommand(editor, "Hello, World!");
+invoker.executeCommand(addTextCmd);
+console.log(editor.content); // "Hello, World!"
+
+const deleteTextCmd = new DeleteTextCommand(editor);
+invoker.executeCommand(deleteTextCmd);
+console.log(editor.content); // ""
+
+invoker.undo();
+console.log(editor.content); // "Hello, World!"
+
+invoker.redo();
+console.log(editor.content); // ""
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Iterator
+
+> Iterator is a behavioral design pattern that lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).
+
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/20229eb8-caa0-4953-adf0-87f516332966"/>
+
+```typescript
+interface MyIterator<T> {
+  hasPrevious: () => boolean;
+  hasNext: () => boolean;
+  previous: () => T;
+  next: () => T;
+}
+
+class Book {
+  readonly title: string;
+  readonly author: string;
+  readonly isbn: string;
+
+  constructor(title: string, author: string, isbn: string = "") {
+    this.title = title;
+    this.author = author;
+    this.isbn = isbn;
+  }
+}
+
+class BookShelf {
+  private books: Book[] = [];
+
+  getLength(): number {
+    return this.books.length;
+  }
+
+  addBook(book: Book): void {
+    this.books.push(book);
+  }
+
+  getBookAt(index: number): Book {
+    return this.books[index];
+  }
+
+  createIterator() {
+    return new BookShelfIterator(this);
+  }
+}
+
+class BookShelfIterator implements MyIterator<Book> {
+  private bookShelf: BookShelf;
+  private currentIndex: number;
+
+  constructor(bookShelf: BookShelf) {
+    this.bookShelf = bookShelf;
+    this.currentIndex = 0;
+  }
+
+  hasNext() {
+    return this.currentIndex < this.bookShelf.getLength();
+  }
+
+  hasPrevious() {
+    return this.currentIndex > 0;
+  }
+
+  next() {
+    this.currentIndex += 1;
+    return this.bookShelf.getBookAt(this.currentIndex);
+  }
+
+  previous() {
+    this.currentIndex -= 1;
+    return this.bookShelf.getBookAt(this.currentIndex);
+  }
+}
+
+// Usage
+const shelf = new BookShelf();
+shelf.addBook(new Book("Design Patterns", "Gang of Four"));
+shelf.addBook(new Book("Clean Code", "Robert C. Martin"));
+shelf.addBook(new Book("You Don't Know JS", "Kyle Simpson"));
+
+const MyIterator = shelf.createIterator();
+
+while (MyIterator.hasNext()) {
+  const book = MyIterator.next();
+  console.log(`${book.title} by ${book.author}`);
+}
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Mediator
+
+> Mediator is a behavioral design pattern that lets you reduce chaotic dependencies between objects. The pattern restricts direct communications between the objects and forces them to collaborate only via a mediator object.
+
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/e898a7aa-a40e-4679-af89-e41d26d77cfb"/>
+
+```typescript
+interface ChatMediator {
+  sendMessage(receiver: User, message: string): void;
+}
+
+class ConcreteChatMediator implements ChatMediator {
+  private users: User[] = [];
+
+  addUser(user: User): void {
+    this.users.push(user);
+  }
+
+  sendMessage(receiver: User, message: string): void {
+    for (const user of this.users) {
+      // Don't send the message to the user who sent it
+      if (user !== receiver) {
+        user.receiveMessage(message);
+      }
+    }
+  }
+}
+
+class User {
+  private mediator: ChatMediator;
+  private name: string;
+
+  constructor(mediator: ChatMediator, name: string) {
+    this.mediator = mediator;
+    this.name = name;
+  }
+
+  sendMessage(message: string): void {
+    console.log(`${this.name} sends: ${message}`);
+    this.mediator.sendMessage(this, message);
+  }
+
+  receiveMessage(message: string): void {
+    console.log(`${this.name} receives: ${message}`);
+  }
+}
+
+// Usage
+const mediator = new ConcreteChatMediator();
+
+const user1 = new User(mediator, "Alice");
+const user2 = new User(mediator, "Bob");
+const user3 = new User(mediator, "Charlie");
+
+mediator.addUser(user1);
+mediator.addUser(user2);
+mediator.addUser(user3);
+
+user1.sendMessage("Hello, everyone!");
+
+user2.sendMessage("Hi, Alice!");
+
+user3.sendMessage("Hey, Bob!");
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### State
+
+> State is a behavioral design pattern that lets an object alter its behavior when its internal state changes. It appears as if the object changed its class.
+
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/d77e7972-083f-4fee-b2a7-640f017144f5"/>
+
+```typescript
+interface PipelineState {
+  start(pipeline: Pipeline): void;
+  fail(pipeline: Pipeline): void;
+  complete(pipeline: Pipeline): void;
+}
+
+class IdleState implements PipelineState {
+  start(pipeline: Pipeline) {
+    console.log("Pipeline started. Building...");
+    pipeline.setState(new BuildingState());
+  }
+
+  fail(pipeline: Pipeline) {
+    console.log("Pipeline is idle. Nothing to fail.");
+  }
+
+  complete(pipeline: Pipeline) {
+    console.log("Pipeline is idle. Nothing to complete.");
+  }
+}
+
+class BuildingState implements PipelineState {
+  start(pipeline: Pipeline) {
+    console.log("Pipeline is already building.");
+  }
+
+  fail(pipeline: Pipeline) {
+    console.log("Build failed.");
+    pipeline.setState(new FailedState());
+  }
+
+  complete(pipeline: Pipeline) {
+    console.log("Build complete. Testing...");
+    pipeline.setState(new TestingState());
+  }
+}
+
+class TestingState implements PipelineState {
+  start(pipeline: Pipeline) {
+    console.log("Pipeline is already in progress.");
+  }
+
+  fail(pipeline: Pipeline) {
+    console.log("Testing failed.");
+    pipeline.setState(new FailedState());
+  }
+
+  complete(pipeline: Pipeline) {
+    console.log("Testing complete. Deploying...");
+    pipeline.setState(new DeployingState());
+  }
+}
+
+class DeployingState implements PipelineState {
+  start(pipeline: Pipeline) {
+    console.log("Pipeline is already deploying.");
+  }
+
+  fail(pipeline: Pipeline) {
+    console.log("Deployment failed.");
+    pipeline.setState(new FailedState());
+  }
+
+  complete(pipeline: Pipeline) {
+    console.log("Deployment successful!");
+    pipeline.setState(new IdleState());
+  }
+}
+
+class FailedState implements PipelineState {
+  start(pipeline: Pipeline) {
+    console.log("Fix the issues and start the pipeline again.");
+  }
+
+  fail(pipeline: Pipeline) {
+    console.log("Pipeline already in failed state.");
+  }
+
+  complete(pipeline: Pipeline) {
+    console.log("Cannot complete. The pipeline has failed.");
+  }
+}
+
+// 3. Context
+class Pipeline {
+  private state: PipelineState;
+
+  constructor() {
+    // Initial state
+    this.state = new IdleState();
+  }
+
+  setState(state: PipelineState) {
+    this.state = state;
+  }
+
+  start() {
+    this.state.start(this);
+  }
+
+  fail() {
+    this.state.fail(this);
+  }
+
+  complete() {
+    this.state.complete(this);
+  }
+}
+
+// Client Code
+const pipeline = new Pipeline();
+pipeline.start(); // Output: Pipeline started. Building...
+pipeline.complete(); // Output: Build complete. Testing...
+pipeline.fail(); // Output: Testing failed.
+
+pipeline.setState(new BuildingState());
+pipeline.start(); // Output: Pipeline is already building.
+pipeline.complete(); // Output: Testing complete. Deploying...
+pipeline.complete(); // Output: Deployment successful!
+
+pipeline.setState(new TestingState());
+pipeline.start(); // Output: Pipeline is already in progress.
+pipeline.fail(); // Output: Testing failed.
+pipeline.complete(); // Output: Deployment successful!
+
+pipeline.setState(new DeployingState());
+pipeline.start(); // Output: Pipeline is already deploying.
+pipeline.fail(); // Output: Deployment failed.
+pipeline.complete(); // Output: Deployment successful!
+
+pipeline.setState(new FailedState());
+pipeline.start(); // Output: Fix the issues and start the pipeline again.
+pipeline.fail(); // Output: Pipeline already in failed state.
+pipeline.complete(); // Output: Cannot complete. The pipeline has failed.
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Strategy
+
+> Strategy is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
+
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/98b8e8e1-bd42-4205-8237-beff23546128"/>
+
+```typescript
+interface RenderStrategy {
+  renderShape(shape: Shape): void;
+}
+
+class RasterRender implements RenderStrategy {
+  renderShape(shape: Shape) {
+    console.log(`Raster rendering the ${shape.getName()}`);
+  }
+}
+
+class VectorRender implements RenderStrategy {
+  renderShape(shape: Shape) {
+    console.log(`Vector rendering the ${shape.getName()}`);
+  }
+}
+
+class Shape {
+  private name: string;
+  private renderStrategy: RenderStrategy;
+
+  constructor(name: string, strategy: RenderStrategy) {
+    this.name = name;
+    this.renderStrategy = strategy;
+  }
+
+  setRenderStrategy(strategy: RenderStrategy) {
+    this.renderStrategy = strategy;
+  }
+
+  render() {
+    this.renderStrategy.renderShape(this);
+  }
+
+  getName(): string {
+    return this.name;
+  }
+}
+
+// Usage
+const rasterRender = new RasterRender();
+const vectorRender = new VectorRender();
+
+const circle = new Shape("Circle", rasterRender);
+circle.render();
+
+circle.setRenderStrategy(vectorRender);
+circle.render();
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Template Method
+
+> Template Method is a behavioral design pattern that defines the skeleton of an algorithm in the superclass but lets subclasses override specific steps of the algorithm without changing its structure.
+
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/7065675a-ad94-488b-a9b7-96fcb2aa7867"/>
+
+```typescript
+abstract class SocialMediaPostAnalyzer {
+  private readonly HARMFUL_WORDS = [
+    "dumb",
+    "stupid",
+    "idiot",
+    "loser",
+    "ugly",
+    "fat",
+    "skinny",
+    "weird",
+    "hate",
+    "rude",
+    "nasty",
+  ];
+
+  preprocessData(data: string): string[] {
+    return data
+      .split(" ")
+      .map((word) => word.replace(/[^a-zA-Z ]/g, "").toLowerCase());
+  }
+
+  analyze(data: string[]): string[] {
+    return data.filter((word) => this.HARMFUL_WORDS.includes(word));
+  }
+
+  displayResults(data: string[]): void {
+    console.log(
+      `The number of harmful words in this post is ${
+        data.length
+      }, including ${data.join(", ")}.`
+    );
+  }
+
+  async analyzePosts(): Promise<void> {
+    const data = await this.fetchData();
+    const preprocessedData = this.preprocessData(data);
+    const analyticsResult = this.analyze(preprocessedData);
+    this.displayResults(analyticsResult);
+  }
+
+  abstract fetchData(): Promise<string>;
+}
+
+class TwitterPostAnalyzer extends SocialMediaPostAnalyzer {
+  // Fetches data from Twitter API and returns its data
+  async fetchData() {
+    return ""; // Dummy data
+  }
+}
+
+class InstagramPostAnalyzer extends SocialMediaPostAnalyzer {
+  // Fetches data from Instagram API and returns its data
+  async fetchData() {
+    return ""; // Dummy data
+  }
+}
+
+// Usage
+const twitterAnalysis = new TwitterPostAnalyzer();
+twitterAnalysis.analyzePosts();
+
+const instagramAnalysis = new InstagramPostAnalyzer();
+instagramAnalysis.analyzePosts();
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
 ## References
 
 In creating this repository, I aimed to provide original examples to facilitate learning about object-oriented programming (OOP) pillars, SOLID principles, and design patterns using TypeScript. While there may be similarities between examples found in this repository and those in other resources, it's essential to emphasize that all code and documentation within this repository are original creations.

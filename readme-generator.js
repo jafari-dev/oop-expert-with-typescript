@@ -5,7 +5,7 @@ const JOINER = "[`⬆ BACK TO TOP ⬆`](#table-of-contents)";
 
 const documentationFileNames = fs.readdirSync(DOCUMENTATION_PATH);
 
-const documentationContents = documentationFileNames.map((fileName, index) => {
+const documentationContents = documentationFileNames.map((fileName) => {
   const fileContent = fs.readFileSync(
     `${DOCUMENTATION_PATH}/${fileName}`,
     "utf-8"
