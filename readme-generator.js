@@ -1,6 +1,7 @@
 const fs = require("node:fs");
 
 const DOCUMENTATION_PATH = "./Documentations";
+const JOINER = "[`⬆ BACK TO TOP ⬆`](#table-of-contents)";
 
 const documentationFileNames = fs.readdirSync(DOCUMENTATION_PATH);
 
@@ -10,10 +11,9 @@ const documentationContents = documentationFileNames.map((fileName, index) => {
     "utf-8"
   );
 
-  return fileContent.trim();
+  return `${fileContent.trim()}\n\n${JOINER}`;
 });
 
-const JOINER = "\n[`⬆ BACK TO TOP ⬆`](#table-of-contents)\n\n";
-const fullDocumentation = documentationContents.join(JOINER);
+const fullDocumentation = documentationContents.join("\n\n");
 
 fs.writeFileSync("./README.md", fullDocumentation);

@@ -25,13 +25,13 @@ This repository is a complete guide and tutorial for the principles and techniqu
    - [Dependency Inversion (DIP)](#5-dependency-inversion-dip)
 3. [Design Patterns](#design-patterns)
    - [What's a Design Pattern?](#whats-a-design-pattern)
-   - [Creational Design Patterns](#creational)
+   - Creational Design Patterns
      - [Abstract Factory](#abstract-factory)
      - [Builder](#builder)
      - [Factory Method (Virtual Constructor)](#factory-method)
      - [Prototype (Clone)](#prototype)
      - [Singleton](#singleton)
-   - [Structural Design Patterns](#structural)
+   - Structural Design Patterns
      - [Adapter (Wrapper)](#adapter-wrapper)
      - [Bridge](#bridge)
      - [Composite (Object Tree)](#composite-object-tree)
@@ -39,9 +39,10 @@ This repository is a complete guide and tutorial for the principles and techniqu
      - [Facade](#facade)
      - [Flyweight (Cache)](#flyweight-cache)
      - [Proxy](#proxy)
-   - [Behavioral Design Patterns](#behavioral)
+   - Behavioral Design Patterns
      - [Chain of Responsibility (CoR)](#chain-of-responsibility)
      - [Command (Action or Transaction)](#command)
+     - [Interpreter](#interpreter)
      - [Iterator](#iterator)
      - [Mediator (Intermediary or Controller)](#mediator)
      - [Memento (Snapshot)](#memento)
@@ -50,6 +51,7 @@ This repository is a complete guide and tutorial for the principles and techniqu
      - [Strategy](#strategy)
      - [Template Method](#template-method)
      - [Visitor](#visitor)
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ## Fundamentals
@@ -64,6 +66,7 @@ Object-oriented programming (OOP) is a programming paradigm based on the concept
 4. <strong>Encapsulation</strong>
 5. <strong>Inheritance</strong>
 6. <strong>Polymorphism</strong>
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Class
@@ -134,6 +137,7 @@ In this example:
 We define a Task class with properties `id`, `title`, `description`, `dueDate`, and `completed`, along with methods `complete()` and `incomplete()` to mark tasks as completed or incomplete.
 We create instances of the Task class (task1 and task2) representing different tasks.
 We demonstrate marking task1 as completed and then output the details of both tasks.
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Objects
@@ -141,6 +145,7 @@ We demonstrate marking task1 as completed and then output the details of both ta
 > It is a basic unit of Object-Oriented Programming and represents the real-life entities. An Object is an instance of a Class. When a class is defined, no memory is allocated but when it is instantiated (i.e. an object is created) memory is allocated. An object has an identity, state, and behavior. Each object contains data and code to manipulate the data. Objects can interact without having to know details of each other’s data or code, it is sufficient to know the type of message accepted and type of response returned by the objects.
 
 For example <strong>Dog</strong> is a real-life object, which has some characteristics like color, breed, bark, sleep, and eats.
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Abstraction
@@ -194,6 +199,7 @@ We have a `Car` class with attributes like `make`, `model`, and `speed`.
 We define methods like `accelerate` and `brake` to manipulate the speed of the car.
 The user interacts with the car object through these methods without needing to know how they are implemented internally.
 So, in essence, abstraction allows us to think about objects at a higher level of understanding, focusing on what they do rather than how they do it.
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Encapsulation
@@ -242,6 +248,7 @@ In this example:
 - We provide public methods `authenticate()` to verify the user's password and `changePassword()` to allow users to change their password.
 - Accessing or modifying the password property directly from outside the class is not allowed due to its private access modifier.
 - Encapsulation ensures that sensitive data (password) is hidden and can only be accessed or modified through controlled methods, enhancing security and preventing unauthorized access or manipulation.
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Inheritance
@@ -290,6 +297,7 @@ class Circle extends Shape {
 In this example, `Circle` is the subclass, and it extends the `Shape` class. By using the extends keyword, Circle inherits all properties and methods from Shape. Additionally, Circle has its own property `radius` and method `area()` specific to circles.
 
 By utilizing inheritance, you can create a hierarchy of classes where subclasses inherit and extend the functionality of their superclass, promoting code reusability and maintaining a logical structure in your programs.
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Polymorphism
@@ -354,6 +362,7 @@ console.log("Area of Triangle:", calculateShapeArea(triangle)); // Outputs: 12
 ```
 
 In this example, `Shape` is the superclass, and `Rectangle`, `Circle`, and `Triangle` are its subclasses. They all implement the `calculateArea()` method differently according to their specific shapes. When we call `calculateShapeArea()` with different shape objects, polymorphism allows the correct version of `calculateArea()` to be called based on the type of shape passed. This demonstrates how polymorphism enables code to handle different types of objects in a unified manner.
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ## SOLID Principles
@@ -363,6 +372,7 @@ In this example, `Shape` is the superclass, and `Rectangle`, `Circle`, and `Tria
 In software engineering, SOLID is a mnemonic acronym for five design principles intended to make software designs more understandable, flexible, and maintainable. The principles are a subset of many principles promoted by American software engineer and instructor Robert C. Martin, first introduced in his 2000 paper Design Principles and Design Patterns.
 
 <img src="https://user-images.githubusercontent.com/37804060/153056635-449fedb7-fcbf-4cb1-b642-5798d29b9c6f.jpg"/>
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 1. Single Responsibility (SRP)
@@ -456,6 +466,7 @@ class Profile {
   }
 }
 ```
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 2. Open/Closed (OCP)
@@ -557,6 +568,7 @@ class Macintosh implements OperatingSystem {
   }
 }
 ```
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 3. Liskov Substitution (LSP)
@@ -620,6 +632,7 @@ class AdultsTablet extends Tablet {
   }
 }
 ```
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 4. Interface Segregation (ISP)
@@ -716,6 +729,7 @@ class Laptop implements CommonPorts {
   }
 }
 ```
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### 5. Dependency Inversion (DIP)
@@ -830,6 +844,7 @@ class Messenger {
   }
 }
 ```
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ## Design Patterns
@@ -873,6 +888,7 @@ There are 23 design patterns that are grouped into 3 categories:
    - Visitor
 
 **Tip**: The order of design patterns isn't important. So, you can choose which one to learn, regardless of the category.
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Abstract Factory
@@ -957,6 +973,7 @@ class PremiumApiProviderFactory implements ApiProviderFactory {
   }
 }
 ```
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Builder
@@ -1053,6 +1070,7 @@ class OnlineShopPageBuilder implements PageBuilder {
   }
 }
 ```
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Factory Method
@@ -1136,6 +1154,7 @@ bitcoinService.payMoney(200); // You paid 200 dollars by Bitcoin.
 const visaCardService = getPaymentFactory(PaymentType.VisaCard).createService();
 visaCardService.payMoney(300); // You paid 300 dollars by VisaCard.
 ```
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Prototype
@@ -1173,6 +1192,7 @@ const productTwo = productOne.clone();
 
 // productOne !== productTwo but their properties are the same
 ```
+
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
 ### Singleton
@@ -1212,3 +1232,619 @@ const instanceOne = Weather.getInstance();
 const instanceTwo = Weather.getInstance();
 // instanceOne is equal to instanceTwo (instanceOne === instanceTwo)
 ```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Adapter (Wrapper)
+
+> Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858390-a0bdcf53-22bb-42b3-b499-70b51384a61c.png"/>
+
+```typescript
+interface StandardUser {
+  fullName: string;
+  skills: string[];
+  age: number;
+  contact: {
+    email: string;
+    phone: string;
+  };
+}
+
+abstract class ResumeServiceApi {
+  static generateResume(data: StandardUser) {
+    /* Implementation */
+  }
+}
+
+class User {
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly birthday: Date;
+  readonly skills: Record<string, 1 | 2 | 3 | 4 | 5>;
+  readonly email?: string;
+  readonly phone?: string;
+
+  constructor({
+    firstName,
+    lastName,
+    birthday,
+    skills,
+    email,
+    phone,
+  }: {
+    firstName: string;
+    lastName: string;
+    birthday: Date;
+    skills: Record<string, 1 | 2 | 3 | 4 | 5>;
+    email?: string;
+    phone?: string;
+  }) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthday = birthday;
+    this.skills = skills;
+    this.email = email;
+    this.phone = phone;
+  }
+}
+
+class UserAdapter implements StandardUser {
+  private user: User;
+
+  constructor(user: User) {
+    this.user = user;
+  }
+
+  get fullName() {
+    return `${this.user.firstName} ${this.user.lastName}`;
+  }
+
+  get skills() {
+    return Object.keys(this.user.skills);
+  }
+
+  get age() {
+    return new Date().getFullYear() - this.user.birthday.getFullYear();
+  }
+
+  get contact() {
+    return { email: this.user.email ?? "", phone: this.user.phone ?? "" };
+  }
+}
+
+// Use case
+
+const user = new User({
+  firstName: "Ahmad",
+  lastName: "Jafari",
+  birthday: new Date(1999, 1, 1, 0, 0, 0, 0),
+  skills: { TypeScript: 4, JavaScript: 3, OOP: 4, CSharp: 2, Java: 1 },
+  email: "a99jafari@gmail.com",
+  phone: "+98 930 848 XXXX",
+});
+
+const resume = ResumeServiceApi.generateResume(user); // ==> Type Error!
+
+const standardUser = new UserAdapter(user);
+const resume = ResumeServiceApi.generateResume(standardUser); // ==> OK!
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Bridge
+
+> Bridge is a structural design pattern that lets you split a large class or a set of closely related classes into two separate hierarchies—abstraction and implementation—which can be developed independently of each other.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858360-9b8ab73c-9b08-41d1-b7b9-84a2e5ef5028.png"/>
+
+```typescript
+interface Player {
+  play(): string;
+  stop(): string;
+}
+
+class AudioPlayer implements Player {
+  play(): string {
+    return "Audio is playing";
+  }
+
+  stop(): string {
+    return "Audio is stopped";
+  }
+}
+
+class VideoPlayer implements Player {
+  play(): string {
+    return "Video is playing";
+  }
+
+  stop(): string {
+    return "Video is stopped";
+  }
+}
+
+interface Platform {
+  play(): string;
+  stop(): string;
+}
+
+class Desktop implements Platform {
+  private player: Player;
+
+  constructor(player: Player) {
+    this.player = player;
+  }
+
+  play(): string {
+    return this.player.play() + " on desktop";
+  }
+
+  stop(): string {
+    return this.player.stop() + " on desktop";
+  }
+}
+
+class Mobile implements Platform {
+  private player: Player;
+
+  constructor(player: Player) {
+    this.player = player;
+  }
+
+  play(): string {
+    return this.player.play() + " on mobile";
+  }
+
+  stop(): string {
+    return this.player.stop() + " on mobile";
+  }
+}
+
+// Usage
+const audioPlayer = new AudioPlayer();
+const videoPlayer = new VideoPlayer();
+
+const desktopVideoPlayer = new Desktop(videoPlayer);
+const desktopAudioPlayer = new Desktop(audioPlayer);
+const mobileVideoPlayer = new Mobile(videoPlayer);
+const mobileAudioPlayer = new Mobile(audioPlayer);
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Composite (Object Tree)
+
+> Composite is a structural design pattern that lets you compose objects into tree structures and then work with these structures as if they were individual objects.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858367-a2ba0672-4bb3-4b11-a63c-7843df0cfb7c.png"/>
+
+```typescript
+abstract class BaseUnit<T> {
+  constructor(
+    private readonly id: string,
+    private readonly units: BaseUnit<T>[] = []
+  ) {}
+
+  getUnit(unitId: string): BaseUnit<T> | null {
+    return this.units.find((unit) => unit.id === unitId) ?? null;
+  }
+
+  getSalary(): number {
+    return this.units.reduce((acc, unit) => acc + unit.getSalary(), 0);
+  }
+
+  increaseSalary(percentage: number): void {
+    this.units.forEach((unit) => unit.increaseSalary(percentage));
+  }
+}
+
+class Employee extends BaseUnit<null> {
+  private salary: number;
+
+  constructor(id: string, salary: number) {
+    super(id);
+    this.salary = salary;
+  }
+
+  getUnit(): never {
+    throw new Error("Employee cannot have sub-units");
+  }
+
+  getSalary() {
+    return this.salary;
+  }
+
+  increaseSalary(percentage: number) {
+    this.salary = this.salary + (this.salary * percentage) / 100;
+  }
+}
+
+class Department extends BaseUnit<Employee> {}
+
+class Faculty extends BaseUnit<Department> {}
+
+class University extends BaseUnit<Faculty> {}
+
+// Usage
+
+const harvardUniversity = new University("Harvard", [
+  new Faculty("Engineering", [
+    new Department("Computer", [
+      new Employee("C1", 6200),
+      new Employee("C2", 5400),
+      new Employee("C3", 5600),
+    ]),
+    new Department("Electrical", [
+      new Employee("E1", 4800),
+      new Employee("E2", 5800),
+    ]),
+  ]),
+  new Faculty("Science", [
+    new Department("Physics", [
+      new Employee("P1", 3800),
+      new Employee("P2", 4600),
+    ]),
+    new Department("Mathematics", [
+      new Employee("M1", 5200),
+      new Employee("M2", 5600),
+      new Employee("M3", 4600),
+    ]),
+  ]),
+]);
+
+console.log(harvardUniversity.getSalary());
+harvardUniversity.increaseSalary(10);
+console.log(harvardUniversity.getSalary());
+
+const engineeringFaculty = harvardUniversity.getUnit("Engineering") as Faculty;
+console.log(engineeringFaculty.getSalary());
+engineeringFaculty.increaseSalary(10);
+console.log(engineeringFaculty.getSalary());
+
+const computerDepartment = engineeringFaculty.getUnit("Computer") as Department;
+console.log(computerDepartment.getSalary());
+computerDepartment.increaseSalary(10);
+console.log(computerDepartment.getSalary());
+
+const employee = computerDepartment.getUnit("C1") as Employee;
+console.log(employee.getSalary());
+employee.increaseSalary(10);
+console.log(employee.getSalary());
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Decorator (Wrapper)
+
+> Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858382-6ece64aa-4c9f-4e4e-944e-f7a67fcdd162.png"/>
+
+```typescript
+interface INotifier {
+  sendMessage: (message: string) => void;
+  setUsers: (users: string[]) => void;
+  getUsers: () => string[];
+}
+
+class Notifier implements INotifier {
+  private users: string[];
+
+  constructor(users: string[]) {
+    this.users = users;
+  }
+
+  public sendMessage(message: string) {
+    this.users.forEach((user) => {
+      // Show the `message` to the `user` on Web Application
+    });
+  }
+
+  public setUsers(users: string[]) {
+    this.users = users;
+  }
+
+  public getUsers() {
+    return this.users;
+  }
+}
+
+abstract class NotifierDecorator implements INotifier {
+  protected notifier: INotifier;
+
+  constructor(notifier: INotifier) {
+    this.notifier = notifier;
+  }
+
+  public abstract sendMessage(message: string);
+
+  public getUsers() {
+    return this.notifier.getUsers();
+  }
+
+  public setUsers(users: string[]) {
+    this.notifier.setUsers(users);
+  }
+}
+
+class EmailNotifier extends NotifierDecorator {
+  sendMessage(message: string) {
+    notifier.getUsers().forEach((user) => {
+      // Send the `message` to the `user` via Email
+    });
+
+    this.notifier.sendMessage(message);
+  }
+}
+
+class SlackNotifier extends NotifierDecorator {
+  sendMessage(message: string) {
+    this.notifier.getUsers().forEach((user) => {
+      // Send the `message` to the `user` via Slack
+    });
+
+    this.notifier.sendMessage(message);
+  }
+}
+
+class SmsNotifier extends NotifierDecorator {
+  sendMessage(message: string) {
+    this.notifier.getUsers().forEach((user) => {
+      // Send the `message` to the `user` via SMS
+    });
+
+    this.notifier.sendMessage(message);
+  }
+}
+
+const notifier = new Notifier(["Ahmad", "Artin", "Ghazaleh"]);
+
+const notifierByEmail = new EmailNotifier(notifier);
+const notifierBySlack = new SlackNotifier(notifier);
+const notifierBySMS = new SmsNotifier(notifier);
+
+const notifierByEmailAndSlack = new EmailNotifier(new SlackNotifier(notifier));
+const notifierByEmailAndSMS = new EmailNotifier(new SmsNotifier(notifier));
+const notifierBySlackAndSMS = new SlackNotifier(new SmsNotifier(notifier));
+
+const notifierByEmailAndSlackAndSMS = new EmailNotifier(
+  new SlackNotifier(new SmsNotifier(notifier))
+);
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Facade
+
+> Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858377-16fc76a5-3b79-4837-bf3c-3f38539a4ac3.png"/>
+
+```typescript
+class GitChecker {
+  private repositoryPath: string;
+
+  constructor(repositoryPath: string) {
+    this.repositoryPath = repositoryPath;
+  }
+
+  analyzeCommits() {
+    // Checks the quality of commit messages
+  }
+
+  analyzeUnmergedBranches() {
+    // Checks the
+  }
+}
+
+class Linter {
+  private rules: string[];
+
+  constructor(rules: string[]) {
+    this.rules = rules;
+  }
+
+  findIssues() {
+    // Checks codebase and finds all issues
+  }
+
+  resolveFixableIssues() {
+    // Checks codebase and fix all fixable issues
+  }
+}
+
+class PackageManager {
+  private dependencies: { name: string; version: number }[];
+
+  constructor(dependencies: { name: string; version: number }[]) {
+    this.dependencies = dependencies;
+  }
+
+  findUnsecureLibraries() {
+    // Analyzes all dependencies and finds all of unsecure libraries
+  }
+
+  findDeprecatedLibraries() {
+    // Analyzes all dependencies and finds all of deprecated libraries
+  }
+}
+
+// Facade Class
+class CodebaseAnalyzer {
+  private gitChecker: GitChecker;
+  private linter: Linter;
+  private packageManager: PackageManager;
+
+  constructor({
+    repositoryPath,
+    linterRules,
+    dependencies,
+  }: {
+    repositoryPath: string;
+    linterRules: string[];
+    dependencies: { name: string; version: number }[];
+  }) {
+    this.gitChecker = new GitChecker(repositoryPath);
+    this.linter = new Linter(linterRules);
+    this.packageManager = new PackageManager(dependencies);
+  }
+
+  // This method is the facade method and does all of the work
+  analyze() {
+    this.gitChecker.analyzeCommits();
+    this.gitChecker.analyzeUnmergedBranches();
+    this.linter.findIssues();
+    this.linter.resolveFixableIssues();
+    this.packageManager.findUnsecureLibraries();
+    this.packageManager.findDeprecatedLibraries();
+  }
+}
+
+// Usage
+const codebaseAnalyzer = new CodebaseAnalyzer({
+  repositoryPath: "root/design-patterns/structural/facade/",
+  linterRules: ["rule1", "rule2", "rule3", "rule4"],
+  dependencies: [
+    { name: "ABC", version: 19 },
+    { name: "MNP", version: 14 },
+    { name: "XYZ", version: 23 },
+  ],
+});
+
+codebaseAnalyzer.analyze();
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Flyweight (Cache)
+
+> Flyweight is a structural design pattern that lets you fit more objects into the available amount of RAM by sharing common parts of state between multiple objects instead of keeping all of the data in each object.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858370-1ec33962-9bad-4f5d-8078-132bf7d9da29.png"/>
+
+```typescript
+interface IRequest {
+  readonly method: "GET" | "POST" | "PUT" | "DELETE";
+  readonly url: string;
+  readonly body: Record<string, string>;
+  send(): Promise<any>;
+}
+
+class MinimalRequest implements IRequest {
+  constructor(
+    public readonly method: "GET" | "POST" | "PUT" | "DELETE",
+    public readonly url: string,
+    public readonly body: Record<string, string> = {}
+  ) {}
+
+  public async send(): Promise<any> {
+    const options = { method: this.method, body: JSON.stringify(this.body) };
+
+    const response = await fetch(this.url, options);
+
+    return response.json();
+  }
+}
+
+class RequestFactory {
+  private requests: Map<string, IRequest> = new Map();
+
+  public createRequest(
+    method: "GET" | "POST" | "PUT" | "DELETE",
+    url: string,
+    body: Record<string, string> = {}
+  ): IRequest {
+    const key = `${method}-${url}`;
+
+    if (!this.requests.has(key)) {
+      const request = new MinimalRequest(method, url, body);
+      this.requests.set(key, request);
+    }
+
+    return this.requests.get(key)!; // Type assertion for clarity
+  }
+}
+
+class ParallelRequestsHandler {
+  private factory: RequestFactory;
+
+  constructor(factory: RequestFactory) {
+    this.factory = factory;
+  }
+
+  public async sendAll(
+    requestsInfo: {
+      method: "GET" | "POST" | "PUT" | "DELETE";
+      url: string;
+      body?: Record<string, string>;
+    }[]
+  ): Promise<any[]> {
+    const requests = requestsInfo.map((requestInfo) =>
+      this.factory.createRequest(
+        requestInfo.method,
+        requestInfo.url,
+        requestInfo.body
+      )
+    );
+    const responses = await Promise.all(
+      requests.map((request) => request.send())
+    );
+
+    return responses;
+  }
+}
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Proxy
+
+> Proxy is a structural design pattern that lets you provide a substitute or placeholder for another object. A proxy controls access to the original object, allowing you to perform something either before or after the request gets through to the original object.
+
+<img src="https://user-images.githubusercontent.com/37804060/165858391-e373f505-107c-492d-b354-6a10d6441e35.png"/>
+
+```typescript
+interface IRequestHandler {
+  sendRequest(method: string, url: string, body?: string): void;
+}
+
+class RequestHandler implements IRequestHandler {
+  sendRequest(method: string, url: string, body?: string): void {
+    console.log(`Request sent: ${method} ${url} ${body}`);
+  }
+}
+
+class RequestHandlerProxy implements IRequestHandler {
+  private realApi: RequestHandler;
+
+  constructor(realApi: RequestHandler) {
+    this.realApi = realApi;
+  }
+
+  private logRequest(method: string, url: string, body?: string): void {
+    console.log(`Request logged: ${method} ${url} ${body}`);
+  }
+
+  private validateRequestUrl(url: string): boolean {
+    return url.startsWith("/api");
+  }
+
+  sendRequest(method: string, url: string, body?: string): void {
+    if (this.validateRequestUrl(url)) {
+      this.realApi.sendRequest(method, url, body);
+      this.logRequest(method, url, body);
+    }
+  }
+}
+
+// Usage
+
+const realRequestHandler = new RequestHandler();
+const proxyRequestHandler = new RequestHandlerProxy(realRequestHandler);
+
+proxyRequestHandler.sendRequest("GET", "/api/users");
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)

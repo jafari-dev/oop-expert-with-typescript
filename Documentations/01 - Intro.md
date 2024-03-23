@@ -25,13 +25,13 @@ This repository is a complete guide and tutorial for the principles and techniqu
    - [Dependency Inversion (DIP)](#5-dependency-inversion-dip)
 3. [Design Patterns](#design-patterns)
    - [What's a Design Pattern?](#whats-a-design-pattern)
-   - [Creational Design Patterns](#creational)
+   - Creational Design Patterns
      - [Abstract Factory](#abstract-factory)
      - [Builder](#builder)
      - [Factory Method (Virtual Constructor)](#factory-method)
      - [Prototype (Clone)](#prototype)
      - [Singleton](#singleton)
-   - [Structural Design Patterns](#structural)
+   - Structural Design Patterns
      - [Adapter (Wrapper)](#adapter-wrapper)
      - [Bridge](#bridge)
      - [Composite (Object Tree)](#composite-object-tree)
@@ -39,9 +39,10 @@ This repository is a complete guide and tutorial for the principles and techniqu
      - [Facade](#facade)
      - [Flyweight (Cache)](#flyweight-cache)
      - [Proxy](#proxy)
-   - [Behavioral Design Patterns](#behavioral)
+   - Behavioral Design Patterns
      - [Chain of Responsibility (CoR)](#chain-of-responsibility)
      - [Command (Action or Transaction)](#command)
+     - [Interpreter](#interpreter)
      - [Iterator](#iterator)
      - [Mediator (Intermediary or Controller)](#mediator)
      - [Memento (Snapshot)](#memento)
