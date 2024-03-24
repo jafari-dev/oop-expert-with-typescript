@@ -1132,7 +1132,7 @@ class VisaCardFactory extends PaymentFactory {
   }
 }
 
-// Business logic layer:
+// Usage
 
 function getPaymentFactory(paymentType: PaymentType): PaymentFactory {
   switch (paymentType) {
@@ -1316,7 +1316,7 @@ class UserAdapter implements StandardUser {
   }
 }
 
-// Use case
+// Usage
 
 const user = new User({
   firstName: "Ahmad",
@@ -2086,6 +2086,110 @@ console.log(editor.content); // ""
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
+### Interpreter
+
+> Interpreter is a behavioral design pattern that provides a way to interpret and evaluate sentences or expressions in a language. This pattern defines a language grammar, along with an interpreter that can parse and execute the expressions.
+
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/b5b36a91-dd3d-4bf5-a476-bae961c1d421"/>
+
+```typescript
+interface Expression {
+  interpret(): number;
+}
+
+class NumberExpression implements Expression {
+  constructor(private value: number) {}
+
+  interpret(): number {
+    return this.value;
+  }
+}
+
+class PlusExpression implements Expression {
+  constructor(private left: Expression, private right: Expression) {}
+
+  interpret(): number {
+    return this.left.interpret() + this.right.interpret();
+  }
+}
+
+class MinusExpression implements Expression {
+  constructor(private left: Expression, private right: Expression) {}
+
+  interpret(): number {
+    return this.left.interpret() - this.right.interpret();
+  }
+}
+
+class MultiplyExpression implements Expression {
+  constructor(private left: Expression, private right: Expression) {}
+
+  interpret(): number {
+    return this.left.interpret() * this.right.interpret();
+  }
+}
+
+class DivideExpression implements Expression {
+  constructor(private left: Expression, private right: Expression) {}
+
+  interpret(): number {
+    return this.left.interpret() / this.right.interpret();
+  }
+}
+
+class Interpreter {
+  interpret(expression: string): number {
+    const stack: Expression[] = [];
+
+    const tokens = expression.split(" ");
+    for (const token of tokens) {
+      if (this.isOperator(token)) {
+        const right = stack.pop()!;
+        const left = stack.pop()!;
+        const operator = this.createExpression(token, left, right);
+        stack.push(operator);
+      } else {
+        stack.push(new NumberExpression(parseFloat(token)));
+      }
+    }
+
+    return stack.pop()!.interpret();
+  }
+
+  private isOperator(token: string): boolean {
+    return token === "+" || token === "-" || token === "*" || token === "/";
+  }
+
+  private createExpression(
+    operator: string,
+    left: Expression,
+    right: Expression
+  ): Expression {
+    switch (operator) {
+      case "+":
+        return new PlusExpression(left, right);
+      case "-":
+        return new MinusExpression(left, right);
+      case "*":
+        return new MultiplyExpression(left, right);
+      case "/":
+        return new DivideExpression(left, right);
+      default:
+        throw new Error("Invalid operator: " + operator);
+    }
+  }
+}
+
+// Usage
+const interpreter = new Interpreter();
+
+console.log(interpreter.interpret("3 4 +")); // Output: 7
+console.log(interpreter.interpret("5 2 * 3 +")); // Output: 13
+console.log(interpreter.interpret("10 2 /")); // Output: 5
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
 ### Iterator
 
 > Iterator is a behavioral design pattern that lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).
@@ -2239,6 +2343,176 @@ user1.sendMessage("Hello, everyone!");
 user2.sendMessage("Hi, Alice!");
 
 user3.sendMessage("Hey, Bob!");
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Memento
+
+> Memento is a behavioral design pattern that lets you save and restore the previous state of an object without revealing the details of its implementation.
+
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/4e0b609d-233e-461a-871d-87d5949eb37d"/>
+
+```typescript
+class EditorMemento {
+  constructor(private readonly content: string) {}
+
+  getContent(): string {
+    return this.content;
+  }
+}
+
+class Editor {
+  constructor(private content: string = "") {}
+
+  getContent(): string {
+    return this.content;
+  }
+
+  setContent(content: string): void {
+    this.content = content;
+  }
+
+  createSnapshot(): EditorMemento {
+    return new EditorMemento(this.content);
+  }
+
+  restoreSnapshot(snapshot: EditorMemento): void {
+    this.content = snapshot.getContent();
+  }
+}
+
+class MinimalHistory {
+  private snapshots: EditorMemento[] = [];
+
+  push(snapshot: EditorMemento): void {
+    this.snapshots.push(snapshot);
+  }
+
+  pop(): EditorMemento | undefined {
+    return this.snapshots.pop();
+  }
+}
+
+// Usage
+const editor = new Editor();
+const minimalHistory = new MinimalHistory();
+
+editor.setContent("Hello, World!");
+editor.setContent("Hello, TypeScript!");
+minimalHistory.push(editor.createSnapshot());
+editor.setContent("Hello, Memento Pattern!");
+
+const lastSnapshot = minimalHistory.pop();
+
+if (lastSnapshot) {
+  editor.restoreSnapshot(lastSnapshot);
+}
+
+console.log(editor.getContent()); // Output: Hello, TypeScript!
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Observer
+
+> Observer is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing.
+
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/6ae11f38-d6ed-4c86-a2ed-b59070a56112"/>
+
+```typescript
+interface Subject {
+  registerObserver(observer: Observer): void;
+  removeObserver(observer: Observer): void;
+  notifyObservers(): void;
+}
+
+interface Observer {
+  update(notification: string): void;
+}
+
+class Celebrity implements Subject {
+  private followers: Observer[];
+  private posts: string[];
+
+  constructor() {
+    this.followers = [];
+    this.posts = [];
+  }
+
+  // Method to make a new post
+  sendPost(newPost: string) {
+    this.posts = [...this.posts, newPost];
+    this.notifyFollowers();
+  }
+
+  // Method to notify followers
+  private notifyFollowers() {
+    this.followers.forEach((follower) => {
+      const latestPost = this.posts[this.posts.length - 1];
+
+      follower.update(latestPost);
+    });
+  }
+
+  // Register a new follower
+  registerObserver(observer: Observer) {
+    this.followers.push(observer);
+  }
+
+  // Remove a follower
+  removeObserver(observer: Observer) {
+    const index = this.followers.indexOf(observer);
+    if (index !== -1) {
+      this.followers.splice(index, 1);
+    }
+  }
+
+  // Notify all followers
+  notifyObservers() {
+    this.notifyFollowers();
+  }
+}
+
+class Follower implements Observer {
+  private followerName: string;
+
+  constructor(name: string) {
+    this.followerName = name;
+  }
+
+  // Update method to receive notifications
+  update(notification: string) {
+    console.log(
+      `${this.followerName} received a notification: ${notification}`
+    );
+  }
+}
+
+// Usage
+const celebrity1 = new Celebrity();
+const celebrity2 = new Celebrity();
+
+const follower1 = new Follower("John");
+const follower2 = new Follower("Alice");
+const follower3 = new Follower("Bob");
+
+celebrity1.registerObserver(follower1);
+celebrity1.registerObserver(follower2);
+celebrity2.registerObserver(follower3);
+
+celebrity1.sendPost("Hello World!");
+celebrity2.sendPost("I love coding!");
+
+celebrity1.removeObserver(follower1);
+celebrity1.removeObserver(follower2);
+
+celebrity1.sendPost("Observer pattern is awesome!");
+
+// Output:
+// John received a notification: Hello World!
+// Alice received a notification: Hello World!
+// Bob received a notification: I love coding!
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -2516,6 +2790,83 @@ twitterAnalysis.analyzePosts();
 
 const instagramAnalysis = new InstagramPostAnalyzer();
 instagramAnalysis.analyzePosts();
+```
+
+[`⬆ BACK TO TOP ⬆`](#table-of-contents)
+
+### Visitor
+
+> Visitor is a behavioral design pattern that lets you separate algorithms from the objects on which they operate.
+
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/592e44d8-f8db-467d-89b1-fea1088820c2"/>
+
+```typescript
+interface Visitor {
+  visitDesigner(manager: Designer): void;
+  visitDeveloper(developer: Developer): void;
+}
+
+interface Employee {
+  accept(visitor: Visitor): void;
+}
+
+class Designer implements Employee {
+  name: string;
+  numberOfDesignedPages: number;
+
+  constructor(name: string, numberOfDesignedPages: number) {
+    this.name = name;
+    this.numberOfDesignedPages = numberOfDesignedPages;
+  }
+
+  accept(visitor: Visitor): void {
+    visitor.visitDesigner(this);
+  }
+}
+
+class Developer implements Employee {
+  name: string;
+  baseSalary: number;
+  storyPoints: number;
+
+  constructor(name: string, baseSalary: number, storyPoints: number) {
+    this.name = name;
+    this.baseSalary = baseSalary;
+    this.storyPoints = storyPoints;
+  }
+
+  accept(visitor: Visitor): void {
+    visitor.visitDeveloper(this);
+  }
+}
+
+class SalaryCalculator implements Visitor {
+  totalSalary: number = 0;
+
+  visitDesigner(manager: Designer): void {
+    this.totalSalary += manager.numberOfDesignedPages * 200;
+  }
+
+  visitDeveloper(developer: Developer): void {
+    this.totalSalary += developer.baseSalary + developer.storyPoints * 30;
+  }
+}
+
+// Usage
+const employees: Employee[] = [
+  new Designer("Alice", 15),
+  new Designer("James", 20),
+  new Developer("Ahmad", 3000, 40),
+  new Developer("Kate", 2000, 60),
+];
+
+const salaryCalculator = new SalaryCalculator();
+
+for (const employee of employees) {
+  employee.accept(salaryCalculator);
+}
+
+console.log("Total salary:", salaryCalculator.totalSalary);
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)

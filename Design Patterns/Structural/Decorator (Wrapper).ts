@@ -46,7 +46,7 @@ class ImageResizer extends ImageDecorator {
   };
 }
 
-// Use Case
+// Usage
 
 const image = new ImageFile([], "Picture.jpg").processImage();
 const compressedImage = new ImageCompressor(image).processImage();

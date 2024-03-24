@@ -77,7 +77,7 @@ class UserAdapter implements StandardUser {
   }
 }
 
-// Use case
+// Usage
 
 const user = new User({
   firstName: "Ahmad",

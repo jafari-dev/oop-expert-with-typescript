@@ -55,7 +55,7 @@ class VisaCardFactory extends PaymentFactory {
   }
 }
 
-// Business logic layer:
+// Usage
 
 function getPaymentFactory(paymentType: PaymentType): PaymentFactory {
   switch (paymentType) {
