@@ -379,9 +379,21 @@ In software engineering, SOLID is a mnemonic acronym for five design principles 
 
 ### 1. Single Responsibility (SRP)
 
+#### Original Definition
+
 > There should never be more than one reason for a class to change. Every class should have only one responsibility.
 
+#### Simple Definition
+
+> SRP means that each class should only be responsible for one thing. It keeps classes focused and makes code easier to understand and maintain.
+
 <img src="https://user-images.githubusercontent.com/37804060/153056645-8760ddfa-01f3-4c21-9279-ab6ba669a0fc.jpg"/>
+
+#### Example
+
+Before following the Single Responsibility Principle (SRP), the `Profile` class was handling both user profile data (like email, bio, etc.) and user settings (theme, language and notifications). This violated SRP because a class should have only one reason to change, but here the Profile class had multiple reasons to change - if either the profile data structure or the settings structure changed.
+
+After following SRP, the code was refactored to separate concerns. The Profile class now only deals with profile-related information such as email and bio. The settings-related functionality has been moved to a new Settings class. This change improves maintainability and makes the codebase more flexible. Now, if there's a need to update how settings are handled, it only affects the Settings class, keeping the Profile class untouched. Additionally, it enhances code readability and makes it easier to understand the purpose of each class.
 
 :x: Before following SRP:
 
@@ -473,47 +485,51 @@ class Profile {
 
 ### 2. Open/Closed (OCP)
 
+#### Original Definition
+
 > Software entities should be open for extension, but closed for modification.
 
+#### Simple Definition
+
+> The Open/Closed Principle means that once you write a piece of code, you should be able to add new functionality to it without changing the existing code. It promotes extending the behavior of software rather than altering it, ensuring that changes don't break existing functionality.
+
 <img src="https://user-images.githubusercontent.com/37804060/153056325-679b94dc-ea4f-4315-a682-93057845f9d5.jpg"/>
+
+#### Example
+
+Before OCP implementation, the `QueryGenerator` class directly handles different types of databases, such as _MySQL_, _Redis_, and _Neo4j_, within its methods. This violates the Open/Closed Principle because if you want to add support for a new database, you would need to modify the `QueryGenerator` class by adding a new case to each switch statement. This could lead to the class becoming bloated and tightly coupled to specific database implementations, making it harder to maintain and extend.
+
+After implementing OCP, the code is refactored to use interfaces and separate classes for each database type. Now, the QueryGenerator interface defines common methods `readData` and `writeData`, while individual database classes (`MySql`, `Redis`, and `Neo4j`) implement these methods according to their specific behavior.
+
+This approach adheres to the Open/Closed Principle because the `QueryGenerator` interface is open for extension, allowing you to add support for new databases by creating new classes that implement the interface, without modifying existing code. Additionally, it's closed for modification because changes to existing database classes won't affect the `QueryGenerator` interface or other database implementations. This results in a more flexible, maintainable, and scalable design.
 
 :x: Before following OCP:
 
 ```typescript
-class OperatingSystem {
-  getFilesExtension(os: string): string {
-    if (os === "Windows") {
-      return "exe";
-    } else if (os === "Linux") {
-      return "deb";
-    } else if (os === "Macintosh") {
-      return "dmg";
-    } else {
-      return "unknown";
+class QueryGenerator {
+  readData(database: string): string {
+    switch (database) {
+      case "MySQL":
+        return "SELECT * FROM MySQL";
+      case "Redis":
+        return "SCAN 0";
+      case "Neo4j":
+        return "MATCH (n) RETURN n";
+      default:
+        return "Unknown";
     }
   }
 
-  getCreator(os: string): string {
-    if (os === "Windows") {
-      return "Bill Gates";
-    } else if (os === "Linux") {
-      return "Linus Torvalds";
-    } else if (os === "Macintosh") {
-      return "Steve Jobs";
-    } else {
-      return "Unknown";
-    }
-  }
-
-  getBornDate(os: string): number {
-    if (os === "Windows") {
-      return 1985;
-    } else if (os === "Linux") {
-      return 1991;
-    } else if (os === "Macintosh") {
-      return 1984;
-    } else {
-      return 0;
+  writeData(database: string, data: string): string {
+    switch (database) {
+      case "MySQL":
+        return `INSERT INTO MySQL VALUES (${data})`;
+      case "Redis":
+        return `SET ${data}`;
+      case "Neo4j":
+        return `CREATE (${data})`;
+      default:
+        return "Unknown";
     }
   }
 }
@@ -522,51 +538,38 @@ class OperatingSystem {
 :heavy_check_mark: After following OCP:
 
 ```typescript
-interface OperatingSystem {
-  getFilesExtension: () => string;
-  getCreator: () => string;
-  getBornDate: () => number;
+interface QueryGenerator {
+  readData: () => string;
+  writeData: (data: string) => string;
 }
 
-class Windows implements OperatingSystem {
-  getFilesExtension() {
-    return "exe";
+class MySql implements QueryGenerator {
+  readData() {
+    return "SELECT * FROM MySQL";
   }
 
-  getCreator() {
-    return "Bill Gates";
-  }
-
-  getBornDate() {
-    return 1985;
+  writeData(data: string) {
+    return `INSERT INTO MySQL VALUES (${data})`;
   }
 }
 
-class Linux implements OperatingSystem {
-  getFilesExtension() {
-    return "deb";
+class Redis implements QueryGenerator {
+  readData() {
+    return "SCAN 0";
   }
 
-  getCreator() {
-    return "Linus Torvalds";
-  }
-
-  getBornDate() {
-    return 1991;
+  writeData(data: string) {
+    return `SET ${data}`;
   }
 }
 
-class Macintosh implements OperatingSystem {
-  getFilesExtension() {
-    return "dmg";
+class Neo4j implements QueryGenerator {
+  readData() {
+    return "MATCH (n) RETURN n";
   }
 
-  getCreator() {
-    return "Steve Jobs";
-  }
-
-  getBornDate() {
-    return 1984;
+  writeData(data: string) {
+    return `CREATE (${data})`;
   }
 }
 ```
@@ -575,38 +578,54 @@ class Macintosh implements OperatingSystem {
 
 ### 3. Liskov Substitution (LSP)
 
+#### Original Definition
+
 > If `S` is a subtype of `T`, then objects of type `T` in a program may be replaced with objects of type `S` without altering any of the desirable properties of that program.
 
+#### Simple Definition
+
+> The LSP says that if you have a class, you should be able to use any of its subclasses interchangeably without breaking the program.
+
 <img src="https://user-images.githubusercontent.com/37804060/153056329-914cbbba-685b-452b-9dcf-4fcf6a4faabc.jpg"/>
+
+#### Example
+
+In the initial example, we have an `ImageProcessor` class responsible for various image processing operations such as **compression**, **enhancing size**, **removing background**, and **enhancing quality with AI**. There's also a `LimitedImageProcessor` class that extends `ImageProcessor`, but it overrides the `removeBackground` and `enhanceQualityWithAI` methods to throw errors indicating that these features are only available in the premium version.
+
+This violates the Liskov Substitution Principle because substituting an instance of `LimitedImageProcessor` for an instance of `ImageProcessor` could lead to unexpected errors if code relies on those overridden methods.
+
+To adhere to the LSP, we refactor the classes. We create a `PremiumImageProcessor` class that extends `ImageProcessor` and implements the `removeBackground` and `enhanceQualityWithAI` methods. This way, both classes share a common interface and substituting an instance of `PremiumImageProcessor` for an instance of `ImageProcessor` won't break the program's correctness.
+
+In the refactored version, `ImageProcessor` is now focused on basic image processing operations like compression and enhancing size, while `PremiumImageProcessor` extends it to include premium features like removing background and enhancing quality with AI. This separation allows for better code organization and adherence to the Liskov Substitution Principle.
 
 :x: Before following LSP:
 
 ```typescript
-class Tablet {
-  readBook(): void {
-    // Read a book
+class ImageProcessor {
+  compress() {
+    // Compress the image
   }
 
-  playMovie(): void {
-    // Play a movie
+  enhanceSize() {
+    // Increase the size of the image
   }
 
-  playCartoon(): void {
-    // Play a cartoon
+  removeBackground() {
+    // Remove the background of the image
   }
 
-  openBrowser(): void {
-    // Open a browser
+  enhanceQualityWithAI() {
+    // Enhance the quality of the image with AI
   }
 }
 
-class KidsTablet extends Tablet {
-  override openBrowser(): Error {
-    throw Error("Kids haven't access to the browser!");
+class LimitedImageProcessor extends ImageProcessor {
+  override removeBackground(): Error {
+    throw Error("You have to buy the premium version to access this feature!");
   }
 
-  override playMovie(): Error {
-    throw Error("Kids haven't access to the movies!");
+  override enhanceQualityWithAI(): Error {
+    throw Error("You have to buy the premium version to access this feature!");
   }
 }
 ```
@@ -614,23 +633,23 @@ class KidsTablet extends Tablet {
 :heavy_check_mark: After following LSP:
 
 ```typescript
-class Tablet {
-  readBook(): void {
-    // Read a book
+class ImageProcessor {
+  compress() {
+    // Compress the image
   }
 
-  playCartoon(): void {
-    // Play a cartoon
+  enhanceSize() {
+    // Increase the size of the image
   }
 }
 
-class AdultsTablet extends Tablet {
-  playMovie(): void {
-    // Play a movie
+class PremiumImageProcessor extends ImageProcessor {
+  removeBackground() {
+    // Remove the background of the image
   }
 
-  openBrowser(): void {
-    // Open a browser
+  enhanceQualityWithAI() {
+    // Enhance the quality of the image with AI
   }
 }
 ```
@@ -639,53 +658,67 @@ class AdultsTablet extends Tablet {
 
 ### 4. Interface Segregation (ISP)
 
+#### Original Definition
+
 > No code should be forced to depend on methods it does not use.
 
+#### Simple Definition
+
+> The ISP means that clients should not be forced to implement methods they don't use. It's like saying, "Don't make people take things they don't need."
+
 <img src="https://user-images.githubusercontent.com/37804060/153056335-7bf6d86f-da0b-4687-89fe-9ea97e2ec40e.jpg"/>
+
+#### Example
+
+In the initial implementation before applying the ISP, the `VPNConnection` interface encompasses methods for various VPN protocols, including `useL2TP`, `useOpenVPN`, `useV2Ray`, and `useShadowsocks`. However, not all classes implementing this interface require all these methods. For instance, the `InternalNetwork` class only utilizes `useL2TP` and `useOpenVPN`, yet it is forced to implement all methods defined in the `VPNConnection` interface, leading to unnecessary dependencies and potential errors if methods are called inappropriately.
+
+To address this issue, the Interface Segregation Principle suggests breaking down the monolithic interface into smaller, more focused interfaces. In the improved implementation, two interfaces are introduced: `BaseVPNConnection` and `ExtraVPNConnection`. The `BaseVPNConnection` interface contains methods common to both external and internal networks (`useL2TP` and `useOpenVPN`), while the `ExtraVPNConnection` interface includes methods specific to external networks (`useV2Ray` and `useShadowsocks`).
+
+With this segregation, the `InternalNetwork` class now only needs to implement the methods relevant to its functionality, adhering to the principle of "clients should not be forced to depend on interfaces they do not use." This restructuring enhances code clarity, reduces unnecessary dependencies, and makes the system more maintainable and flexible. Additionally, it mitigates the risk of errors by ensuring that classes only expose the methods they actually support, promoting better encapsulation and separation of concerns.
 
 :x: Before following ISP:
 
 ```typescript
-interface Ports {
-  useUSB: () => void;
-  useHDMI: () => void;
-  usePS2: () => void;
-  useVGA: () => void;
+interface VPNConnection {
+  useL2TP: () => void;
+  useOpenVPN: () => void;
+  useV2Ray: () => void;
+  useShadowsocks: () => void;
 }
 
-class PC implements Ports {
-  useUSB() {
-    console.log("USB port is ready for your PC!");
+class ExternalNetwork implements VPNConnection {
+  useL2TP() {
+    console.log("L2TP VPN is ready for your external network!");
   }
 
-  useHDMI() {
-    console.log("HDMI port is ready for your PC!");
+  useOpenVPN() {
+    console.log("OpenVPN is ready for your external network!");
   }
 
-  usePS2() {
-    console.log("PS2 port is ready for your PC!");
+  useV2Ray() {
+    console.log("V2Ray is ready for your external network!");
   }
 
-  useVGA() {
-    console.log("VGA port is ready for your PC!");
+  useShadowsocks() {
+    console.log("Shadowsocks is ready for your external network!");
   }
 }
 
-class Laptop implements Ports {
-  useUSB() {
-    console.log("USB port is ready for your Laptop!");
+class InternalNetwork implements VPNConnection {
+  useL2TP() {
+    console.log("L2TP VPN is ready for your internal network!");
   }
 
-  useHDMI() {
-    console.log("HDMI port is ready for your Laptop!");
+  useOpenVPN() {
+    console.log("OpenVPN is ready for your internal network!");
   }
 
-  usePS2() {
-    throw new Error("Laptop has not any PS2 port!");
+  useV2Ray() {
+    throw Error("V2Ray is not available for your internal network!");
   }
 
-  useVGA() {
-    throw new Error("Laptop has not any VGA port!");
+  useShadowsocks() {
+    throw Error("Shadowsocks is not available for your internal network!");
   }
 }
 ```
@@ -693,41 +726,41 @@ class Laptop implements Ports {
 :heavy_check_mark: After following ISP:
 
 ```typescript
-interface CommonPorts {
-  useUSB: () => void;
-  useHDMI: () => void;
+interface BaseVPNConnection {
+  useL2TP: () => void;
+  useOpenVPN: () => void;
 }
 
-interface ExtraPorts {
-  usePS2: () => void;
-  useVGA: () => void;
+interface ExtraVPNConnection {
+  useV2Ray: () => void;
+  useShadowsocks: () => void;
 }
 
-class PC implements CommonPorts, ExtraPorts {
-  useUSB() {
-    console.log("USB port is ready for your PC!");
+class ExternalNetwork implements BaseVPNConnection, ExtraVPNConnection {
+  useL2TP() {
+    console.log("L2TP VPN is ready for your external network!");
   }
 
-  useHDMI() {
-    console.log("HDMI port is ready for your PC!");
+  useOpenVPN() {
+    console.log("OpenVPN is ready for your external network!");
   }
 
-  usePS2() {
-    console.log("PS2 port is ready for your PC!");
+  useV2Ray() {
+    console.log("V2Ray is ready for your external network!");
   }
 
-  useVGA() {
-    console.log("VGA port is ready for your PC!");
+  useShadowsocks() {
+    console.log("Shadowsocks is ready for your external network!");
   }
 }
 
-class Laptop implements CommonPorts {
-  useUSB() {
-    console.log("USB port is ready for your Laptop!");
+class InternalNetwork implements BaseVPNConnection {
+  useL2TP() {
+    console.log("L2TP VPN is ready for your internal network!");
   }
 
-  useHDMI() {
-    console.log("HDMI port is ready for your Laptop!");
+  useOpenVPN() {
+    console.log("OpenVPN is ready for your internal network!");
   }
 }
 ```
@@ -736,9 +769,23 @@ class Laptop implements CommonPorts {
 
 ### 5. Dependency Inversion (DIP)
 
+#### Original Definition
+
 > High-level modules should not import anything from low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.
 
+#### Simple Definition
+
+> DIP means that instead of high-level modules depending directly on low-level modules, both should depend on abstractions. This way, changes in low-level modules don't directly affect high-level ones, promoting flexible and maintainable code.
+
 <img src="https://user-images.githubusercontent.com/37804060/153056344-b32c3e4c-8dce-498c-8243-2aed646762f1.jpg"/>
+
+#### Example
+
+In the original code, the `Messenger` class directly depends on specific implementations of messaging APIs like `TelegramApi`, `WhatsappApi`, and `SignalApi`. This tightly couples Messenger with these concrete implementations, making it difficult to change or extend the system without modifying the Messenger class itself. This violates the Dependency Inversion Principle (DIP), which suggests that high-level modules should not depend on low-level modules but rather on abstractions.
+
+To adhere to DIP, we introduce an interface called `MessengerApi`, which defines the methods that the Messenger class requires from a messaging API. Then, each messaging API class (`TelegramApi`, `WhatsappApi` and `SignalApi`) implements this interface, providing their own implementation of the connect and send methods.
+
+By doing this, we decouple the Messenger class from specific messaging API implementations. Now, Messenger depends on the MessengerApi interface rather than concrete implementations. This allows us to easily switch between different messaging APIs or add new ones without modifying the Messenger class. Additionally, it promotes code reusability and simplifies testing, as we can now easily mock the MessengerApi interface for testing purposes. Overall, following DIP enhances the flexibility, maintainability, and testability of the codebase.
 
 :x: Before following DIP:
 
