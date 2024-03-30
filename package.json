@@ -1,0 +1,30 @@
+{
+  "name": "oop-expert-with-typescript",
+  "version": "1.0.0",
+  "description": "A complete guide for learning object oriented programming pillars, SOLID principles and design patterns with TypeScript!",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jafari-dev/oop-expert-with-typescript.git"
+  },
+  "keywords": [
+    "typescript",
+    "oop",
+    "design-patterns",
+    "software-engineering",
+    "software-development",
+    "oop-principles",
+    "software-architecture",
+    "solid-principles",
+    "object-oriented-programming"
+  ],
+  "author": "Ahmad Jafari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jafari-dev/oop-expert-with-typescript/issues"
+  },
+  "homepage": "https://github.com/jafari-dev/oop-expert-with-typescript"
+}
