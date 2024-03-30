@@ -1,47 +1,34 @@
-interface OperatingSystem {
-  getFilesExtension: () => string;
-  getCreator: () => string;
-  getBornDate: () => number;
+interface QueryGenerator {
+  readData: () => string;
+  writeData: (data: string) => string;
 }
 
-class Windows implements OperatingSystem {
-  getFilesExtension() {
-    return "exe";
+class MySql implements QueryGenerator {
+  readData() {
+    return "SELECT * FROM MySQL";
   }
 
-  getCreator() {
-    return "Bill Gates";
-  }
-
-  getBornDate() {
-    return 1985;
+  writeData(data: string) {
+    return `INSERT INTO MySQL VALUES (${data})`;
   }
 }
 
-class Linux implements OperatingSystem {
-  getFilesExtension() {
-    return "deb";
+class Redis implements QueryGenerator {
+  readData() {
+    return "SCAN 0";
   }
 
-  getCreator() {
-    return "Linus Torvalds";
-  }
-
-  getBornDate() {
-    return 1991;
+  writeData(data: string) {
+    return `SET ${data}`;
   }
 }
 
-class Macintosh implements OperatingSystem {
-  getFilesExtension() {
-    return "dmg";
+class Neo4j implements QueryGenerator {
+  readData() {
+    return "MATCH (n) RETURN n";
   }
 
-  getCreator() {
-    return "Steve Jobs";
-  }
-
-  getBornDate() {
-    return 1984;
+  writeData(data: string) {
+    return `CREATE (${data})`;
   }
 }

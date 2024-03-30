@@ -1,19 +1,19 @@
-class Tablet {
-  readBook(): void {
-    // Read a book
+class ImageProcessor {
+  compress(): void {
+    // Compress the image
   }
 
-  playCartoon(): void {
-    // Play a cartoon
+  enhanceSize(): void {
+    // Increase the size of the image
   }
 }
 
-class AdultsTablet extends Tablet {
-  playMovie(): void {
-    // Play a movie
+class PremiumImageProcessor extends ImageProcessor {
+  removeBackground(): void {
+    // Remove the background of the image
   }
 
-  openBrowser(): void {
-    // Open a browser
+  enhanceQualityWithAI(): void {
+    // Enhance the quality of the image with AI
   }
 }

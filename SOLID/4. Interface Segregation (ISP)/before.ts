@@ -1,42 +1,42 @@
-interface Ports {
-  useUSB: () => void;
-  useHDMI: () => void;
-  usePS2: () => void;
-  useVGA: () => void;
+interface VPNConnection {
+  useL2TP: () => void;
+  useOpenVPN: () => void;
+  useV2Ray: () => void;
+  useShadowsocks: () => void;
 }
 
-class PC implements Ports {
-  useUSB() {
-    console.log("USB port is ready for your PC!");
+class ExternalNetwork implements VPNConnection {
+  useL2TP() {
+    console.log("L2TP VPN is ready for your external network!");
   }
 
-  useHDMI() {
-    console.log("HDMI port is ready for your PC!");
+  useOpenVPN() {
+    console.log("OpenVPN is ready for your external network!");
   }
 
-  usePS2() {
-    console.log("PS2 port is ready for your PC!");
+  useV2Ray() {
+    console.log("V2Ray is ready for your external network!");
   }
 
-  useVGA() {
-    console.log("VGA port is ready for your PC!");
+  useShadowsocks() {
+    console.log("Shadowsocks is ready for your external network!");
   }
 }
 
-class Laptop implements Ports {
-  useUSB() {
-    console.log("USB port is ready for your Laptop!");
+class InternalNetwork implements VPNConnection {
+  useL2TP() {
+    console.log("L2TP VPN is ready for your internal network!");
   }
 
-  useHDMI() {
-    console.log("HDMI port is ready for your Laptop!");
+  useOpenVPN() {
+    console.log("OpenVPN is ready for your internal network!");
   }
 
-  usePS2() {
-    throw new Error("Laptop has not any PS2 port!");
+  useV2Ray() {
+    throw Error("V2Ray is not available for your internal network!");
   }
 
-  useVGA() {
-    throw new Error("Laptop has not any VGA port!");
+  useShadowsocks() {
+    throw Error("Shadowsocks is not available for your internal network!");
   }
 }

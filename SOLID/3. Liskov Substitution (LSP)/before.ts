@@ -1,27 +1,27 @@
-class Tablet {
-  readBook(): void {
-    // Read a book
+class ImageProcessor {
+  compress(): void {
+    // Compress the image
   }
 
-  playMovie(): void {
-    // Play a movie
+  enhanceSize(): void {
+    // Increase the size of the image
   }
 
-  playCartoon(): void {
-    // Play a cartoon
+  removeBackground(): void {
+    // Remove the background of the image
   }
 
-  openBrowser(): void {
-    // Open a browser
+  enhanceQualityWithAI(): void {
+    // Enhance the quality of the image with AI
   }
 }
 
-class KidsTablet extends Tablet {
-  override openBrowser(): Error {
-    throw Error("Kids haven't access to the browser!");
+class LimitedImageProcessor extends ImageProcessor {
+  override removeBackground(): Error {
+    throw Error("You have to buy the premium version to access this feature!");
   }
 
-  override playMovie(): Error {
-    throw Error("Kids haven't access to the movies!");
+  override enhanceQualityWithAI(): Error {
+    throw Error("You have to buy the premium version to access this feature!");
   }
 }

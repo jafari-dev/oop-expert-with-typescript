@@ -1,37 +1,37 @@
-interface CommonPorts {
-  useUSB: () => void;
-  useHDMI: () => void;
+interface BaseVPNConnection {
+  useL2TP: () => void;
+  useOpenVPN: () => void;
 }
 
-interface ExtraPorts {
-  usePS2: () => void;
-  useVGA: () => void;
+interface ExtraVPNConnection {
+  useV2Ray: () => void;
+  useShadowsocks: () => void;
 }
 
-class PC implements CommonPorts, ExtraPorts {
-  useUSB() {
-    console.log("USB port is ready for your PC!");
+class ExternalNetwork implements BaseVPNConnection, ExtraVPNConnection {
+  useL2TP() {
+    console.log("L2TP VPN is ready for your external network!");
   }
 
-  useHDMI() {
-    console.log("HDMI port is ready for your PC!");
+  useOpenVPN() {
+    console.log("OpenVPN is ready for your external network!");
   }
 
-  usePS2() {
-    console.log("PS2 port is ready for your PC!");
+  useV2Ray() {
+    console.log("V2Ray is ready for your external network!");
   }
 
-  useVGA() {
-    console.log("VGA port is ready for your PC!");
+  useShadowsocks() {
+    console.log("Shadowsocks is ready for your external network!");
   }
 }
 
-class Laptop implements CommonPorts {
-  useUSB() {
-    console.log("USB port is ready for your Laptop!");
+class InternalNetwork implements BaseVPNConnection {
+  useL2TP() {
+    console.log("L2TP VPN is ready for your internal network!");
   }
 
-  useHDMI() {
-    console.log("HDMI port is ready for your Laptop!");
+  useOpenVPN() {
+    console.log("OpenVPN is ready for your internal network!");
   }
 }

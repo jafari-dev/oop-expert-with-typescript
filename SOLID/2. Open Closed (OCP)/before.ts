@@ -1,37 +1,27 @@
-class OperatingSystem {
-  getFilesExtension(os: string): string {
-    if (os === "Windows") {
-      return "exe";
-    } else if (os === "Linux") {
-      return "deb";
-    } else if (os === "Macintosh") {
-      return "dmg";
-    } else {
-      return "unknown";
+class QueryGenerator {
+  readData(database: string): string {
+    switch (database) {
+      case "MySQL":
+        return "SELECT * FROM MySQL";
+      case "Redis":
+        return "SCAN 0";
+      case "Neo4j":
+        return "MATCH (n) RETURN n";
+      default:
+        return "Unknown";
     }
   }
 
-  getCreator(os: string): string {
-    if (os === "Windows") {
-      return "Bill Gates";
-    } else if (os === "Linux") {
-      return "Linus Torvalds";
-    } else if (os === "Macintosh") {
-      return "Steve Jobs";
-    } else {
-      return "Unknown";
-    }
-  }
-
-  getBornDate(os: string): number {
-    if (os === "Windows") {
-      return 1985;
-    } else if (os === "Linux") {
-      return 1991;
-    } else if (os === "Macintosh") {
-      return 1984;
-    } else {
-      return 0;
+  writeData(database: string, data: string): string {
+    switch (database) {
+      case "MySQL":
+        return `INSERT INTO MySQL VALUES (${data})`;
+      case "Redis":
+        return `SET ${data}`;
+      case "Neo4j":
+        return `CREATE (${data})`;
+      default:
+        return "Unknown";
     }
   }
 }
