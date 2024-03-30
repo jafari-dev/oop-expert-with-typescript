@@ -1,17 +1,17 @@
 class ImageProcessor {
-  compress(): void {
+  compress() {
     // Compress the image
   }
 
-  enhanceSize(): void {
+  enhanceSize() {
     // Increase the size of the image
   }
 
-  removeBackground(): void {
+  removeBackground() {
     // Remove the background of the image
   }
 
-  enhanceQualityWithAI(): void {
+  enhanceQualityWithAI() {
     // Enhance the quality of the image with AI
   }
 }
