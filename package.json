@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/jafari-dev/oop-expert-with-typescript/issues"
   },
-  "homepage": "https://github.com/jafari-dev/oop-expert-with-typescript"
+  "homepage": "https://github.com/jafari-dev/oop-expert-with-typescript",
+  "devDependencies": {
+    "typescript": "^5.4.3"
+  }
 }
