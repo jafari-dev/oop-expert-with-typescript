@@ -4,7 +4,8 @@
   "description": "A complete guide for learning object oriented programming pillars, SOLID principles and design patterns with TypeScript!",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --config .eslintrc.json . --ext ts",
+    "lint:fix": "eslint --config .eslintrc.json . --ext ts --fix"
   },
   "repository": {
     "type": "git",
