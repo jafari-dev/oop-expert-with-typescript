@@ -40,6 +40,7 @@ class Celebrity implements Subject {
   // Remove a follower
   removeObserver(observer: Observer) {
     const index = this.followers.indexOf(observer);
+
     if (index !== -1) {
       this.followers.splice(index, 1);
     }
@@ -60,9 +61,7 @@ class Follower implements Observer {
 
   // Update method to receive notifications
   update(notification: string) {
-    console.log(
-      `${this.followerName} received a notification: ${notification}`
-    );
+    console.log(`${this.followerName} received a notification: ${notification}`);
   }
 }
 

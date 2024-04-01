@@ -56,17 +56,20 @@ class BookShelfIterator implements MyIterator<Book> {
 
   next() {
     this.currentIndex += 1;
+
     return this.bookShelf.getBookAt(this.currentIndex);
   }
 
   previous() {
     this.currentIndex -= 1;
+
     return this.bookShelf.getBookAt(this.currentIndex);
   }
 }
 
 // Usage
 const shelf = new BookShelf();
+
 shelf.addBook(new Book("Design Patterns", "Gang of Four"));
 shelf.addBook(new Book("Clean Code", "Robert C. Martin"));
 shelf.addBook(new Book("You Don't Know JS", "Kyle Simpson"));
@@ -75,5 +78,6 @@ const MyIterator = shelf.createIterator();
 
 while (MyIterator.hasNext()) {
   const book = MyIterator.next();
+
   console.log(`${book.title} by ${book.author}`);
 }

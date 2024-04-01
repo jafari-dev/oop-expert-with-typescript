@@ -1,6 +1,6 @@
 class ImageProcessor {
-  compress() {
-    // Compress the image
+  compress(imageFile: File) {
+    return imageFile;
   }
 
   enhanceSize() {

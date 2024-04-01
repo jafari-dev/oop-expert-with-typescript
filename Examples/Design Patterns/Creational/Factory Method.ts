@@ -64,10 +64,13 @@ function getPaymentFactory(paymentType: PaymentType): PaymentFactory {
 }
 
 const paypalService = getPaymentFactory(PaymentType.Paypal).createService();
+
 paypalService.payMoney(100); // You paid 100 dollars by Paypal.
 
 const bitcoinService = getPaymentFactory(PaymentType.Bitcoin).createService();
+
 bitcoinService.payMoney(200); // You paid 200 dollars by Bitcoin.
 
 const visaCardService = getPaymentFactory(PaymentType.VisaCard).createService();
+
 visaCardService.payMoney(300); // You paid 300 dollars by VisaCard.

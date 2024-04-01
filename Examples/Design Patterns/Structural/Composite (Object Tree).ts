@@ -1,7 +1,7 @@
 abstract class BaseUnit<T> {
   constructor(
     private readonly id: string,
-    private readonly units: BaseUnit<T>[] = []
+    private readonly units: BaseUnit<T>[] = [],
   ) {}
 
   getUnit(unitId: string): BaseUnit<T> | null {
@@ -48,26 +48,12 @@ class University extends BaseUnit<Faculty> {}
 
 const harvardUniversity = new University("Harvard", [
   new Faculty("Engineering", [
-    new Department("Computer", [
-      new Employee("C1", 6200),
-      new Employee("C2", 5400),
-      new Employee("C3", 5600),
-    ]),
-    new Department("Electrical", [
-      new Employee("E1", 4800),
-      new Employee("E2", 5800),
-    ]),
+    new Department("Computer", [new Employee("C1", 6200), new Employee("C2", 5400), new Employee("C3", 5600)]),
+    new Department("Electrical", [new Employee("E1", 4800), new Employee("E2", 5800)]),
   ]),
   new Faculty("Science", [
-    new Department("Physics", [
-      new Employee("P1", 3800),
-      new Employee("P2", 4600),
-    ]),
-    new Department("Mathematics", [
-      new Employee("M1", 5200),
-      new Employee("M2", 5600),
-      new Employee("M3", 4600),
-    ]),
+    new Department("Physics", [new Employee("P1", 3800), new Employee("P2", 4600)]),
+    new Department("Mathematics", [new Employee("M1", 5200), new Employee("M2", 5600), new Employee("M3", 4600)]),
   ]),
 ]);
 
@@ -76,16 +62,19 @@ harvardUniversity.increaseSalary(10);
 console.log(harvardUniversity.getSalary());
 
 const engineeringFaculty = harvardUniversity.getUnit("Engineering") as Faculty;
+
 console.log(engineeringFaculty.getSalary());
 engineeringFaculty.increaseSalary(10);
 console.log(engineeringFaculty.getSalary());
 
 const computerDepartment = engineeringFaculty.getUnit("Computer") as Department;
+
 console.log(computerDepartment.getSalary());
 computerDepartment.increaseSalary(10);
 console.log(computerDepartment.getSalary());
 
 const employee = computerDepartment.getUnit("C1") as Employee;
+
 console.log(employee.getSalary());
 employee.increaseSalary(10);
 console.log(employee.getSalary());

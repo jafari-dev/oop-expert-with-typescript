@@ -14,9 +14,7 @@ abstract class SocialMediaPostAnalyzer {
   ];
 
   preprocessData(data: string): string[] {
-    return data
-      .split(" ")
-      .map((word) => word.replace(/[^a-zA-Z ]/g, "").toLowerCase());
+    return data.split(" ").map((word) => word.replace(/[^a-zA-Z ]/g, "").toLowerCase());
   }
 
   analyze(data: string[]): string[] {
@@ -24,17 +22,14 @@ abstract class SocialMediaPostAnalyzer {
   }
 
   displayResults(data: string[]): void {
-    console.log(
-      `The number of harmful words in this post is ${
-        data.length
-      }, including ${data.join(", ")}.`
-    );
+    console.log(`The number of harmful words in this post is ${data.length}, including ${data.join(", ")}.`);
   }
 
   async analyzePosts(): Promise<void> {
     const data = await this.fetchData();
     const preprocessedData = this.preprocessData(data);
     const analyticsResult = this.analyze(preprocessedData);
+
     this.displayResults(analyticsResult);
   }
 
@@ -57,7 +52,9 @@ class InstagramPostAnalyzer extends SocialMediaPostAnalyzer {
 
 // Usage
 const twitterAnalysis = new TwitterPostAnalyzer();
+
 twitterAnalysis.analyzePosts();
 
 const instagramAnalysis = new InstagramPostAnalyzer();
+
 instagramAnalysis.analyzePosts();

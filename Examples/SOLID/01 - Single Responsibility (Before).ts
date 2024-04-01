@@ -5,13 +5,15 @@ class Profile {
   preferredLanguage: string;
   receiveNotifications: boolean;
 
-  constructor(
-    email: string,
-    bio: string,
-    theme: "LIGHT" | "DARK",
-    preferredLanguage: string,
-    receiveNotifications: boolean
-  ) {
+  constructor(params: {
+    email: string;
+    bio: string;
+    theme: "LIGHT" | "DARK";
+    preferredLanguage: string;
+    receiveNotifications: boolean;
+  }) {
+    const { email, bio, theme, preferredLanguage, receiveNotifications } = params;
+
     this.email = email;
     this.bio = bio;
     this.theme = theme;

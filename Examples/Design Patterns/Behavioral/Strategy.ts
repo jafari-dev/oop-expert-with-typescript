@@ -41,6 +41,7 @@ const rasterRender = new RasterRender();
 const vectorRender = new VectorRender();
 
 const circle = new Shape("Circle", rasterRender);
+
 circle.render();
 
 circle.setRenderStrategy(vectorRender);

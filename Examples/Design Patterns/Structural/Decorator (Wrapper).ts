@@ -5,7 +5,7 @@ interface ImageProcessor {
 class ImageFile implements ImageProcessor {
   private image: File;
 
-  constructor(imageBlobs: BlobPart[], imageName: string) {
+  constructor(imageBlobs: Blob[], imageName: string) {
     this.image = new File(imageBlobs, imageName);
   }
 
@@ -23,7 +23,7 @@ abstract class ImageDecorator implements ImageProcessor {
   }
 
   abstract processImage(): File;
-} 
+}
 
 class ImageCompressor extends ImageDecorator {
   processImage(): File {
@@ -43,7 +43,7 @@ class ImageResizer extends ImageDecorator {
   processImage() {
     // Changes image width and height
     return this.image;
-  };
+  }
 }
 
 // Usage

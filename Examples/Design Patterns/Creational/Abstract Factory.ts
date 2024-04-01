@@ -33,19 +33,75 @@ interface AudioApi {
 }
 
 class NormalMovieApiProvider implements MovieApi {
-  // Implementation
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByActors(actors: string[]) {
+    return [];
+  }
+  searchByAwards(awards: string[]) {
+    return [];
+  }
+  searchByDirector(director: string) {
+    return [];
+  }
+  releaseYear(releaseYear: Date) {
+    return [];
+  }
 }
 
 class NormalAudioApiProvider implements AudioApi {
-  // Implementation
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByArtist(artist: string) {
+    return [];
+  }
+  searchByMood(mood: string) {
+    return [];
+  }
+  searchByGenre(genre: string) {
+    return [];
+  }
+  searchByLyric(text: string) {
+    return [];
+  }
 }
 
 class PremiumMovieApiProvider implements MovieApi {
-  // Implementation
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByActors(actors: string[]) {
+    return [];
+  }
+  searchByAwards(awards: string[]) {
+    return [];
+  }
+  searchByDirector(director: string) {
+    return [];
+  }
+  releaseYear(releaseYear: Date) {
+    return [];
+  }
 }
 
 class PremiumAudioApiProvider implements AudioApi {
-  // Implementation
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByArtist(artist: string) {
+    return [];
+  }
+  searchByMood(mood: string) {
+    return [];
+  }
+  searchByGenre(genre: string) {
+    return [];
+  }
+  searchByLyric(text: string) {
+    return [];
+  }
 }
 
 interface ApiProviderFactory {

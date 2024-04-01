@@ -9,7 +9,7 @@ class TelegramApi implements MessengerApi {
   }
 
   send(targetId: string, message: string) {
-    console.log(message + " sent to " + targetId + " by Telegram!");
+    console.log(`${message} sent to ${targetId} by Telegram!`);
   }
 }
 
@@ -19,7 +19,7 @@ class WhatsappApi implements MessengerApi {
   }
 
   send(targetId: string, message: string) {
-    console.log(message + " sent to " + targetId + " by Whatsapp!");
+    console.log(`${message} sent to ${targetId} by Whatsapp!`);
   }
 }
 
@@ -29,7 +29,7 @@ class SignalApi implements MessengerApi {
   }
 
   send(targetId: string, message: string) {
-    console.log(message + " sent to " + targetId + " by Signal!");
+    console.log(`${message} sent to ${targetId} by Signal!`);
   }
 }
 

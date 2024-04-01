@@ -8,7 +8,7 @@ interface IResponse {
 class ResponseHandler {
   private nextHandler?: ResponseHandler;
 
-  protected process(response: IResponse) {
+  protected process(response: IResponse): IResponse {
     return response;
   }
 
@@ -21,10 +21,10 @@ class ResponseHandler {
   public handle(response: IResponse): IResponse {
     const processedResponse = this.process(response);
 
-    if (this.nextHandler != null) {
-      return this.nextHandler.handle(processedResponse);
-    } else {
+    if (this.nextHandler == null) {
       return processedResponse;
+    } else {
+      return this.nextHandler.handle(processedResponse);
     }
   }
 }
@@ -53,9 +53,8 @@ class BodyFormatter extends ResponseHandler {
     const newBody: Record<string, unknown> = {};
 
     for (const key in body) {
-      const camelCaseKey = key.replace(/_([a-z])/g, (subString) =>
-        subString[1].toUpperCase()
-      );
+      const camelCaseKey = key.replace(/_([a-z])/g, (subString) => subString[1].toUpperCase());
+
       newBody[camelCaseKey] = body[key];
     }
 
@@ -109,10 +108,7 @@ const encryptor = new Encryptor();
 const bodyFormatter = new BodyFormatter();
 const metadataAdder = new MetadataAdder();
 
-responseHandler
-  .setNext(encryptor)
-  .setNext(bodyFormatter)
-  .setNext(metadataAdder);
+responseHandler.setNext(encryptor).setNext(bodyFormatter).setNext(metadataAdder);
 
 const resultResponse = responseHandler.handle(response);
 

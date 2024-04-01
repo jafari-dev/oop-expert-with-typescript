@@ -32,3 +32,24 @@ class Neo4j implements QueryGenerator {
     return `CREATE (${data})`;
   }
 }
+
+// Usage
+const mysqlQueryGenerator = new MySql();
+const redisQueryGenerator = new Redis();
+const neo4jQueryGenerator = new Neo4j();
+
+const mysqlReadingQuery = mysqlQueryGenerator.readData();
+const mysqlWritingQuery = mysqlQueryGenerator.writeData("PRINCIPLE = OCP");
+const redisReadingQuery = redisQueryGenerator.readData();
+const redisWritingQuery = redisQueryGenerator.writeData("PRINCIPLE = OCP");
+const neo4jReadingQuery = neo4jQueryGenerator.readData();
+const neo4jWritingQuery = neo4jQueryGenerator.writeData("PRINCIPLE = OCP");
+
+console.log({
+  mysqlReadingQuery, // SELECT * FROM MySQL
+  mysqlWritingQuery, // INSERT INTO MySQL VALUES (PRINCIPLE = OCP)
+  redisReadingQuery, // SCAN 0
+  redisWritingQuery, // SET PRINCIPLE = OCP
+  neo4jReadingQuery, // MATCH (n) RETURN n
+  neo4jWritingQuery, // CREATE (PRINCIPLE = OCP)
+});

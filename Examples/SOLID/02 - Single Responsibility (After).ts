@@ -3,11 +3,9 @@ class Settings {
   preferredLanguage: string;
   receiveNotifications: boolean;
 
-  constructor(
-    theme: "LIGHT" | "DARK",
-    preferredLanguage: string,
-    receiveNotifications: boolean
-  ) {
+  constructor(params: { theme: "LIGHT" | "DARK"; preferredLanguage: string; receiveNotifications: boolean }) {
+    const { theme, preferredLanguage, receiveNotifications } = params;
+
     this.theme = theme;
     this.preferredLanguage = preferredLanguage;
     this.receiveNotifications = receiveNotifications;
@@ -35,7 +33,9 @@ class Profile {
   bio: string;
   settings: Settings;
 
-  constructor(email: string, bio: string, settings: Settings) {
+  constructor(params: { email: string; bio: string; settings: Settings }) {
+    const { email, bio, settings } = params;
+
     this.email = email;
     this.bio = bio;
     this.settings = settings;

@@ -4,7 +4,7 @@ class TelegramApi {
   }
 
   messageTo(targetId: number, message: string) {
-    console.log(message + " sent to " + targetId + " by Telegram!");
+    console.log(`${message} sent to ${targetId} by Telegram!`);
   }
 }
 
@@ -14,7 +14,7 @@ class WhatsappApi {
   }
 
   pushMessage(message: string, targetId: number) {
-    console.log(message + " sent to " + targetId + " by Whatsapp!");
+    console.log(`${message} sent to ${targetId} by Whatsapp!`);
   }
 }
 
@@ -24,7 +24,7 @@ class SignalApi {
   }
 
   postMessage(params: { id: number; text: string }) {
-    console.log(params.text + " sent to " + params.id + " by Signal!");
+    console.log(`${params.text} sent to ${params.id} by Signal!`);
   }
 }
 

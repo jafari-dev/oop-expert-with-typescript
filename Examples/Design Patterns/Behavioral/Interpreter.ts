@@ -11,7 +11,10 @@ class NumberExpression implements Expression {
 }
 
 class PlusExpression implements Expression {
-  constructor(private left: Expression, private right: Expression) {}
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
 
   interpret(): number {
     return this.left.interpret() + this.right.interpret();
@@ -19,7 +22,10 @@ class PlusExpression implements Expression {
 }
 
 class MinusExpression implements Expression {
-  constructor(private left: Expression, private right: Expression) {}
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
 
   interpret(): number {
     return this.left.interpret() - this.right.interpret();
@@ -27,7 +33,10 @@ class MinusExpression implements Expression {
 }
 
 class MultiplyExpression implements Expression {
-  constructor(private left: Expression, private right: Expression) {}
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
 
   interpret(): number {
     return this.left.interpret() * this.right.interpret();
@@ -35,7 +44,10 @@ class MultiplyExpression implements Expression {
 }
 
 class DivideExpression implements Expression {
-  constructor(private left: Expression, private right: Expression) {}
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
 
   interpret(): number {
     return this.left.interpret() / this.right.interpret();
@@ -47,11 +59,13 @@ class Interpreter {
     const stack: Expression[] = [];
 
     const tokens = expression.split(" ");
+
     for (const token of tokens) {
       if (this.isOperator(token)) {
         const right = stack.pop()!;
         const left = stack.pop()!;
         const operator = this.createExpression(token, left, right);
+
         stack.push(operator);
       } else {
         stack.push(new NumberExpression(parseFloat(token)));
@@ -65,11 +79,7 @@ class Interpreter {
     return token === "+" || token === "-" || token === "*" || token === "/";
   }
 
-  private createExpression(
-    operator: string,
-    left: Expression,
-    right: Expression
-  ): Expression {
+  private createExpression(operator: string, left: Expression, right: Expression): Expression {
     switch (operator) {
       case "+":
         return new PlusExpression(left, right);
@@ -80,7 +90,7 @@ class Interpreter {
       case "/":
         return new DivideExpression(left, right);
       default:
-        throw new Error("Invalid operator: " + operator);
+        throw new Error(`Invalid operator: ${operator}`);
     }
   }
 }

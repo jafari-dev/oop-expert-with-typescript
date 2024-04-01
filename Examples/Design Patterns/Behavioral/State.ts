@@ -10,17 +10,17 @@ class IdleState implements PipelineState {
     pipeline.setState(new BuildingState());
   }
 
-  fail(pipeline: Pipeline) {
+  fail(_pipeline: Pipeline) {
     console.log("Pipeline is idle. Nothing to fail.");
   }
 
-  complete(pipeline: Pipeline) {
+  complete(_pipeline: Pipeline) {
     console.log("Pipeline is idle. Nothing to complete.");
   }
 }
 
 class BuildingState implements PipelineState {
-  start(pipeline: Pipeline) {
+  start(_pipeline: Pipeline) {
     console.log("Pipeline is already building.");
   }
 
@@ -36,7 +36,7 @@ class BuildingState implements PipelineState {
 }
 
 class TestingState implements PipelineState {
-  start(pipeline: Pipeline) {
+  start(_pipeline: Pipeline) {
     console.log("Pipeline is already in progress.");
   }
 
@@ -52,7 +52,7 @@ class TestingState implements PipelineState {
 }
 
 class DeployingState implements PipelineState {
-  start(pipeline: Pipeline) {
+  start(_pipeline: Pipeline) {
     console.log("Pipeline is already deploying.");
   }
 
@@ -68,15 +68,15 @@ class DeployingState implements PipelineState {
 }
 
 class FailedState implements PipelineState {
-  start(pipeline: Pipeline) {
+  start(_pipeline: Pipeline) {
     console.log("Fix the issues and start the pipeline again.");
   }
 
-  fail(pipeline: Pipeline) {
+  fail(_pipeline: Pipeline) {
     console.log("Pipeline already in failed state.");
   }
 
-  complete(pipeline: Pipeline) {
+  complete(_pipeline: Pipeline) {
     console.log("Cannot complete. The pipeline has failed.");
   }
 }
@@ -109,6 +109,7 @@ class Pipeline {
 
 // Client Code
 const pipeline = new Pipeline();
+
 pipeline.start(); // Output: Pipeline started. Building...
 pipeline.complete(); // Output: Build complete. Testing...
 pipeline.fail(); // Output: Testing failed.

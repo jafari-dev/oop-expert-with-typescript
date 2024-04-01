@@ -8,6 +8,7 @@ class Weather {
 
   private constructor() {
     const data = []; // Get data from API
+
     this.statusOfCities = data;
   }
 

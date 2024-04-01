@@ -36,11 +36,11 @@ class Desktop implements Platform {
   }
 
   play(): string {
-    return this.player.play() + " on desktop";
+    return `${this.player.play()} on desktop`;
   }
 
   stop(): string {
-    return this.player.stop() + " on desktop";
+    return `${this.player.stop()} on desktop`;
   }
 }
 
@@ -52,11 +52,11 @@ class Mobile implements Platform {
   }
 
   play(): string {
-    return this.player.play() + " on mobile";
+    return `${this.player.play()} on mobile`;
   }
 
   stop(): string {
-    return this.player.stop() + " on mobile";
+    return `${this.player.stop()} on mobile`;
   }
 }
 

@@ -9,7 +9,7 @@ class MinimalRequest implements IRequest {
   constructor(
     public readonly method: "GET" | "POST" | "PUT" | "DELETE",
     public readonly url: string,
-    public readonly body: Record<string, string> = {}
+    public readonly body: Record<string, string> = {},
   ) {}
 
   public async send(): Promise<any> {
@@ -27,12 +27,13 @@ class RequestFactory {
   public createRequest(
     method: "GET" | "POST" | "PUT" | "DELETE",
     url: string,
-    body: Record<string, string> = {}
+    body: Record<string, string> = {},
   ): IRequest {
     const key = `${method}-${url}`;
 
     if (!this.requests.has(key)) {
       const request = new MinimalRequest(method, url, body);
+
       this.requests.set(key, request);
     }
 
@@ -52,18 +53,12 @@ class ParallelRequestsHandler {
       method: "GET" | "POST" | "PUT" | "DELETE";
       url: string;
       body?: Record<string, string>;
-    }[]
+    }[],
   ): Promise<any[]> {
     const requests = requestsInfo.map((requestInfo) =>
-      this.factory.createRequest(
-        requestInfo.method,
-        requestInfo.url,
-        requestInfo.body
-      )
+      this.factory.createRequest(requestInfo.method, requestInfo.url, requestInfo.body),
     );
-    const responses = await Promise.all(
-      requests.map((request) => request.send())
-    );
+    const responses = await Promise.all(requests.map((request) => request.send()));
 
     return responses;
   }
