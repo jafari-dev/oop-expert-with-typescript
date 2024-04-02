@@ -1,23 +1,29 @@
-class ImageProcessor {
-  compress(imageFile: File) {
-    return imageFile;
+class AudioProcessor {
+  constructor(protected audioFile: File) {}
+
+  compress() {
+    // Compress the size of the audio
   }
 
-  enhanceSize() {
-    // Increase the size of the image
+  changeTempo() {
+    // Increase the size of the audio
   }
 
-  removeBackground() {
-    // Remove the background of the image
+  separateMusicAndVocal() {
+    // Remove the background of the audio
   }
 
   enhanceQualityWithAI() {
-    // Enhance the quality of the image with AI
+    // Enhance the quality of the audio with AI
   }
 }
 
-class LimitedImageProcessor extends ImageProcessor {
-  override removeBackground(): Error {
+class LimitedAudioProcessor extends AudioProcessor {
+  constructor(audioFile: File) {
+    super(audioFile);
+  }
+
+  override separateMusicAndVocal(): Error {
     throw Error("You have to buy the premium version to access this feature!");
   }
 

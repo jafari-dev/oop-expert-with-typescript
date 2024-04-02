@@ -1,19 +1,25 @@
-class ImageProcessor {
+class AudioProcessor {
+  constructor(protected audioFile: File) {}
+
   compress() {
-    // Compress the image
+    // Compress the size of the audio
   }
 
-  enhanceSize() {
-    // Increase the size of the image
+  changeTempo() {
+    // Increase the size of the audio
   }
 }
 
-class PremiumImageProcessor extends ImageProcessor {
-  removeBackground() {
-    // Remove the background of the image
+class PremiumAudioProcessor extends AudioProcessor {
+  constructor(audioFile: File) {
+    super(audioFile);
+  }
+
+  separateMusicAndVocal() {
+    // Remove the background of the audio
   }
 
   enhanceQualityWithAI() {
-    // Enhance the quality of the image with AI
+    // Enhance the quality of the audio with AI
   }
 }

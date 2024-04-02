@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A complete guide for learning object oriented programming pillars, SOLID principles and design patterns with TypeScript!",
   "main": "script.js",
+  "type": "module",
   "scripts": {
     "lint": "eslint --config .eslintrc.json . --ext ts",
     "lint:fix": "eslint --config .eslintrc.json . --ext ts --fix"

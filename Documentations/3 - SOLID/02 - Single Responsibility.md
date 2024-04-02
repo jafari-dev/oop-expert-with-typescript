@@ -12,7 +12,7 @@
 
 #### Example
 
-Before following the Single Responsibility Principle (SRP), the `Profile` class was handling both user profile data (like email, bio, etc.) and user settings (theme, language and notifications). This violated SRP because a class should have only one reason to change, but here the Profile class had multiple reasons to change - if either the profile data structure or the settings structure changed.
+Before following the Single Responsibility Principle (SRP), the `Profile` class was handling both user profile data (like email, bio, etc.) and user settings (theme and preferredLanguage). This violated SRP because a class should have only one reason to change, but here the Profile class had multiple reasons to change - if either the profile data structure or the settings structure changed.
 
 After following SRP, the code was refactored to separate concerns. The Profile class now only deals with profile-related information such as email and bio. The settings-related functionality has been moved to a new Settings class. This change improves maintainability and makes the codebase more flexible. Now, if there's a need to update how settings are handled, it only affects the Settings class, keeping the Profile class untouched. Additionally, it enhances code readability and makes it easier to understand the purpose of each class.
 
@@ -20,13 +20,19 @@ After following SRP, the code was refactored to separate concerns. The Profile c
 
 ```typescript
 class Profile {
-  constructor(
-    private email: string,
-    private bio: string,
-    private theme: "LIGHT" | "DARK",
-    private preferredLanguage: string,
-    private receiveNotifications: boolean
-  ) {}
+  private email: string;
+  private bio: string;
+  private theme: "LIGHT" | "DARK";
+  private preferredLanguage: string;
+
+  constructor(params: { email: string; bio: string; theme: "LIGHT" | "DARK"; preferredLanguage: string }) {
+    const { email, bio, theme, preferredLanguage } = params;
+
+    this.email = email;
+    this.bio = bio;
+    this.theme = theme;
+    this.preferredLanguage = preferredLanguage;
+  }
 
   public updateEmail(email: string): void {
     this.email = email;
@@ -48,8 +54,13 @@ class Profile {
     this.preferredLanguage = language;
   }
 
-  public toggleNotifications(): void {
-    this.receiveNotifications = !this.receiveNotifications;
+  public getProfile() {
+    return {
+      email: this.email,
+      bio: this.bio,
+      theme: this.theme,
+      preferredLanguage: this.preferredLanguage,
+    };
   }
 }
 ```
@@ -59,9 +70,8 @@ class Profile {
 ```typescript
 class Settings {
   constructor(
-    private theme: "LIGHT" | "DARK",
-    private preferredLanguage: string,
-    private receiveNotifications: boolean
+    protected theme: "LIGHT" | "DARK",
+    protected preferredLanguage: string,
   ) {}
 
   public toggleTheme(): void {
@@ -76,16 +86,16 @@ class Settings {
     this.preferredLanguage = language;
   }
 
-  public toggleNotifications(): void {
-    this.receiveNotifications = !this.receiveNotifications;
+  public getSettings() {
+    return { theme: this.theme, preferredLanguage: this.preferredLanguage };
   }
 }
 
 class Profile {
   constructor(
-    private email: string,
-    private bio: string,
-    private settings: Settings
+    protected email: string,
+    protected bio: string,
+    protected settings: Settings,
   ) {}
 
   public updateEmail(email: string): void {
@@ -96,8 +106,8 @@ class Profile {
     this.bio = bio;
   }
 
-  public getSettings(): Settings {
-    return this.settings;
+  public getProfile() {
+    return { email: this.email, bio: this.bio, settings: this.settings.getSettings() };
   }
 }
 ```

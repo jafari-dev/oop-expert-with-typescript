@@ -391,7 +391,7 @@ In software engineering, SOLID is a mnemonic acronym for five design principles 
 
 #### Example
 
-Before following the Single Responsibility Principle (SRP), the `Profile` class was handling both user profile data (like email, bio, etc.) and user settings (theme, language and notifications). This violated SRP because a class should have only one reason to change, but here the Profile class had multiple reasons to change - if either the profile data structure or the settings structure changed.
+Before following the Single Responsibility Principle (SRP), the `Profile` class was handling both user profile data (like email, bio, etc.) and user settings (theme and preferredLanguage). This violated SRP because a class should have only one reason to change, but here the Profile class had multiple reasons to change - if either the profile data structure or the settings structure changed.
 
 After following SRP, the code was refactored to separate concerns. The Profile class now only deals with profile-related information such as email and bio. The settings-related functionality has been moved to a new Settings class. This change improves maintainability and makes the codebase more flexible. Now, if there's a need to update how settings are handled, it only affects the Settings class, keeping the Profile class untouched. Additionally, it enhances code readability and makes it easier to understand the purpose of each class.
 
@@ -399,13 +399,19 @@ After following SRP, the code was refactored to separate concerns. The Profile c
 
 ```typescript
 class Profile {
-  constructor(
-    private email: string,
-    private bio: string,
-    private theme: "LIGHT" | "DARK",
-    private preferredLanguage: string,
-    private receiveNotifications: boolean
-  ) {}
+  private email: string;
+  private bio: string;
+  private theme: "LIGHT" | "DARK";
+  private preferredLanguage: string;
+
+  constructor(params: { email: string; bio: string; theme: "LIGHT" | "DARK"; preferredLanguage: string }) {
+    const { email, bio, theme, preferredLanguage } = params;
+
+    this.email = email;
+    this.bio = bio;
+    this.theme = theme;
+    this.preferredLanguage = preferredLanguage;
+  }
 
   public updateEmail(email: string): void {
     this.email = email;
@@ -427,8 +433,13 @@ class Profile {
     this.preferredLanguage = language;
   }
 
-  public toggleNotifications(): void {
-    this.receiveNotifications = !this.receiveNotifications;
+  public getProfile() {
+    return {
+      email: this.email,
+      bio: this.bio,
+      theme: this.theme,
+      preferredLanguage: this.preferredLanguage,
+    };
   }
 }
 ```
@@ -438,9 +449,8 @@ class Profile {
 ```typescript
 class Settings {
   constructor(
-    private theme: "LIGHT" | "DARK",
-    private preferredLanguage: string,
-    private receiveNotifications: boolean
+    protected theme: "LIGHT" | "DARK",
+    protected preferredLanguage: string,
   ) {}
 
   public toggleTheme(): void {
@@ -455,16 +465,16 @@ class Settings {
     this.preferredLanguage = language;
   }
 
-  public toggleNotifications(): void {
-    this.receiveNotifications = !this.receiveNotifications;
+  public getSettings() {
+    return { theme: this.theme, preferredLanguage: this.preferredLanguage };
   }
 }
 
 class Profile {
   constructor(
-    private email: string,
-    private bio: string,
-    private settings: Settings
+    protected email: string,
+    protected bio: string,
+    protected settings: Settings,
   ) {}
 
   public updateEmail(email: string): void {
@@ -475,8 +485,8 @@ class Profile {
     this.bio = bio;
   }
 
-  public getSettings(): Settings {
-    return this.settings;
+  public getProfile() {
+    return { email: this.email, bio: this.bio, settings: this.settings.getSettings() };
   }
 }
 ```
@@ -499,15 +509,17 @@ class Profile {
 
 Before OCP implementation, the `QueryGenerator` class directly handles different types of databases, such as _MySQL_, _Redis_, and _Neo4j_, within its methods. This violates the Open/Closed Principle because if you want to add support for a new database, you would need to modify the `QueryGenerator` class by adding a new case to each switch statement. This could lead to the class becoming bloated and tightly coupled to specific database implementations, making it harder to maintain and extend.
 
-After implementing OCP, the code is refactored to use interfaces and separate classes for each database type. Now, the QueryGenerator interface defines common methods `readData` and `writeData`, while individual database classes (`MySql`, `Redis`, and `Neo4j`) implement these methods according to their specific behavior.
+After implementing OCP, the code is refactored to use interfaces and separate classes for each database type. Now, the QueryGenerator interface defines common methods `getReadingQuery` and `getWritingQuery`, while individual database classes (`MySql`, `Redis`, and `Neo4j`) implement these methods according to their specific behavior.
 
 This approach adheres to the Open/Closed Principle because the `QueryGenerator` interface is open for extension, allowing you to add support for new databases by creating new classes that implement the interface, without modifying existing code. Additionally, it's closed for modification because changes to existing database classes won't affect the `QueryGenerator` interface or other database implementations. This results in a more flexible, maintainable, and scalable design.
 
 :x: Before following OCP:
 
 ```typescript
+type DB = "MySQL" | "Redis" | "Neo4j";
+
 class QueryGenerator {
-  readData(database: string): string {
+  getReadingQuery(database: DB): string {
     switch (database) {
       case "MySQL":
         return "SELECT * FROM MySQL";
@@ -520,7 +532,7 @@ class QueryGenerator {
     }
   }
 
-  writeData(database: string, data: string): string {
+  getWritingQuery(database: DB, data: string): string {
     switch (database) {
       case "MySQL":
         return `INSERT INTO MySQL VALUES (${data})`;
@@ -539,36 +551,36 @@ class QueryGenerator {
 
 ```typescript
 interface QueryGenerator {
-  readData: () => string;
-  writeData: (data: string) => string;
+  getReadingQuery: () => string;
+  getWritingQuery: (data: string) => string;
 }
 
 class MySql implements QueryGenerator {
-  readData() {
+  getReadingQuery() {
     return "SELECT * FROM MySQL";
   }
 
-  writeData(data: string) {
+  getWritingQuery(data: string) {
     return `INSERT INTO MySQL VALUES (${data})`;
   }
 }
 
 class Redis implements QueryGenerator {
-  readData() {
+  getReadingQuery() {
     return "SCAN 0";
   }
 
-  writeData(data: string) {
+  getWritingQuery(data: string) {
     return `SET ${data}`;
   }
 }
 
 class Neo4j implements QueryGenerator {
-  readData() {
+  getReadingQuery() {
     return "MATCH (n) RETURN n";
   }
 
-  writeData(data: string) {
+  getWritingQuery(data: string) {
     return `CREATE (${data})`;
   }
 }
@@ -601,26 +613,32 @@ In the refactored version, `ImageProcessor` is now focused on basic image proces
 :x: Before following LSP:
 
 ```typescript
-class ImageProcessor {
+class AudioProcessor {
+  constructor(protected audioFile: File) {}
+
   compress() {
-    // Compress the image
+    // Compress the size of the audio
   }
 
-  enhanceSize() {
-    // Increase the size of the image
+  changeTempo() {
+    // Increase the size of the audio
   }
 
-  removeBackground() {
-    // Remove the background of the image
+  separateMusicAndVocal() {
+    // Remove the background of the audio
   }
 
   enhanceQualityWithAI() {
-    // Enhance the quality of the image with AI
+    // Enhance the quality of the audio with AI
   }
 }
 
-class LimitedImageProcessor extends ImageProcessor {
-  override removeBackground(): Error {
+class LimitedAudioProcessor extends AudioProcessor {
+  constructor(audioFile: File) {
+    super(audioFile);
+  }
+
+  override separateMusicAndVocal(): Error {
     throw Error("You have to buy the premium version to access this feature!");
   }
 
@@ -633,23 +651,29 @@ class LimitedImageProcessor extends ImageProcessor {
 :heavy_check_mark: After following LSP:
 
 ```typescript
-class ImageProcessor {
+class AudioProcessor {
+  constructor(protected audioFile: File) {}
+
   compress() {
-    // Compress the image
+    // Compress the size of the audio
   }
 
-  enhanceSize() {
-    // Increase the size of the image
+  changeTempo() {
+    // Increase the size of the audio
   }
 }
 
-class PremiumImageProcessor extends ImageProcessor {
-  removeBackground() {
-    // Remove the background of the image
+class PremiumAudioProcessor extends AudioProcessor {
+  constructor(audioFile: File) {
+    super(audioFile);
+  }
+
+  separateMusicAndVocal() {
+    // Remove the background of the audio
   }
 
   enhanceQualityWithAI() {
-    // Enhance the quality of the image with AI
+    // Enhance the quality of the audio with AI
   }
 }
 ```
@@ -796,7 +820,7 @@ class TelegramApi {
   }
 
   messageTo(targetId: number, message: string) {
-    console.log(message + " sent to " + targetId + " by Telegram!");
+    console.log(`${message} sent to ${targetId} by Telegram!`);
   }
 }
 
@@ -806,7 +830,7 @@ class WhatsappApi {
   }
 
   pushMessage(message: string, targetId: number) {
-    console.log(message + " sent to " + targetId + " by Whatsapp!");
+    console.log(`${message} sent to ${targetId} by Whatsapp!`);
   }
 }
 
@@ -816,16 +840,12 @@ class SignalApi {
   }
 
   postMessage(params: { id: number; text: string }) {
-    console.log(params.text + " sent to " + params.id + " by Signal!");
+    console.log(`${params.text} sent to ${params.id} by Signal!`);
   }
 }
 
 class Messenger {
-  private api: TelegramApi | WhatsappApi | SignalApi;
-
-  constructor(api: TelegramApi | WhatsappApi | SignalApi) {
-    this.api = api;
-  }
+  constructor(private api: TelegramApi | WhatsappApi | SignalApi) {}
 
   sendMessage(targetId: number, message: string) {
     if (this.api instanceof TelegramApi) {
@@ -856,7 +876,7 @@ class TelegramApi implements MessengerApi {
   }
 
   send(targetId: string, message: string) {
-    console.log(message + " sent to " + targetId + " by Telegram!");
+    console.log(`${message} sent to ${targetId} by Telegram!`);
   }
 }
 
@@ -866,7 +886,7 @@ class WhatsappApi implements MessengerApi {
   }
 
   send(targetId: string, message: string) {
-    console.log(message + " sent to " + targetId + " by Whatsapp!");
+    console.log(`${message} sent to ${targetId} by Whatsapp!`);
   }
 }
 
@@ -876,16 +896,12 @@ class SignalApi implements MessengerApi {
   }
 
   send(targetId: string, message: string) {
-    console.log(message + " sent to " + targetId + " by Signal!");
+    console.log(`${message} sent to ${targetId} by Signal!`);
   }
 }
 
 class Messenger {
-  private api: MessengerApi;
-
-  constructor(api: MessengerApi) {
-    this.api = api;
-  }
+  constructor(private api: MessengerApi) {}
 
   sendMessage(targetId: string, message: string) {
     this.api.connect();

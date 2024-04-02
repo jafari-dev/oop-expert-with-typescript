@@ -1,24 +1,16 @@
 class Profile {
-  email: string;
-  bio: string;
-  theme: "LIGHT" | "DARK";
-  preferredLanguage: string;
-  receiveNotifications: boolean;
+  private email: string;
+  private bio: string;
+  private theme: "LIGHT" | "DARK";
+  private preferredLanguage: string;
 
-  constructor(params: {
-    email: string;
-    bio: string;
-    theme: "LIGHT" | "DARK";
-    preferredLanguage: string;
-    receiveNotifications: boolean;
-  }) {
-    const { email, bio, theme, preferredLanguage, receiveNotifications } = params;
+  constructor(params: { email: string; bio: string; theme: "LIGHT" | "DARK"; preferredLanguage: string }) {
+    const { email, bio, theme, preferredLanguage } = params;
 
     this.email = email;
     this.bio = bio;
     this.theme = theme;
     this.preferredLanguage = preferredLanguage;
-    this.receiveNotifications = receiveNotifications;
   }
 
   public updateEmail(email: string): void {
@@ -41,7 +33,12 @@ class Profile {
     this.preferredLanguage = language;
   }
 
-  public toggleNotifications(): void {
-    this.receiveNotifications = !this.receiveNotifications;
+  public getProfile() {
+    return {
+      email: this.email,
+      bio: this.bio,
+      theme: this.theme,
+      preferredLanguage: this.preferredLanguage,
+    };
   }
 }

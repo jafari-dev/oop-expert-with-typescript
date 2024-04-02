@@ -29,11 +29,7 @@ class SignalApi {
 }
 
 class Messenger {
-  private api: TelegramApi | WhatsappApi | SignalApi;
-
-  constructor(api: TelegramApi | WhatsappApi | SignalApi) {
-    this.api = api;
-  }
+  constructor(private api: TelegramApi | WhatsappApi | SignalApi) {}
 
   sendMessage(targetId: number, message: string) {
     if (this.api instanceof TelegramApi) {

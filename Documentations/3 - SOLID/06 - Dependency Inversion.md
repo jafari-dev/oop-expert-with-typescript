@@ -27,7 +27,7 @@ class TelegramApi {
   }
 
   messageTo(targetId: number, message: string) {
-    console.log(message + " sent to " + targetId + " by Telegram!");
+    console.log(`${message} sent to ${targetId} by Telegram!`);
   }
 }
 
@@ -37,7 +37,7 @@ class WhatsappApi {
   }
 
   pushMessage(message: string, targetId: number) {
-    console.log(message + " sent to " + targetId + " by Whatsapp!");
+    console.log(`${message} sent to ${targetId} by Whatsapp!`);
   }
 }
 
@@ -47,16 +47,12 @@ class SignalApi {
   }
 
   postMessage(params: { id: number; text: string }) {
-    console.log(params.text + " sent to " + params.id + " by Signal!");
+    console.log(`${params.text} sent to ${params.id} by Signal!`);
   }
 }
 
 class Messenger {
-  private api: TelegramApi | WhatsappApi | SignalApi;
-
-  constructor(api: TelegramApi | WhatsappApi | SignalApi) {
-    this.api = api;
-  }
+  constructor(private api: TelegramApi | WhatsappApi | SignalApi) {}
 
   sendMessage(targetId: number, message: string) {
     if (this.api instanceof TelegramApi) {
@@ -87,7 +83,7 @@ class TelegramApi implements MessengerApi {
   }
 
   send(targetId: string, message: string) {
-    console.log(message + " sent to " + targetId + " by Telegram!");
+    console.log(`${message} sent to ${targetId} by Telegram!`);
   }
 }
 
@@ -97,7 +93,7 @@ class WhatsappApi implements MessengerApi {
   }
 
   send(targetId: string, message: string) {
-    console.log(message + " sent to " + targetId + " by Whatsapp!");
+    console.log(`${message} sent to ${targetId} by Whatsapp!`);
   }
 }
 
@@ -107,16 +103,12 @@ class SignalApi implements MessengerApi {
   }
 
   send(targetId: string, message: string) {
-    console.log(message + " sent to " + targetId + " by Signal!");
+    console.log(`${message} sent to ${targetId} by Signal!`);
   }
 }
 
 class Messenger {
-  private api: MessengerApi;
-
-  constructor(api: MessengerApi) {
-    this.api = api;
-  }
+  constructor(private api: MessengerApi) {}
 
   sendMessage(targetId: string, message: string) {
     this.api.connect();
