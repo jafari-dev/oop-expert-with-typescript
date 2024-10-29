@@ -6,15 +6,11 @@
   "type": "module",
   "scripts": {
     "readme": "bun ./script.ts",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
+    "lint": "bunx biome check"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@typescript-eslint/eslint-plugin": "^8.12.1",
-    "@typescript-eslint/parser": "^8.12.1",
-    "eslint": "^9.13.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "prettier": "^3.3.3"
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
