@@ -1,22 +1,40 @@
 import fs from "node:fs";
 
 const JOINER = "\n\n[`⬆ BACK TO TOP ⬆`](#table-of-contents)";
-
+const CODE_ADDRESS = "[EXAMPLE-FILE-ADDRESS]";
 const DOCS_DIRECTORY = "./Documentations";
-const subDirectoriesOfDocs = fs.readdirSync(DOCS_DIRECTORY);
 
-const contentOfDocs = subDirectoriesOfDocs.reduce((docs, subDirectory) => {
-  const fileNames = fs.readdirSync(`${DOCS_DIRECTORY}/${subDirectory}`);
+function wrapInTypeScriptBlock(content: string) {
+  const PREFIX = "```typescript";
+  const SUFFIX = "```";
 
-  const contents = fileNames.map((fileName) => {
-    const fileContent = fs.readFileSync(`${DOCS_DIRECTORY}/${subDirectory}/${fileName}`, "utf-8");
+  return `${PREFIX}\n${content}\n${SUFFIX}`;
+}
 
-    return `${fileContent.trim()}${JOINER}`;
+const contents = fs.readdirSync(DOCS_DIRECTORY).map((fileName) => {
+  const fileContent = fs.readFileSync(`${DOCS_DIRECTORY}/${fileName}`, "utf-8");
+
+  const lines = fileContent.split("\n");
+
+  const newLines = lines.map((line) => {
+    if (line.startsWith(CODE_ADDRESS)) {
+      const codeFineAddress = line.replace(CODE_ADDRESS, "").slice(1, -1);
+
+      console.log(12345, codeFineAddress);
+
+      const code = fs.readFileSync(`.${codeFineAddress}`, "utf-8");
+
+      return wrapInTypeScriptBlock(code);
+    } else {
+      return line;
+    }
   });
 
-  return [...docs, ...contents];
-}, [] as Array<string>);
+  const joinedLines = newLines.join("\n").trim();
 
-const fullDocumentation = contentOfDocs.join("\n\n");
+  return `${joinedLines}${JOINER}`;
+});
+
+const fullDocumentation = contents.join(`\n\n`);
 
 fs.writeFileSync("./README.md", fullDocumentation);

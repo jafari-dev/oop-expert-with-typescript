@@ -442,6 +442,7 @@ class Profile {
     };
   }
 }
+
 ```
 
 :heavy_check_mark: After following SRP:
@@ -489,6 +490,7 @@ class Profile {
     return { email: this.email, bio: this.bio, settings: this.settings.getSettings() };
   }
 }
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -545,6 +547,7 @@ class QueryGenerator {
     }
   }
 }
+
 ```
 
 :heavy_check_mark: After following OCP:
@@ -584,6 +587,7 @@ class Neo4j implements QueryGenerator {
     return `CREATE (${data})`;
   }
 }
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -646,6 +650,7 @@ class LimitedAudioProcessor extends AudioProcessor {
     throw Error("You have to buy the premium version to access this feature!");
   }
 }
+
 ```
 
 :heavy_check_mark: After following LSP:
@@ -676,6 +681,7 @@ class PremiumAudioProcessor extends AudioProcessor {
     // Enhance the quality of the audio with AI
   }
 }
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -745,6 +751,7 @@ class InternalNetwork implements VPNConnection {
     throw Error("Shadowsocks is not available for your internal network!");
   }
 }
+
 ```
 
 :heavy_check_mark: After following ISP:
@@ -787,6 +794,7 @@ class InternalNetwork implements BaseVPNConnection {
     console.log("OpenVPN is ready for your internal network!");
   }
 }
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -860,6 +868,7 @@ class Messenger {
     }
   }
 }
+
 ```
 
 :heavy_check_mark: After following DIP:
@@ -908,6 +917,7 @@ class Messenger {
     this.api.send(targetId, message);
   }
 }
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -965,10 +975,10 @@ There are 23 design patterns that are grouped into 3 categories:
 ```typescript
 interface Movie {
   title: string;
-  artists: string[];
+  artists: Array<string>;
   director: string;
   releaseYear: number;
-  awards: string[];
+  awards: Array<string>;
   duration: number;
 }
 
@@ -982,35 +992,91 @@ interface AudioTrack {
 }
 
 interface MovieApi {
-  searchByTitle: (name: string) => Movie[];
-  searchByActors: (actors: string[]) => Movie[];
-  searchByAwards: (awards: string[]) => Movie[];
-  searchByDirector: (director: string) => Movie[];
-  releaseYear: (releaseYear: Date) => Movie[];
+  searchByTitle: (name: string) => Array<Movie>;
+  searchByActors: (actors: Array<string>) => Array<Movie>;
+  searchByAwards: (awards: Array<string>) => Array<Movie>;
+  searchByDirector: (director: string) => Array<Movie>;
+  releaseYear: (releaseYear: Date) => Array<Movie>;
 }
 
 interface AudioApi {
-  searchByTitle: (name: string) => AudioTrack[];
-  searchByArtist: (artist: string) => AudioTrack[];
-  searchByMood: (mood: string) => AudioTrack[];
-  searchByGenre: (genre: string) => AudioTrack[];
-  searchByLyric: (text: string) => AudioTrack[];
+  searchByTitle: (name: string) => Array<AudioTrack>;
+  searchByArtist: (artist: string) => Array<AudioTrack>;
+  searchByMood: (mood: string) => Array<AudioTrack>;
+  searchByGenre: (genre: string) => Array<AudioTrack>;
+  searchByLyric: (text: string) => Array<AudioTrack>;
 }
 
 class NormalMovieApiProvider implements MovieApi {
-  // Implementation
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByActors(actors: Array<string>) {
+    return [];
+  }
+  searchByAwards(awards: Array<string>) {
+    return [];
+  }
+  searchByDirector(director: string) {
+    return [];
+  }
+  releaseYear(releaseYear: Date) {
+    return [];
+  }
 }
 
 class NormalAudioApiProvider implements AudioApi {
-  // Implementation
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByArtist(artist: string) {
+    return [];
+  }
+  searchByMood(mood: string) {
+    return [];
+  }
+  searchByGenre(genre: string) {
+    return [];
+  }
+  searchByLyric(text: string) {
+    return [];
+  }
 }
 
 class PremiumMovieApiProvider implements MovieApi {
-  // Implementation
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByActors(actors: Array<string>) {
+    return [];
+  }
+  searchByAwards(awards: Array<string>) {
+    return [];
+  }
+  searchByDirector(director: string) {
+    return [];
+  }
+  releaseYear(releaseYear: Date) {
+    return [];
+  }
 }
 
 class PremiumAudioApiProvider implements AudioApi {
-  // Implementation
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByArtist(artist: string) {
+    return [];
+  }
+  searchByMood(mood: string) {
+    return [];
+  }
+  searchByGenre(genre: string) {
+    return [];
+  }
+  searchByLyric(text: string) {
+    return [];
+  }
 }
 
 interface ApiProviderFactory {
@@ -1037,6 +1103,7 @@ class PremiumApiProviderFactory implements ApiProviderFactory {
     return new PremiumAudioApiProvider();
   }
 }
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1049,9 +1116,9 @@ class PremiumApiProviderFactory implements ApiProviderFactory {
 
 ```typescript
 class Page {
-  private headerParts: string[];
-  private bodyParts: string[];
-  private footerParts: string[];
+  private headerParts: Array<string>;
+  private bodyParts: Array<string>;
+  private footerParts: Array<string>;
 
   constructor() {
     this.headerParts = [];
@@ -1059,15 +1126,15 @@ class Page {
     this.footerParts = [];
   }
 
-  public setHeaderParts(...parts: string[]) {
+  public setHeaderParts(...parts: Array<string>) {
     this.headerParts = parts;
   }
 
-  public setBodyParts(...parts: string[]) {
+  public setBodyParts(...parts: Array<string>) {
     this.bodyParts = parts;
   }
 
-  public setFooterParts(...parts: string[]) {
+  public setFooterParts(...parts: Array<string>) {
     this.footerParts = parts;
   }
 
@@ -1134,6 +1201,7 @@ class OnlineShopPageBuilder implements PageBuilder {
     this.page.setFooterParts("About Us", "Address", "Legal Certificate Link");
   }
 }
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1211,13 +1279,17 @@ function getPaymentFactory(paymentType: PaymentType): PaymentFactory {
 }
 
 const paypalService = getPaymentFactory(PaymentType.Paypal).createService();
+
 paypalService.payMoney(100); // You paid 100 dollars by Paypal.
 
 const bitcoinService = getPaymentFactory(PaymentType.Bitcoin).createService();
+
 bitcoinService.payMoney(200); // You paid 200 dollars by Bitcoin.
 
 const visaCardService = getPaymentFactory(PaymentType.VisaCard).createService();
+
 visaCardService.payMoney(300); // You paid 300 dollars by VisaCard.
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1256,6 +1328,7 @@ const productOne = new Product("Laptop", 2500000, new Date(2050));
 const productTwo = productOne.clone();
 
 // productOne !== productTwo but their properties are the same
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1270,13 +1343,14 @@ const productTwo = productOne.clone();
 class Weather {
   private static instance: Weather | null = null;
 
-  private statusOfCities: {
+  private statusOfCities: Array<{
     city: string;
     status: "SUNNY" | "CLOUDY" | "RAINY" | "SNOWY";
-  }[];
+  }>;
 
   private constructor() {
     const data = []; // Get data from API
+
     this.statusOfCities = data;
   }
 
@@ -1296,6 +1370,7 @@ class Weather {
 const instanceOne = Weather.getInstance();
 const instanceTwo = Weather.getInstance();
 // instanceOne is equal to instanceTwo (instanceOne === instanceTwo)
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1309,7 +1384,7 @@ const instanceTwo = Weather.getInstance();
 ```typescript
 interface StandardUser {
   fullName: string;
-  skills: string[];
+  skills: Array<string>;
   age: number;
   contact: {
     email: string;
@@ -1390,10 +1465,11 @@ const user = new User({
   phone: "+98 930 848 XXXX",
 });
 
-const resume = ResumeServiceApi.generateResume(user); // ==> Type Error!
+// const resume = ResumeServiceApi.generateResume(user); |-> Type Error!
 
 const standardUser = new UserAdapter(user);
-const resume = ResumeServiceApi.generateResume(standardUser); // ==> OK!
+const resume = ResumeServiceApi.generateResume(standardUser); // OK!
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1443,11 +1519,11 @@ class Desktop implements Platform {
   }
 
   play(): string {
-    return this.player.play() + " on desktop";
+    return `${this.player.play()} on desktop`;
   }
 
   stop(): string {
-    return this.player.stop() + " on desktop";
+    return `${this.player.stop()} on desktop`;
   }
 }
 
@@ -1459,11 +1535,11 @@ class Mobile implements Platform {
   }
 
   play(): string {
-    return this.player.play() + " on mobile";
+    return `${this.player.play()} on mobile`;
   }
 
   stop(): string {
-    return this.player.stop() + " on mobile";
+    return `${this.player.stop()} on mobile`;
   }
 }
 
@@ -1475,6 +1551,7 @@ const desktopVideoPlayer = new Desktop(videoPlayer);
 const desktopAudioPlayer = new Desktop(audioPlayer);
 const mobileVideoPlayer = new Mobile(videoPlayer);
 const mobileAudioPlayer = new Mobile(audioPlayer);
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1489,7 +1566,7 @@ const mobileAudioPlayer = new Mobile(audioPlayer);
 abstract class BaseUnit<T> {
   constructor(
     private readonly id: string,
-    private readonly units: BaseUnit<T>[] = []
+    private readonly units: Array<BaseUnit<T>> = [],
   ) {}
 
   getUnit(unitId: string): BaseUnit<T> | null {
@@ -1536,26 +1613,12 @@ class University extends BaseUnit<Faculty> {}
 
 const harvardUniversity = new University("Harvard", [
   new Faculty("Engineering", [
-    new Department("Computer", [
-      new Employee("C1", 6200),
-      new Employee("C2", 5400),
-      new Employee("C3", 5600),
-    ]),
-    new Department("Electrical", [
-      new Employee("E1", 4800),
-      new Employee("E2", 5800),
-    ]),
+    new Department("Computer", [new Employee("C1", 6200), new Employee("C2", 5400), new Employee("C3", 5600)]),
+    new Department("Electrical", [new Employee("E1", 4800), new Employee("E2", 5800)]),
   ]),
   new Faculty("Science", [
-    new Department("Physics", [
-      new Employee("P1", 3800),
-      new Employee("P2", 4600),
-    ]),
-    new Department("Mathematics", [
-      new Employee("M1", 5200),
-      new Employee("M2", 5600),
-      new Employee("M3", 4600),
-    ]),
+    new Department("Physics", [new Employee("P1", 3800), new Employee("P2", 4600)]),
+    new Department("Mathematics", [new Employee("M1", 5200), new Employee("M2", 5600), new Employee("M3", 4600)]),
   ]),
 ]);
 
@@ -1564,19 +1627,23 @@ harvardUniversity.increaseSalary(10);
 console.log(harvardUniversity.getSalary());
 
 const engineeringFaculty = harvardUniversity.getUnit("Engineering") as Faculty;
+
 console.log(engineeringFaculty.getSalary());
 engineeringFaculty.increaseSalary(10);
 console.log(engineeringFaculty.getSalary());
 
 const computerDepartment = engineeringFaculty.getUnit("Computer") as Department;
+
 console.log(computerDepartment.getSalary());
 computerDepartment.increaseSalary(10);
 console.log(computerDepartment.getSalary());
 
 const employee = computerDepartment.getUnit("C1") as Employee;
+
 console.log(employee.getSalary());
 employee.increaseSalary(10);
 console.log(employee.getSalary());
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1588,95 +1655,61 @@ console.log(employee.getSalary());
 <img src="https://user-images.githubusercontent.com/37804060/165858382-6ece64aa-4c9f-4e4e-944e-f7a67fcdd162.png"/>
 
 ```typescript
-interface INotifier {
-  sendMessage: (message: string) => void;
-  setUsers: (users: string[]) => void;
-  getUsers: () => string[];
+interface ImageProcessor {
+  processImage: () => File;
 }
 
-class Notifier implements INotifier {
-  private users: string[];
+class ImageFile implements ImageProcessor {
+  private image: File;
 
-  constructor(users: string[]) {
-    this.users = users;
+  constructor(imageBlobs: Array<Blob>, imageName: string) {
+    this.image = new File(imageBlobs, imageName);
   }
 
-  public sendMessage(message: string) {
-    this.users.forEach((user) => {
-      // Show the `message` to the `user` on Web Application
-    });
-  }
-
-  public setUsers(users: string[]) {
-    this.users = users;
-  }
-
-  public getUsers() {
-    return this.users;
+  processImage() {
+    // Converts the blobs to a visible image
+    return this.image;
   }
 }
 
-abstract class NotifierDecorator implements INotifier {
-  protected notifier: INotifier;
+abstract class ImageDecorator implements ImageProcessor {
+  protected image: File;
 
-  constructor(notifier: INotifier) {
-    this.notifier = notifier;
+  constructor(image: File) {
+    this.image = image;
   }
 
-  public abstract sendMessage(message: string);
+  abstract processImage(): File;
+}
 
-  public getUsers() {
-    return this.notifier.getUsers();
-  }
-
-  public setUsers(users: string[]) {
-    this.notifier.setUsers(users);
+class ImageCompressor extends ImageDecorator {
+  processImage(): File {
+    // Compresses image size
+    return this.image;
   }
 }
 
-class EmailNotifier extends NotifierDecorator {
-  sendMessage(message: string) {
-    notifier.getUsers().forEach((user) => {
-      // Send the `message` to the `user` via Email
-    });
-
-    this.notifier.sendMessage(message);
+class ImageEnhancer extends ImageDecorator {
+  processImage(): File {
+    // Enhances image quality
+    return this.image;
   }
 }
 
-class SlackNotifier extends NotifierDecorator {
-  sendMessage(message: string) {
-    this.notifier.getUsers().forEach((user) => {
-      // Send the `message` to the `user` via Slack
-    });
-
-    this.notifier.sendMessage(message);
+class ImageResizer extends ImageDecorator {
+  processImage() {
+    // Changes image width and height
+    return this.image;
   }
 }
 
-class SmsNotifier extends NotifierDecorator {
-  sendMessage(message: string) {
-    this.notifier.getUsers().forEach((user) => {
-      // Send the `message` to the `user` via SMS
-    });
+// Usage
 
-    this.notifier.sendMessage(message);
-  }
-}
+const image = new ImageFile([], "Picture.jpg").processImage();
+const compressedImage = new ImageCompressor(image).processImage();
+const enhancedImage = new ImageCompressor(compressedImage).processImage();
+const resizedImage = new ImageResizer(enhancedImage).processImage();
 
-const notifier = new Notifier(["Ahmad", "Artin", "Ghazaleh"]);
-
-const notifierByEmail = new EmailNotifier(notifier);
-const notifierBySlack = new SlackNotifier(notifier);
-const notifierBySMS = new SmsNotifier(notifier);
-
-const notifierByEmailAndSlack = new EmailNotifier(new SlackNotifier(notifier));
-const notifierByEmailAndSMS = new EmailNotifier(new SmsNotifier(notifier));
-const notifierBySlackAndSMS = new SlackNotifier(new SmsNotifier(notifier));
-
-const notifierByEmailAndSlackAndSMS = new EmailNotifier(
-  new SlackNotifier(new SmsNotifier(notifier))
-);
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1705,9 +1738,9 @@ class GitChecker {
 }
 
 class Linter {
-  private rules: string[];
+  private rules: Array<string>;
 
-  constructor(rules: string[]) {
+  constructor(rules: Array<string>) {
     this.rules = rules;
   }
 
@@ -1721,9 +1754,9 @@ class Linter {
 }
 
 class PackageManager {
-  private dependencies: { name: string; version: number }[];
+  private dependencies: Array<{ name: string; version: number }>;
 
-  constructor(dependencies: { name: string; version: number }[]) {
+  constructor(dependencies: Array<{ name: string; version: number }>) {
     this.dependencies = dependencies;
   }
 
@@ -1748,8 +1781,8 @@ class CodebaseAnalyzer {
     dependencies,
   }: {
     repositoryPath: string;
-    linterRules: string[];
-    dependencies: { name: string; version: number }[];
+    linterRules: Array<string>;
+    dependencies: Array<{ name: string; version: number }>;
   }) {
     this.gitChecker = new GitChecker(repositoryPath);
     this.linter = new Linter(linterRules);
@@ -1779,6 +1812,7 @@ const codebaseAnalyzer = new CodebaseAnalyzer({
 });
 
 codebaseAnalyzer.analyze();
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1794,17 +1828,17 @@ interface IRequest {
   readonly method: "GET" | "POST" | "PUT" | "DELETE";
   readonly url: string;
   readonly body: Record<string, string>;
-  send(): Promise<any>;
+  send(): Promise<unknown>;
 }
 
 class MinimalRequest implements IRequest {
   constructor(
     public readonly method: "GET" | "POST" | "PUT" | "DELETE",
     public readonly url: string,
-    public readonly body: Record<string, string> = {}
+    public readonly body: Record<string, string> = {},
   ) {}
 
-  public async send(): Promise<any> {
+  public async send(): Promise<unknown> {
     const options = { method: this.method, body: JSON.stringify(this.body) };
 
     const response = await fetch(this.url, options);
@@ -1819,12 +1853,13 @@ class RequestFactory {
   public createRequest(
     method: "GET" | "POST" | "PUT" | "DELETE",
     url: string,
-    body: Record<string, string> = {}
+    body: Record<string, string> = {},
   ): IRequest {
     const key = `${method}-${url}`;
 
     if (!this.requests.has(key)) {
       const request = new MinimalRequest(method, url, body);
+
       this.requests.set(key, request);
     }
 
@@ -1840,26 +1875,21 @@ class ParallelRequestsHandler {
   }
 
   public async sendAll(
-    requestsInfo: {
+    requestsInfo: Array<{
       method: "GET" | "POST" | "PUT" | "DELETE";
       url: string;
       body?: Record<string, string>;
-    }[]
-  ): Promise<any[]> {
+    }>,
+  ): Promise<Array<unknown>> {
     const requests = requestsInfo.map((requestInfo) =>
-      this.factory.createRequest(
-        requestInfo.method,
-        requestInfo.url,
-        requestInfo.body
-      )
+      this.factory.createRequest(requestInfo.method, requestInfo.url, requestInfo.body),
     );
-    const responses = await Promise.all(
-      requests.map((request) => request.send())
-    );
+    const responses = await Promise.all(requests.map((request) => request.send()));
 
     return responses;
   }
 }
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1910,6 +1940,7 @@ const realRequestHandler = new RequestHandler();
 const proxyRequestHandler = new RequestHandlerProxy(realRequestHandler);
 
 proxyRequestHandler.sendRequest("GET", "/api/users");
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -1931,7 +1962,7 @@ interface IResponse {
 class ResponseHandler {
   private nextHandler?: ResponseHandler;
 
-  protected process(response: IResponse) {
+  protected process(response: IResponse): IResponse {
     return response;
   }
 
@@ -1944,10 +1975,10 @@ class ResponseHandler {
   public handle(response: IResponse): IResponse {
     const processedResponse = this.process(response);
 
-    if (this.nextHandler != null) {
-      return this.nextHandler.handle(processedResponse);
-    } else {
+    if (this.nextHandler == null) {
       return processedResponse;
+    } else {
+      return this.nextHandler.handle(processedResponse);
     }
   }
 }
@@ -1976,9 +2007,8 @@ class BodyFormatter extends ResponseHandler {
     const newBody: Record<string, unknown> = {};
 
     for (const key in body) {
-      const camelCaseKey = key.replace(/_([a-z])/g, (subString) =>
-        subString[1].toUpperCase()
-      );
+      const camelCaseKey = key.replace(/_([a-z])/g, (subString) => subString[1].toUpperCase());
+
       newBody[camelCaseKey] = body[key];
     }
 
@@ -1996,11 +2026,17 @@ class BodyFormatter extends ResponseHandler {
 
 class MetadataAdder extends ResponseHandler {
   private getResponseMetadata(statusCode: number) {
-    if (statusCode < 200) return "Informational";
-    else if (statusCode < 300) return "Success";
-    else if (statusCode < 400) return "Redirection";
-    else if (statusCode < 500) return "Client Error";
-    else return "Server Error";
+    if (statusCode < 200) {
+      return "Informational";
+    } else if (statusCode < 300) {
+      return "Success";
+    } else if (statusCode < 400) {
+      return "Redirection";
+    } else if (statusCode < 500) {
+      return "Client Error";
+    } else {
+      return "Server Error";
+    }
   }
 
   protected process(response: IResponse) {
@@ -2032,14 +2068,27 @@ const encryptor = new Encryptor();
 const bodyFormatter = new BodyFormatter();
 const metadataAdder = new MetadataAdder();
 
-responseHandler
-  .setNext(encryptor)
-  .setNext(bodyFormatter)
-  .setNext(metadataAdder);
+responseHandler.setNext(encryptor).setNext(bodyFormatter).setNext(metadataAdder);
 
 const resultResponse = responseHandler.handle(response);
 
 console.log(resultResponse);
+/*
+{
+  "statusCode": 200,
+  "body": {
+    "designPatternName": "Chain of Responsibility",
+    "patternCategory": "Behavioral",
+    "complexityPercentage": 80
+  },
+  "authentication": {
+    "api_token": "encrypted-12345678",
+    "refresh_token": "encrypted-ABCDEFGH"
+  },
+  "message": "Success"
+}
+*/
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -2057,9 +2106,12 @@ interface Command {
 }
 
 class AddTextCommand implements Command {
-  private prevText: string;
+  private prevText: string = "";
 
-  constructor(private editor: TextEditor, private text: string) {}
+  constructor(
+    private editor: TextEditor,
+    private text: string,
+  ) {}
 
   execute() {
     this.prevText = this.editor.content;
@@ -2072,7 +2124,7 @@ class AddTextCommand implements Command {
 }
 
 class DeleteTextCommand implements Command {
-  private prevText: string;
+  private prevText: string = "";
 
   constructor(private editor: TextEditor) {}
 
@@ -2091,15 +2143,12 @@ class TextEditor {
 }
 
 class CommandInvoker {
-  private commandHistory: Command[] = [];
+  private commandHistory: Array<Command> = [];
   private currentCommandIndex: number = -1;
 
   executeCommand(command: Command) {
     if (this.currentCommandIndex < this.commandHistory.length - 1) {
-      this.commandHistory = this.commandHistory.slice(
-        0,
-        this.currentCommandIndex + 1
-      );
+      this.commandHistory = this.commandHistory.slice(0, this.currentCommandIndex + 1);
     }
 
     command.execute();
@@ -2110,6 +2159,7 @@ class CommandInvoker {
   undo() {
     if (this.currentCommandIndex >= 0) {
       const command = this.commandHistory[this.currentCommandIndex];
+
       command.undo();
       this.currentCommandIndex--;
     } else {
@@ -2120,6 +2170,7 @@ class CommandInvoker {
   redo() {
     if (this.currentCommandIndex < this.commandHistory.length - 1) {
       const command = this.commandHistory[this.currentCommandIndex + 1];
+
       command.execute();
       this.currentCommandIndex++;
     } else {
@@ -2133,10 +2184,12 @@ const editor = new TextEditor();
 const invoker = new CommandInvoker();
 
 const addTextCmd = new AddTextCommand(editor, "Hello, World!");
+
 invoker.executeCommand(addTextCmd);
 console.log(editor.content); // "Hello, World!"
 
 const deleteTextCmd = new DeleteTextCommand(editor);
+
 invoker.executeCommand(deleteTextCmd);
 console.log(editor.content); // ""
 
@@ -2145,6 +2198,7 @@ console.log(editor.content); // "Hello, World!"
 
 invoker.redo();
 console.log(editor.content); // ""
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -2169,7 +2223,10 @@ class NumberExpression implements Expression {
 }
 
 class PlusExpression implements Expression {
-  constructor(private left: Expression, private right: Expression) {}
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
 
   interpret(): number {
     return this.left.interpret() + this.right.interpret();
@@ -2177,7 +2234,10 @@ class PlusExpression implements Expression {
 }
 
 class MinusExpression implements Expression {
-  constructor(private left: Expression, private right: Expression) {}
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
 
   interpret(): number {
     return this.left.interpret() - this.right.interpret();
@@ -2185,7 +2245,10 @@ class MinusExpression implements Expression {
 }
 
 class MultiplyExpression implements Expression {
-  constructor(private left: Expression, private right: Expression) {}
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
 
   interpret(): number {
     return this.left.interpret() * this.right.interpret();
@@ -2193,7 +2256,10 @@ class MultiplyExpression implements Expression {
 }
 
 class DivideExpression implements Expression {
-  constructor(private left: Expression, private right: Expression) {}
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
 
   interpret(): number {
     return this.left.interpret() / this.right.interpret();
@@ -2202,14 +2268,16 @@ class DivideExpression implements Expression {
 
 class Interpreter {
   interpret(expression: string): number {
-    const stack: Expression[] = [];
+    const stack: Array<Expression> = [];
 
     const tokens = expression.split(" ");
+
     for (const token of tokens) {
       if (this.isOperator(token)) {
         const right = stack.pop()!;
         const left = stack.pop()!;
         const operator = this.createExpression(token, left, right);
+
         stack.push(operator);
       } else {
         stack.push(new NumberExpression(parseFloat(token)));
@@ -2223,11 +2291,7 @@ class Interpreter {
     return token === "+" || token === "-" || token === "*" || token === "/";
   }
 
-  private createExpression(
-    operator: string,
-    left: Expression,
-    right: Expression
-  ): Expression {
+  private createExpression(operator: string, left: Expression, right: Expression): Expression {
     switch (operator) {
       case "+":
         return new PlusExpression(left, right);
@@ -2238,7 +2302,7 @@ class Interpreter {
       case "/":
         return new DivideExpression(left, right);
       default:
-        throw new Error("Invalid operator: " + operator);
+        throw new Error(`Invalid operator: ${operator}`);
     }
   }
 }
@@ -2249,6 +2313,7 @@ const interpreter = new Interpreter();
 console.log(interpreter.interpret("3 4 +")); // Output: 7
 console.log(interpreter.interpret("5 2 * 3 +")); // Output: 13
 console.log(interpreter.interpret("10 2 /")); // Output: 5
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -2280,7 +2345,7 @@ class Book {
 }
 
 class BookShelf {
-  private books: Book[] = [];
+  private books: Array<Book> = [];
 
   getLength(): number {
     return this.books.length;
@@ -2318,17 +2383,20 @@ class BookShelfIterator implements MyIterator<Book> {
 
   next() {
     this.currentIndex += 1;
+
     return this.bookShelf.getBookAt(this.currentIndex);
   }
 
   previous() {
     this.currentIndex -= 1;
+
     return this.bookShelf.getBookAt(this.currentIndex);
   }
 }
 
 // Usage
 const shelf = new BookShelf();
+
 shelf.addBook(new Book("Design Patterns", "Gang of Four"));
 shelf.addBook(new Book("Clean Code", "Robert C. Martin"));
 shelf.addBook(new Book("You Don't Know JS", "Kyle Simpson"));
@@ -2337,8 +2405,10 @@ const MyIterator = shelf.createIterator();
 
 while (MyIterator.hasNext()) {
   const book = MyIterator.next();
+
   console.log(`${book.title} by ${book.author}`);
 }
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -2355,7 +2425,7 @@ interface ChatMediator {
 }
 
 class ConcreteChatMediator implements ChatMediator {
-  private users: User[] = [];
+  private users: Array<User> = [];
 
   addUser(user: User): void {
     this.users.push(user);
@@ -2406,6 +2476,7 @@ user1.sendMessage("Hello, everyone!");
 user2.sendMessage("Hi, Alice!");
 
 user3.sendMessage("Hey, Bob!");
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -2446,7 +2517,7 @@ class Editor {
 }
 
 class MinimalHistory {
-  private snapshots: EditorMemento[] = [];
+  private snapshots: Array<EditorMemento> = [];
 
   push(snapshot: EditorMemento): void {
     this.snapshots.push(snapshot);
@@ -2473,6 +2544,7 @@ if (lastSnapshot) {
 }
 
 console.log(editor.getContent()); // Output: Hello, TypeScript!
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -2495,8 +2567,8 @@ interface Observer {
 }
 
 class Celebrity implements Subject {
-  private followers: Observer[];
-  private posts: string[];
+  private followers: Array<Observer>;
+  private posts: Array<string>;
 
   constructor() {
     this.followers = [];
@@ -2526,6 +2598,7 @@ class Celebrity implements Subject {
   // Remove a follower
   removeObserver(observer: Observer) {
     const index = this.followers.indexOf(observer);
+
     if (index !== -1) {
       this.followers.splice(index, 1);
     }
@@ -2546,9 +2619,7 @@ class Follower implements Observer {
 
   // Update method to receive notifications
   update(notification: string) {
-    console.log(
-      `${this.followerName} received a notification: ${notification}`
-    );
+    console.log(`${this.followerName} received a notification: ${notification}`);
   }
 }
 
@@ -2576,6 +2647,7 @@ celebrity1.sendPost("Observer pattern is awesome!");
 // John received a notification: Hello World!
 // Alice received a notification: Hello World!
 // Bob received a notification: I love coding!
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -2599,17 +2671,17 @@ class IdleState implements PipelineState {
     pipeline.setState(new BuildingState());
   }
 
-  fail(pipeline: Pipeline) {
+  fail(_pipeline: Pipeline) {
     console.log("Pipeline is idle. Nothing to fail.");
   }
 
-  complete(pipeline: Pipeline) {
+  complete(_pipeline: Pipeline) {
     console.log("Pipeline is idle. Nothing to complete.");
   }
 }
 
 class BuildingState implements PipelineState {
-  start(pipeline: Pipeline) {
+  start(_pipeline: Pipeline) {
     console.log("Pipeline is already building.");
   }
 
@@ -2625,7 +2697,7 @@ class BuildingState implements PipelineState {
 }
 
 class TestingState implements PipelineState {
-  start(pipeline: Pipeline) {
+  start(_pipeline: Pipeline) {
     console.log("Pipeline is already in progress.");
   }
 
@@ -2641,7 +2713,7 @@ class TestingState implements PipelineState {
 }
 
 class DeployingState implements PipelineState {
-  start(pipeline: Pipeline) {
+  start(_pipeline: Pipeline) {
     console.log("Pipeline is already deploying.");
   }
 
@@ -2657,15 +2729,15 @@ class DeployingState implements PipelineState {
 }
 
 class FailedState implements PipelineState {
-  start(pipeline: Pipeline) {
+  start(_pipeline: Pipeline) {
     console.log("Fix the issues and start the pipeline again.");
   }
 
-  fail(pipeline: Pipeline) {
+  fail(_pipeline: Pipeline) {
     console.log("Pipeline already in failed state.");
   }
 
-  complete(pipeline: Pipeline) {
+  complete(_pipeline: Pipeline) {
     console.log("Cannot complete. The pipeline has failed.");
   }
 }
@@ -2698,6 +2770,7 @@ class Pipeline {
 
 // Client Code
 const pipeline = new Pipeline();
+
 pipeline.start(); // Output: Pipeline started. Building...
 pipeline.complete(); // Output: Build complete. Testing...
 pipeline.fail(); // Output: Testing failed.
@@ -2721,6 +2794,7 @@ pipeline.setState(new FailedState());
 pipeline.start(); // Output: Fix the issues and start the pipeline again.
 pipeline.fail(); // Output: Pipeline already in failed state.
 pipeline.complete(); // Output: Cannot complete. The pipeline has failed.
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -2775,10 +2849,12 @@ const rasterRender = new RasterRender();
 const vectorRender = new VectorRender();
 
 const circle = new Shape("Circle", rasterRender);
+
 circle.render();
 
 circle.setRenderStrategy(vectorRender);
 circle.render();
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -2805,28 +2881,23 @@ abstract class SocialMediaPostAnalyzer {
     "nasty",
   ];
 
-  preprocessData(data: string): string[] {
-    return data
-      .split(" ")
-      .map((word) => word.replace(/[^a-zA-Z ]/g, "").toLowerCase());
+  preprocessData(data: string): Array<string> {
+    return data.split(" ").map((word) => word.replace(/[^a-zA-Z ]/g, "").toLowerCase());
   }
 
-  analyze(data: string[]): string[] {
+  analyze(data: Array<string>): Array<string> {
     return data.filter((word) => this.HARMFUL_WORDS.includes(word));
   }
 
-  displayResults(data: string[]): void {
-    console.log(
-      `The number of harmful words in this post is ${
-        data.length
-      }, including ${data.join(", ")}.`
-    );
+  displayResults(data: Array<string>): void {
+    console.log(`The number of harmful words in this post is ${data.length}, including ${data.join(", ")}.`);
   }
 
   async analyzePosts(): Promise<void> {
     const data = await this.fetchData();
     const preprocessedData = this.preprocessData(data);
     const analyticsResult = this.analyze(preprocessedData);
+
     this.displayResults(analyticsResult);
   }
 
@@ -2849,10 +2920,13 @@ class InstagramPostAnalyzer extends SocialMediaPostAnalyzer {
 
 // Usage
 const twitterAnalysis = new TwitterPostAnalyzer();
+
 twitterAnalysis.analyzePosts();
 
 const instagramAnalysis = new InstagramPostAnalyzer();
+
 instagramAnalysis.analyzePosts();
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
@@ -2916,7 +2990,7 @@ class SalaryCalculator implements Visitor {
 }
 
 // Usage
-const employees: Employee[] = [
+const employees: Array<Employee> = [
   new Designer("Alice", 15),
   new Designer("James", 20),
   new Developer("Ahmad", 3000, 40),
@@ -2930,6 +3004,7 @@ for (const employee of employees) {
 }
 
 console.log("Total salary:", salaryCalculator.totalSalary);
+
 ```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
