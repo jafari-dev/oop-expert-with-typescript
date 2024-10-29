@@ -13,15 +13,15 @@ abstract class SocialMediaPostAnalyzer {
     "nasty",
   ];
 
-  preprocessData(data: string): string[] {
+  preprocessData(data: string): Array<string> {
     return data.split(" ").map((word) => word.replace(/[^a-zA-Z ]/g, "").toLowerCase());
   }
 
-  analyze(data: string[]): string[] {
+  analyze(data: Array<string>): Array<string> {
     return data.filter((word) => this.HARMFUL_WORDS.includes(word));
   }
 
-  displayResults(data: string[]): void {
+  displayResults(data: Array<string>): void {
     console.log(`The number of harmful words in this post is ${data.length}, including ${data.join(", ")}.`);
   }
 

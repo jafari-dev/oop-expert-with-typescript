@@ -18,7 +18,7 @@ class Book {
 }
 
 class BookShelf {
-  private books: Book[] = [];
+  private books: Array<Book> = [];
 
   getLength(): number {
     return this.books.length;

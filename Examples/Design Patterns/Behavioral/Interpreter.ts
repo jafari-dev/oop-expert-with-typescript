@@ -56,7 +56,7 @@ class DivideExpression implements Expression {
 
 class Interpreter {
   interpret(expression: string): number {
-    const stack: Expression[] = [];
+    const stack: Array<Expression> = [];
 
     const tokens = expression.split(" ");
 

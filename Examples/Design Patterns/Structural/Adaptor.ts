@@ -1,6 +1,6 @@
 interface StandardUser {
   fullName: string;
-  skills: string[];
+  skills: Array<string>;
   age: number;
   contact: {
     email: string;

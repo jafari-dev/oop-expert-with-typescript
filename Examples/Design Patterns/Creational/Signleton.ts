@@ -1,10 +1,10 @@
 class Weather {
   private static instance: Weather | null = null;
 
-  private statusOfCities: {
+  private statusOfCities: Array<{
     city: string;
     status: "SUNNY" | "CLOUDY" | "RAINY" | "SNOWY";
-  }[];
+  }>;
 
   private constructor() {
     const data = []; // Get data from API

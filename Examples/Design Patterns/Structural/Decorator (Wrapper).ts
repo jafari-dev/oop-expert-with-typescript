@@ -5,7 +5,7 @@ interface ImageProcessor {
 class ImageFile implements ImageProcessor {
   private image: File;
 
-  constructor(imageBlobs: Blob[], imageName: string) {
+  constructor(imageBlobs: Array<Blob>, imageName: string) {
     this.image = new File(imageBlobs, imageName);
   }
 

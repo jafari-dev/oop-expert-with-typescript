@@ -9,8 +9,8 @@ interface Observer {
 }
 
 class Celebrity implements Subject {
-  private followers: Observer[];
-  private posts: string[];
+  private followers: Array<Observer>;
+  private posts: Array<string>;
 
   constructor() {
     this.followers = [];

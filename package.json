@@ -4,8 +4,17 @@
   "description": "A complete guide for learning object oriented programming pillars, SOLID principles and design patterns with TypeScript!",
   "main": "script.ts",
   "type": "module",
+  "scripts": {
+    "readme": "bun ./script.ts",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@typescript-eslint/eslint-plugin": "^8.12.1",
+    "@typescript-eslint/parser": "^8.12.1",
+    "eslint": "^9.13.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.3.3"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

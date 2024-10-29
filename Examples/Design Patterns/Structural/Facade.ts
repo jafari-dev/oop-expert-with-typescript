@@ -15,9 +15,9 @@ class GitChecker {
 }
 
 class Linter {
-  private rules: string[];
+  private rules: Array<string>;
 
-  constructor(rules: string[]) {
+  constructor(rules: Array<string>) {
     this.rules = rules;
   }
 
@@ -31,9 +31,9 @@ class Linter {
 }
 
 class PackageManager {
-  private dependencies: { name: string; version: number }[];
+  private dependencies: Array<{ name: string; version: number }>;
 
-  constructor(dependencies: { name: string; version: number }[]) {
+  constructor(dependencies: Array<{ name: string; version: number }>) {
     this.dependencies = dependencies;
   }
 
@@ -58,8 +58,8 @@ class CodebaseAnalyzer {
     dependencies,
   }: {
     repositoryPath: string;
-    linterRules: string[];
-    dependencies: { name: string; version: number }[];
+    linterRules: Array<string>;
+    dependencies: Array<{ name: string; version: number }>;
   }) {
     this.gitChecker = new GitChecker(repositoryPath);
     this.linter = new Linter(linterRules);

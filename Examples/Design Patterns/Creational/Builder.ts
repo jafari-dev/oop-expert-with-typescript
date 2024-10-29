@@ -1,7 +1,7 @@
 class Page {
-  private headerParts: string[];
-  private bodyParts: string[];
-  private footerParts: string[];
+  private headerParts: Array<string>;
+  private bodyParts: Array<string>;
+  private footerParts: Array<string>;
 
   constructor() {
     this.headerParts = [];
@@ -9,15 +9,15 @@ class Page {
     this.footerParts = [];
   }
 
-  public setHeaderParts(...parts: string[]) {
+  public setHeaderParts(...parts: Array<string>) {
     this.headerParts = parts;
   }
 
-  public setBodyParts(...parts: string[]) {
+  public setBodyParts(...parts: Array<string>) {
     this.bodyParts = parts;
   }
 
-  public setFooterParts(...parts: string[]) {
+  public setFooterParts(...parts: Array<string>) {
     this.footerParts = parts;
   }
 

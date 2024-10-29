@@ -1,9 +1,9 @@
 interface Movie {
   title: string;
-  artists: string[];
+  artists: Array<string>;
   director: string;
   releaseYear: number;
-  awards: string[];
+  awards: Array<string>;
   duration: number;
 }
 
@@ -17,29 +17,29 @@ interface AudioTrack {
 }
 
 interface MovieApi {
-  searchByTitle: (name: string) => Movie[];
-  searchByActors: (actors: string[]) => Movie[];
-  searchByAwards: (awards: string[]) => Movie[];
-  searchByDirector: (director: string) => Movie[];
-  releaseYear: (releaseYear: Date) => Movie[];
+  searchByTitle: (name: string) => Array<Movie>;
+  searchByActors: (actors: Array<string>) => Array<Movie>;
+  searchByAwards: (awards: Array<string>) => Array<Movie>;
+  searchByDirector: (director: string) => Array<Movie>;
+  releaseYear: (releaseYear: Date) => Array<Movie>;
 }
 
 interface AudioApi {
-  searchByTitle: (name: string) => AudioTrack[];
-  searchByArtist: (artist: string) => AudioTrack[];
-  searchByMood: (mood: string) => AudioTrack[];
-  searchByGenre: (genre: string) => AudioTrack[];
-  searchByLyric: (text: string) => AudioTrack[];
+  searchByTitle: (name: string) => Array<AudioTrack>;
+  searchByArtist: (artist: string) => Array<AudioTrack>;
+  searchByMood: (mood: string) => Array<AudioTrack>;
+  searchByGenre: (genre: string) => Array<AudioTrack>;
+  searchByLyric: (text: string) => Array<AudioTrack>;
 }
 
 class NormalMovieApiProvider implements MovieApi {
   searchByTitle(name: string) {
     return [];
   }
-  searchByActors(actors: string[]) {
+  searchByActors(actors: Array<string>) {
     return [];
   }
-  searchByAwards(awards: string[]) {
+  searchByAwards(awards: Array<string>) {
     return [];
   }
   searchByDirector(director: string) {
@@ -72,10 +72,10 @@ class PremiumMovieApiProvider implements MovieApi {
   searchByTitle(name: string) {
     return [];
   }
-  searchByActors(actors: string[]) {
+  searchByActors(actors: Array<string>) {
     return [];
   }
-  searchByAwards(awards: string[]) {
+  searchByAwards(awards: Array<string>) {
     return [];
   }
   searchByDirector(director: string) {

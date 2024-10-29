@@ -2,7 +2,7 @@ interface IRequest {
   readonly method: "GET" | "POST" | "PUT" | "DELETE";
   readonly url: string;
   readonly body: Record<string, string>;
-  send(): Promise<any>;
+  send(): Promise<unknown>;
 }
 
 class MinimalRequest implements IRequest {
@@ -12,7 +12,7 @@ class MinimalRequest implements IRequest {
     public readonly body: Record<string, string> = {},
   ) {}
 
-  public async send(): Promise<any> {
+  public async send(): Promise<unknown> {
     const options = { method: this.method, body: JSON.stringify(this.body) };
 
     const response = await fetch(this.url, options);
@@ -49,12 +49,12 @@ class ParallelRequestsHandler {
   }
 
   public async sendAll(
-    requestsInfo: {
+    requestsInfo: Array<{
       method: "GET" | "POST" | "PUT" | "DELETE";
       url: string;
       body?: Record<string, string>;
-    }[],
-  ): Promise<any[]> {
+    }>,
+  ): Promise<Array<unknown>> {
     const requests = requestsInfo.map((requestInfo) =>
       this.factory.createRequest(requestInfo.method, requestInfo.url, requestInfo.body),
     );

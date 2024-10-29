@@ -72,11 +72,17 @@ class BodyFormatter extends ResponseHandler {
 
 class MetadataAdder extends ResponseHandler {
   private getResponseMetadata(statusCode: number) {
-    if (statusCode < 200) return "Informational";
-    else if (statusCode < 300) return "Success";
-    else if (statusCode < 400) return "Redirection";
-    else if (statusCode < 500) return "Client Error";
-    else return "Server Error";
+    if (statusCode < 200) {
+      return "Informational";
+    } else if (statusCode < 300) {
+      return "Success";
+    } else if (statusCode < 400) {
+      return "Redirection";
+    } else if (statusCode < 500) {
+      return "Client Error";
+    } else {
+      return "Server Error";
+    }
   }
 
   protected process(response: IResponse) {

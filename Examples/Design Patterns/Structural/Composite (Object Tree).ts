@@ -1,7 +1,7 @@
 abstract class BaseUnit<T> {
   constructor(
     private readonly id: string,
-    private readonly units: BaseUnit<T>[] = [],
+    private readonly units: Array<BaseUnit<T>> = [],
   ) {}
 
   getUnit(unitId: string): BaseUnit<T> | null {

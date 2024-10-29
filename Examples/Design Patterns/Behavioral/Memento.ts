@@ -27,7 +27,7 @@ class Editor {
 }
 
 class MinimalHistory {
-  private snapshots: EditorMemento[] = [];
+  private snapshots: Array<EditorMemento> = [];
 
   push(snapshot: EditorMemento): void {
     this.snapshots.push(snapshot);

@@ -3,7 +3,7 @@ interface ChatMediator {
 }
 
 class ConcreteChatMediator implements ChatMediator {
-  private users: User[] = [];
+  private users: Array<User> = [];
 
   addUser(user: User): void {
     this.users.push(user);

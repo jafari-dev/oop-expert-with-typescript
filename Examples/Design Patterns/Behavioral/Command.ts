@@ -41,7 +41,7 @@ class TextEditor {
 }
 
 class CommandInvoker {
-  private commandHistory: Command[] = [];
+  private commandHistory: Array<Command> = [];
   private currentCommandIndex: number = -1;
 
   executeCommand(command: Command) {

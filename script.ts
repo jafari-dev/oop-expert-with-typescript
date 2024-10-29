@@ -15,7 +15,7 @@ const contentOfDocs = subDirectoriesOfDocs.reduce((docs, subDirectory) => {
   });
 
   return [...docs, ...contents];
-}, [] as string[]);
+}, [] as Array<string>);
 
 const fullDocumentation = contentOfDocs.join("\n\n");
 

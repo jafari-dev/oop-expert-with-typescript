@@ -50,7 +50,7 @@ class SalaryCalculator implements Visitor {
 }
 
 // Usage
-const employees: Employee[] = [
+const employees: Array<Employee> = [
   new Designer("Alice", 15),
   new Designer("James", 20),
   new Developer("Ahmad", 3000, 40),
