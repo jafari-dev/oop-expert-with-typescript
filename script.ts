@@ -18,11 +18,8 @@ const contents = fs.readdirSync(DOCS_DIRECTORY).map((fileName) => {
 
   const newLines = lines.map((line) => {
     if (line.startsWith(CODE_ADDRESS)) {
-      const codeFineAddress = line.replace(CODE_ADDRESS, "").slice(1, -1);
-
-      console.log(12345, codeFineAddress);
-
-      const code = fs.readFileSync(`.${codeFineAddress}`, "utf-8");
+      const codeFileAddress = line.replace(CODE_ADDRESS, "").slice(1, -1);
+      const code = fs.readFileSync(`.${codeFileAddress}`, "utf-8");
 
       return wrapInTypeScriptBlock(code);
     } else {
