@@ -18,10 +18,10 @@ To adhere to DIP, we introduce an interface called `MessengerApi`, which defines
 
 By doing this, we decouple the Messenger class from specific messaging API implementations. Now, Messenger depends on the MessengerApi interface rather than concrete implementations. This allows us to easily switch between different messaging APIs or add new ones without modifying the Messenger class. Additionally, it promotes code reusability and simplifies testing, as we can now easily mock the MessengerApi interface for testing purposes. Overall, following DIP enhances the flexibility, maintainability, and testability of the codebase.
 
-:x: Before following DIP:
+##### ❌ Before following DIP:
 
 [EXAMPLE-FILE-ADDRESS](/Examples/SOLID/-DependencyInversion.ts)
 
-:heavy_check_mark: After following DIP:
+##### ✔️ After following DIP:
 
 [EXAMPLE-FILE-ADDRESS](/Examples/SOLID/+DependencyInversion.ts)

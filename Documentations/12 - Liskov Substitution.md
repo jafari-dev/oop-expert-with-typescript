@@ -20,10 +20,10 @@ To adhere to the LSP, we refactor the classes. We create a `PremiumImageProcesso
 
 In the refactored version, `ImageProcessor` is now focused on basic image processing operations like compression and enhancing size, while `PremiumImageProcessor` extends it to include premium features like removing background and enhancing quality with AI. This separation allows for better code organization and adherence to the Liskov Substitution Principle.
 
-:x: Before following LSP:
+##### ❌ Before following LSP:
 
 [EXAMPLE-FILE-ADDRESS](/Examples/SOLID/-LiskovSubstitution.ts)
 
-:heavy_check_mark: After following LSP:
+##### ✔️ After following LSP:
 
 [EXAMPLE-FILE-ADDRESS](/Examples/SOLID/+LiskovSubstitution.ts)

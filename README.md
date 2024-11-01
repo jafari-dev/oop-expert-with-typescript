@@ -395,7 +395,7 @@ Before following the Single Responsibility Principle (SRP), the `Profile` class 
 
 After following SRP, the code was refactored to separate concerns. The Profile class now only deals with profile-related information such as email and bio. The settings-related functionality has been moved to a new Settings class. This change improves maintainability and makes the codebase more flexible. Now, if there's a need to update how settings are handled, it only affects the Settings class, keeping the Profile class untouched. Additionally, it enhances code readability and makes it easier to understand the purpose of each class.
 
-:x: Before following SRP:
+##### ❌ Before following SRP:
 
 ```typescript
 class Profile {
@@ -445,7 +445,7 @@ class Profile {
 
 ```
 
-:heavy_check_mark: After following SRP:
+##### ✔️ After following SRP:
 
 ```typescript
 class Settings {
@@ -515,7 +515,7 @@ After implementing OCP, the code is refactored to use interfaces and separate cl
 
 This approach adheres to the Open/Closed Principle because the `QueryGenerator` interface is open for extension, allowing you to add support for new databases by creating new classes that implement the interface, without modifying existing code. Additionally, it's closed for modification because changes to existing database classes won't affect the `QueryGenerator` interface or other database implementations. This results in a more flexible, maintainable, and scalable design.
 
-:x: Before following OCP:
+##### ❌ Before following OCP:
 
 ```typescript
 type DB = "MySQL" | "Redis" | "Neo4j";
@@ -550,7 +550,7 @@ class QueryGenerator {
 
 ```
 
-:heavy_check_mark: After following OCP:
+##### ✔️ After following OCP:
 
 ```typescript
 interface QueryGenerator {
@@ -614,7 +614,7 @@ To adhere to the LSP, we refactor the classes. We create a `PremiumImageProcesso
 
 In the refactored version, `ImageProcessor` is now focused on basic image processing operations like compression and enhancing size, while `PremiumImageProcessor` extends it to include premium features like removing background and enhancing quality with AI. This separation allows for better code organization and adherence to the Liskov Substitution Principle.
 
-:x: Before following LSP:
+##### ❌ Before following LSP:
 
 ```typescript
 class AudioProcessor {
@@ -653,7 +653,7 @@ class LimitedAudioProcessor extends AudioProcessor {
 
 ```
 
-:heavy_check_mark: After following LSP:
+##### ✔️ After following LSP:
 
 ```typescript
 class AudioProcessor {
@@ -706,7 +706,7 @@ To address this issue, the Interface Segregation Principle suggests breaking dow
 
 With this segregation, the `InternalNetwork` class now only needs to implement the methods relevant to its functionality, adhering to the principle of "clients should not be forced to depend on interfaces they do not use." This restructuring enhances code clarity, reduces unnecessary dependencies, and makes the system more maintainable and flexible. Additionally, it mitigates the risk of errors by ensuring that classes only expose the methods they actually support, promoting better encapsulation and separation of concerns.
 
-:x: Before following ISP:
+##### ❌ Before following ISP:
 
 ```typescript
 interface VPNConnection {
@@ -754,7 +754,7 @@ class InternalNetwork implements VPNConnection {
 
 ```
 
-:heavy_check_mark: After following ISP:
+##### ✔️ After following ISP:
 
 ```typescript
 interface BaseVPNConnection {
@@ -819,7 +819,7 @@ To adhere to DIP, we introduce an interface called `MessengerApi`, which defines
 
 By doing this, we decouple the Messenger class from specific messaging API implementations. Now, Messenger depends on the MessengerApi interface rather than concrete implementations. This allows us to easily switch between different messaging APIs or add new ones without modifying the Messenger class. Additionally, it promotes code reusability and simplifies testing, as we can now easily mock the MessengerApi interface for testing purposes. Overall, following DIP enhances the flexibility, maintainability, and testability of the codebase.
 
-:x: Before following DIP:
+##### ❌ Before following DIP:
 
 ```typescript
 class TelegramApi {
@@ -871,7 +871,7 @@ class Messenger {
 
 ```
 
-:heavy_check_mark: After following DIP:
+##### ✔️ After following DIP:
 
 ```typescript
 interface MessengerApi {
@@ -1142,6 +1142,36 @@ class PremiumApiProviderFactory implements ApiProviderFactory {
 > Builder is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.
 
 <img src="https://user-images.githubusercontent.com/37804060/165857814-d11b7310-ec21-4596-9d53-26fc2acf1a57.png"/>
+
+#### Example Context
+
+In this example, we illustrate the Builder pattern through the creation of a `Page` object, which can represent different types of web pages with varying headers, bodies, and footers. We utilize builders to construct pages for specific purposes, like a personal blog or an online shop.
+
+- **Main Class:**
+  - `Page`: Represents a web page composed of header, body, and footer parts. It provides methods to set these parts.
+
+- **Builder Interface:**
+  - `PageBuilder`: Declares the generic methods for constructing different parts of a `Page` object, including the header, body, and footer.
+
+- **Concrete Builders:**
+  - `PersonalBlogPageBuilder`: Implements the `PageBuilder` interface to construct a page suitable for a personal blog. The header, body, and footer have blog-specific parts.
+  - `OnlineShopPageBuilder`: Another implementation of the `PageBuilder` interface for creating a page suited for an online shop, with distinct sections in the header, body, and footer.
+
+##### Purpose
+
+The Builder pattern is employed here to manage the construction of a `Page` object that may consist of various optional parts, which allows for more flexible and maintainable code. By using different builders, we can easily create different representations of a page without altering the underlying logic and construction process.
+
+##### How It Works
+
+- **Initialization**: Each specific `PageBuilder` implementation initializes a new `Page` object.
+- **Building Process**: The client calls the builder's methods to set up each part of the page:
+  - `buildHeader()`: Constructs the header based on the page type.
+  - `buildBody()`: Adds the body components specific to the page context.
+  - `buildFooter()`: Defines the footer layout.
+
+Upon completion, the `getPage()` method is used to retrieve the fully constructed `Page` object.
+
+This organized step-by-step construction process makes it easier to create complex page objects that can be adapted and extended to accommodate new requirements without modifying existing code directly, following SOLID principles effectively.
 
 ```typescript
 class Page {

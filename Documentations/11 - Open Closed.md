@@ -18,10 +18,10 @@ After implementing OCP, the code is refactored to use interfaces and separate cl
 
 This approach adheres to the Open/Closed Principle because the `QueryGenerator` interface is open for extension, allowing you to add support for new databases by creating new classes that implement the interface, without modifying existing code. Additionally, it's closed for modification because changes to existing database classes won't affect the `QueryGenerator` interface or other database implementations. This results in a more flexible, maintainable, and scalable design.
 
-:x: Before following OCP:
+##### ❌ Before following OCP:
 
 [EXAMPLE-FILE-ADDRESS](/Examples/SOLID/-OpenClosed.ts)
 
-:heavy_check_mark: After following OCP:
+##### ✔️ After following OCP:
 
 [EXAMPLE-FILE-ADDRESS](/Examples/SOLID/+OpenClosed.ts)

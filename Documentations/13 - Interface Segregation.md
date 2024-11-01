@@ -18,10 +18,10 @@ To address this issue, the Interface Segregation Principle suggests breaking dow
 
 With this segregation, the `InternalNetwork` class now only needs to implement the methods relevant to its functionality, adhering to the principle of "clients should not be forced to depend on interfaces they do not use." This restructuring enhances code clarity, reduces unnecessary dependencies, and makes the system more maintainable and flexible. Additionally, it mitigates the risk of errors by ensuring that classes only expose the methods they actually support, promoting better encapsulation and separation of concerns.
 
-:x: Before following ISP:
+##### ❌ Before following ISP:
 
 [EXAMPLE-FILE-ADDRESS](/Examples/SOLID/-InterfaceSegregation.ts)
 
-:heavy_check_mark: After following ISP:
+##### ✔️ After following ISP:
 
 [EXAMPLE-FILE-ADDRESS](/Examples/SOLID/+InterfaceSegregation.ts)

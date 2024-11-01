@@ -16,10 +16,10 @@ Before following the Single Responsibility Principle (SRP), the `Profile` class 
 
 After following SRP, the code was refactored to separate concerns. The Profile class now only deals with profile-related information such as email and bio. The settings-related functionality has been moved to a new Settings class. This change improves maintainability and makes the codebase more flexible. Now, if there's a need to update how settings are handled, it only affects the Settings class, keeping the Profile class untouched. Additionally, it enhances code readability and makes it easier to understand the purpose of each class.
 
-:x: Before following SRP:
+##### ❌ Before following SRP:
 
 [EXAMPLE-FILE-ADDRESS](/Examples/SOLID/-SingleResponsibility.ts)
 
-:heavy_check_mark: After following SRP:
+##### ✔️ After following SRP:
 
 [EXAMPLE-FILE-ADDRESS](/Examples/SOLID/+SingleResponsibility.ts)
