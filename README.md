@@ -2,10 +2,6 @@
 
 This repository is a complete guide and tutorial for the principles and techniques of object-oriented programming. It can be a reference for all interested in programming and software developers. You will find simple and practical examples in all sections to make the concepts easier to understand.
 
-<p>
-  <img src="https://user-images.githubusercontent.com/37804060/151722505-c16e7705-4533-48af-aebb-9d22f15c9ed0.png"/>
-</p>
-
 ## Table of Contents
 
 1. [Fundamentals](#fundamentals)
@@ -25,32 +21,29 @@ This repository is a complete guide and tutorial for the principles and techniqu
    - [Dependency Inversion (DIP)](#5-dependency-inversion-dip)
 3. [Design Patterns](#design-patterns)
    - [What's a Design Pattern?](#whats-a-design-pattern)
-   - Creational Design Patterns
-     - [Abstract Factory](#abstract-factory)
-     - [Builder](#builder)
-     - [Factory Method (Virtual Constructor)](#factory-method)
-     - [Prototype (Clone)](#prototype)
-     - [Singleton](#singleton)
-   - Structural Design Patterns
-     - [Adapter (Wrapper)](#adapter-wrapper)
-     - [Bridge](#bridge)
-     - [Composite (Object Tree)](#composite-object-tree)
-     - [Decorator (Wrapper)](#decorator-wrapper)
-     - [Facade](#facade)
-     - [Flyweight (Cache)](#flyweight-cache)
-     - [Proxy](#proxy)
-   - Behavioral Design Patterns
-     - [Chain of Responsibility (CoR)](#chain-of-responsibility)
-     - [Command (Action or Transaction)](#command)
-     - [Interpreter](#interpreter)
-     - [Iterator](#iterator)
-     - [Mediator (Intermediary or Controller)](#mediator)
-     - [Memento (Snapshot)](#memento)
-     - [Observer (Event-Subscriber or Listener)](#observer)
-     - [State](#state)
-     - [Strategy](#strategy)
-     - [Template Method](#template-method)
-     - [Visitor](#visitor)
+   - [Creational - Abstract Factory](#abstract-factory)
+   - [Creational - Builder](#builder)
+   - [Creational - Factory Method or Virtual Constructor](#factory-method)
+   - [Creational - Prototype or Clone](#prototype)
+   - [Creational - Singleton](#singleton)
+   - [Structural - Adapter or Wrapper](#adapter-wrapper)
+   - [Structural - Bridge](#bridge)
+   - [Structural - Composite or Object Tree](#composite-object-tree)
+   - [Structural - Decorator or Wrapper](#decorator-wrapper)
+   - [Structural - Facade](#facade)
+   - [Structural - Flyweight or Cache](#flyweight-cache)
+   - [Structural - Proxy](#proxy)
+   - [Behavioral - Chain of Responsibility](#chain-of-responsibility)
+   - [Behavioral - Command or Action or Transaction](#command)
+   - [Behavioral - Interpreter](#interpreter)
+   - [Behavioral - Iterator](#iterator)
+   - [Behavioral - Mediator or Intermediary or Controller](#mediator)
+   - [Behavioral - Memento or Snapshot](#memento)
+   - [Behavioral - Observer or Event-Subscriber or Listener](#observer)
+   - [Behavioral - State](#state)
+   - [Behavioral - Strategy](#strategy)
+   - [Behavioral - Template Method](#template-method)
+   - [Behavioral - Visitor](#visitor)
 4. [References](#references)
 5. [Contributing and Supporting](#contributing-and-supporting)
 
@@ -3098,7 +3091,7 @@ Your contributions can enhance the learning experience for countless individuals
 
 By collaborating with me, you not only enrich the learning journey for others but also sharpen your own skills. Every line of code, every explanation, and every suggestion can make a significant difference.
 
-If you've found this repository helpful, kindly consider giving it a :star:. Your support encourages me to continue refining and expanding its content, benefitting the entire community of developers striving to master object-oriented programming with TypeScript.
+If you've found this repository helpful, kindly consider giving it a ⭐. Your support encourages me to continue refining and expanding its content, benefitting the entire community of developers striving to master object-oriented programming with TypeScript.
 
 Let's work together to cultivate a vibrant learning environment where knowledge is shared, refined, and celebrated. Your contributions are deeply appreciated. Thank you for being a part of this journey.
 
