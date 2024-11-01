@@ -5,9 +5,8 @@
   "main": "script.ts",
   "type": "module",
   "scripts": {
-    "readme": "bun ./script.ts",
-    "lint": "bunx biome check",
-    "website": "bun ./html-generator.ts"
+    "readme": "bun ./script.ts && bun ./html-generator.ts",
+    "lint": "bunx biome check"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

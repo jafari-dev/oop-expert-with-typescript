@@ -1,0 +1,62 @@
+@font-face {
+  font-family: "DankMono";
+  src: url("./DankMono-Regular.ttf") format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Comfortaa", sans-serif;
+}
+
+body {
+  background-color: #f0f0f0;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  padding: 12px;
+  margin-inline: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-block: 32px;
+}
+
+p {
+  line-height: 24px;
+  text-align: justify;
+}
+
+img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+  margin-inline: auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ol, ul {
+  list-style-position: inside;
+  padding-left: 16px;
+}
+
+li {
+  margin-bottom: 12px;
+}
+
+code, pre {
+  font-family: "DankMono", serif !important;
+  font-weight: 700;
+}
