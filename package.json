@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "readme": "bun ./script.ts",
-    "lint": "bunx biome check"
+    "lint": "bunx biome check",
+    "website": "bun ./html-generator.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
@@ -14,5 +15,9 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "marked": "^14.1.3",
+    "marked-gfm-heading-id": "^4.1.0"
   }
 }
