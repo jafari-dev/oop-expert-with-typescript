@@ -1,0 +1,2927 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <a href="https://github.com/jafari-dev/oop-expert-with-typescript?tab=readme-ov-file#fundamentals"
+        target="_blank">Github Repository</a>
+    </header>
+    <h1 id="object-oriented-programming-expert-with-typescript">Object Oriented Programming Expert with TypeScript</h1>
+<p>This repository is a complete guide and tutorial for the principles and techniques of object-oriented programming. It can be a reference for all interested in programming and software developers. You will find simple and practical examples in all sections to make the concepts easier to understand.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#fundamentals">Fundamentals</a><ul>
+<li><a href="#whats-object-oriented-programming">What&#39;s Object-Oriented-Programming?</a></li>
+<li><a href="#class">Class</a></li>
+<li><a href="#objects">Objects</a></li>
+<li><a href="#abstraction">Abstraction</a></li>
+<li><a href="#encapsulation">Encapsulation</a></li>
+<li><a href="#inheritance">Inheritance</a></li>
+<li><a href="#polymorphism">Polymorphism</a></li>
+</ul>
+</li>
+<li><a href="#solid-principles">SOLID Principles</a><ul>
+<li><a href="#whats-solid-meaning">What&#39;s SOLID Meaning?</a></li>
+<li><a href="#1-single-responsibility-srp">Single Responsibility (SRP)</a></li>
+<li><a href="#2-openclosed-ocp">Open/Closed (OCP)</a></li>
+<li><a href="#3-liskov-substitution-lsp">Liskov Substitution (LSP)</a></li>
+<li><a href="#4-interface-segregation-isp">Interface Segregation (ISP)</a></li>
+<li><a href="#5-dependency-inversion-dip">Dependency Inversion (DIP)</a></li>
+</ul>
+</li>
+<li><a href="#design-patterns">Design Patterns</a><ul>
+<li><a href="#whats-a-design-pattern">What&#39;s a Design Pattern?</a></li>
+<li><a href="#abstract-factory">Creational - Abstract Factory</a></li>
+<li><a href="#builder">Creational - Builder</a></li>
+<li><a href="#factory-method">Creational - Factory Method or Virtual Constructor</a></li>
+<li><a href="#prototype">Creational - Prototype or Clone</a></li>
+<li><a href="#singleton">Creational - Singleton</a></li>
+<li><a href="#adapter-wrapper">Structural - Adapter or Wrapper</a></li>
+<li><a href="#bridge">Structural - Bridge</a></li>
+<li><a href="#composite-object-tree">Structural - Composite or Object Tree</a></li>
+<li><a href="#decorator-wrapper">Structural - Decorator or Wrapper</a></li>
+<li><a href="#facade">Structural - Facade</a></li>
+<li><a href="#flyweight-cache">Structural - Flyweight or Cache</a></li>
+<li><a href="#proxy">Structural - Proxy</a></li>
+<li><a href="#chain-of-responsibility">Behavioral - Chain of Responsibility</a></li>
+<li><a href="#command">Behavioral - Command or Action or Transaction</a></li>
+<li><a href="#interpreter">Behavioral - Interpreter</a></li>
+<li><a href="#iterator">Behavioral - Iterator</a></li>
+<li><a href="#mediator">Behavioral - Mediator or Intermediary or Controller</a></li>
+<li><a href="#memento">Behavioral - Memento or Snapshot</a></li>
+<li><a href="#observer">Behavioral - Observer or Event-Subscriber or Listener</a></li>
+<li><a href="#state">Behavioral - State</a></li>
+<li><a href="#strategy">Behavioral - Strategy</a></li>
+<li><a href="#template-method">Behavioral - Template Method</a></li>
+<li><a href="#visitor">Behavioral - Visitor</a></li>
+</ul>
+</li>
+<li><a href="#references">References</a></li>
+<li><a href="#contributing-and-supporting">Contributing and Supporting</a></li>
+</ol>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h2 id="fundamentals">Fundamentals</h2>
+<h3 id="whats-object-oriented-programming">What&#39;s Object-oriented-programming?</h3>
+<p>Object-oriented programming (OOP) is a programming paradigm based on the concept of &quot;objects&quot;, which can contain data and code: data in the form of fields (often known as attributes or properties), and code, in the form of procedures (often known as methods). There are 6 pillars of OOP, includes:</p>
+<ol>
+<li><em>Class</em></li>
+<li><em>Objects</em></li>
+<li><em>Data Abstraction</em></li>
+<li><em>Encapsulation</em></li>
+<li><em>Inheritance</em></li>
+<li><em>Polymorphism</em></li>
+</ol>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="class">Class</h3>
+<blockquote>
+<p>A class is a blueprint for creating objects (instances) that share common properties and behaviors. It serves as a template or a prototype from which objects are created. A class encapsulates data for the object and methods to operate on that data. It provides a way to structure and organize code in a modular and reusable manner.</p>
+</blockquote>
+<p>Here&#39;s a simple explanation of the concept of a class in TypeScript along with a real-world example:</p>
+<pre><code class="language-typescript">class Task {
+  // Properties
+  private id: number;
+  private title: string;
+  private description: string;
+  private dueDate: Date;
+  private completed: boolean;
+
+  // Constructor
+  constructor(taskInfo: {
+    id: number;
+    title: string;
+    description: string;
+    dueDate: Date;
+  }) {
+    this.id = taskInfo.id;
+    this.title = taskInfo.title;
+    this.description = taskInfo.description;
+    this.dueDate = taskInfo.dueDate;
+    this.completed = false; // By default, the task is not completed
+  }
+
+  // Method to mark the task as completed
+  public complete() {
+    this.completed = true;
+  }
+
+  // Method to mark the task as incomplete
+  public incomplete() {
+    this.completed = false;
+  }
+}
+
+// Create instances of the Task class using an object as a parameter
+const task1 = new Task({
+  id: 1,
+  title: &quot;Finish report&quot;,
+  description: &quot;Write the quarterly report for the team meeting&quot;,
+  dueDate: new Date(&quot;2120-03-25&quot;),
+});
+
+const task2 = new Task({
+  id: 2,
+  title: &quot;Buy groceries&quot;,
+  description: &quot;Buy milk, eggs, and bread&quot;,
+  dueDate: new Date(&quot;2077-11-17&quot;),
+});
+
+// Mark task1 as completed
+task1.complete();
+
+// Output task details
+console.log(task1);
+console.log(task2);
+</code></pre>
+<p>In this example:</p>
+<p>We define a Task class with properties <code>id</code>, <code>title</code>, <code>description</code>, <code>dueDate</code>, and <code>completed</code>, along with methods <code>complete()</code> and <code>incomplete()</code> to mark tasks as completed or incomplete.
+We create instances of the Task class (task1 and task2) representing different tasks.
+We demonstrate marking task1 as completed and then output the details of both tasks.</p>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="objects">Objects</h3>
+<blockquote>
+<p>It is a basic unit of Object-Oriented Programming and represents the real-life entities. An Object is an instance of a Class. When a class is defined, no memory is allocated but when it is instantiated (i.e. an object is created) memory is allocated. An object has an identity, state, and behavior. Each object contains data and code to manipulate the data. Objects can interact without having to know details of each other’s data or code, it is sufficient to know the type of message accepted and type of response returned by the objects.</p>
+</blockquote>
+<p>For example <em>Dog</em> is a real-life object, which has some characteristics like color, breed, bark, sleep, and eats.</p>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="abstraction">Abstraction</h3>
+<blockquote>
+<p>Abstraction is a concept that allows you to focus on the essential attributes and behaviors of an object while hiding the unnecessary details. It involves representing only the relevant characteristics of an object, and hiding the complex implementation details from the user.</p>
+</blockquote>
+<p>Let&#39;s break this down with a simple example:</p>
+<p>Consider a car. When you think about a car, you don&#39;t need to know every intricate detail of how the engine works or how the transmission shifts gears in order to drive it. Instead, you focus on the essential features like steering, accelerating, and braking.</p>
+<p>In OOP, abstraction allows us to create a <code>Car</code> class that encapsulates these essential features without revealing the internal complexities. Here&#39;s a basic implementation:</p>
+<pre><code class="language-typescript">class Car {
+  private brand: string;
+  private model: string;
+  private speed: number;
+
+  constructor(brand: string, model: string) {
+    this.brand = brand;
+    this.model = model;
+    this.speed = 0;
+  }
+
+  public accelerate(): void {
+    this.speed += 10;
+  }
+
+  public brake(): void {
+    this.speed -= 10;
+  }
+
+  public getSpeed(): number {
+    return this.speed;
+  }
+}
+
+// Create a car object
+const myCar: Car = new Car(&quot;Toyota&quot;, &quot;Camry&quot;);
+
+// Accelerate the car
+myCar.accelerate();
+
+// Get the current speed
+console.log(&quot;Current speed:&quot;, myCar.getSpeed());
+</code></pre>
+<p>In this example:</p>
+<p>We have a <code>Car</code> class with attributes like <code>make</code>, <code>model</code>, and <code>speed</code>.
+We define methods like <code>accelerate</code> and <code>brake</code> to manipulate the speed of the car.
+The user interacts with the car object through these methods without needing to know how they are implemented internally.
+So, in essence, abstraction allows us to think about objects at a higher level of understanding, focusing on what they do rather than how they do it.</p>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="encapsulation">Encapsulation</h3>
+<blockquote>
+<p>Encapsulation is defined as the wrapping up of data under a single unit. It is the mechanism that binds together code and the data it manipulates. In Encapsulation, the variables or data of a class are hidden from any other class and can be accessed only through any member function of their class in which they are declared. As in encapsulation, the data in a class is hidden from other classes, so it is also known as data-hiding.</p>
+</blockquote>
+<p>Let&#39;s consider a simple example where encapsulation is used to control access to sensitive data. Imagine we have a <code>User</code> class representing users in a system, and we want to ensure that the user&#39;s password is not directly accessible from outside the class.</p>
+<pre><code class="language-typescript">class User {
+  private username: string;
+  private password: string;
+
+  constructor(username: string, password: string) {
+    this.username = username;
+    this.password = password;
+  }
+
+  // Method to authenticate user
+  authenticate(enteredPassword: string): boolean {
+    return enteredPassword === this.password;
+  }
+
+  // Method to change password
+  changePassword(newPassword: string): void {
+    this.password = newPassword;
+  }
+}
+
+// Create a user
+const user = new User(&quot;Ahmad Jafari&quot;, &quot;abcd1234&quot;);
+
+console.log(user.authenticate(&quot;12345678&quot;)); // Output: false
+console.log(user.authenticate(&quot;abcd1234&quot;)); // Output: true
+
+user.changePassword(&quot;Ab1234!?&quot;);
+
+console.log(user.authenticate(&quot;abcd1234&quot;)); // Output: false
+console.log(user.authenticate(&quot;Ab1234!?&quot;)); // Output: true
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li>We define a <code>User</code> class with a private property <code>password</code>.</li>
+<li><code>password</code> property is encapsulated and cannot be directly accessed.</li>
+<li>We provide public methods <code>authenticate()</code> to verify the user&#39;s password and <code>changePassword()</code> to allow users to change their password.</li>
+<li>Accessing or modifying the password property directly from outside the class is not allowed due to its private access modifier.</li>
+<li>Encapsulation ensures that sensitive data (password) is hidden and can only be accessed or modified through controlled methods, enhancing security and preventing unauthorized access or manipulation.</li>
+</ul>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="inheritance">Inheritance</h3>
+<blockquote>
+<p>Inheritance in OOP is a concept where a new class (called a subclass or derived class) is created based on an existing class (called a superclass or base class). The subclass inherits attributes and behaviors (methods) from its superclass, allowing it to reuse and extend the functionality of the superclass.</p>
+</blockquote>
+<p>Using the <code>Shape</code> class example:</p>
+<pre><code class="language-typescript">// Base class representing a generic shape
+class Shape {
+  x: number;
+  y: number;
+
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+
+  // Method to describe the shape
+  describe(): void {
+    console.log(`This is a shape at position (${this.x}, ${this.y}).`);
+  }
+}
+</code></pre>
+<p>Here, <code>Shape</code> is the base class. It has properties like x and y, along with a method describe() to provide information about the shape.</p>
+<pre><code class="language-typescript">// Derived class representing a circle
+class Circle extends Shape {
+  radius: number;
+
+  constructor(x: number, y: number, radius: number) {
+    super(x, y); // Call the constructor of the superclass (Shape)
+    this.radius = radius;
+  }
+
+  // Method to calculate area of the circle
+  area(): number {
+    return Math.PI * this.radius ** 2;
+  }
+}
+</code></pre>
+<p>In this example, <code>Circle</code> is the subclass, and it extends the <code>Shape</code> class. By using the extends keyword, Circle inherits all properties and methods from Shape. Additionally, Circle has its own property <code>radius</code> and method <code>area()</code> specific to circles.</p>
+<p>By utilizing inheritance, you can create a hierarchy of classes where subclasses inherit and extend the functionality of their superclass, promoting code reusability and maintaining a logical structure in your programs.</p>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="polymorphism">Polymorphism</h3>
+<blockquote>
+<p>Polymorphism in OOP refers to the ability of different objects to be treated as instances of a common superclass. Simply put, it allows objects of different classes to be treated as objects of a shared superclass. This enables more flexible and dynamic code, as different objects can respond to the same method call in different ways.</p>
+</blockquote>
+<p>Let&#39;s consider a real-world example involving shapes. We&#39;ll create a program that calculates the area of different shapes such as rectangles, circles, and triangles using polymorphism.</p>
+<pre><code class="language-typescript">// Parent class
+abstract class Shape {
+  abstract calculateArea(): number;
+}
+
+// Rectangle class
+class Rectangle extends Shape {
+  constructor(private width: number, private height: number) {
+    super();
+  }
+
+  calculateArea(): number {
+    return this.width * this.height;
+  }
+}
+
+// Circle class
+class Circle extends Shape {
+  constructor(private radius: number) {
+    super();
+  }
+
+  calculateArea(): number {
+    return Math.PI * this.radius ** 2;
+  }
+}
+
+// Triangle class
+class Triangle extends Shape {
+  constructor(private base: number, private height: number) {
+    super();
+  }
+
+  calculateArea(): number {
+    return 0.5 * this.base * this.height;
+  }
+}
+
+// Function to calculate the area of any shape
+function calculateShapeArea(shape: Shape): number {
+  return shape.calculateArea();
+}
+
+// Creating instances of different shapes
+const rectangle = new Rectangle(5, 10);
+const circle = new Circle(7);
+const triangle = new Triangle(4, 6);
+
+// Using the function with different shape objects
+console.log(&quot;Area of Rectangle:&quot;, calculateShapeArea(rectangle)); // Outputs: 50
+console.log(&quot;Area of Circle:&quot;, calculateShapeArea(circle).toFixed(2)); // Outputs: 153.94
+console.log(&quot;Area of Triangle:&quot;, calculateShapeArea(triangle)); // Outputs: 12
+</code></pre>
+<p>In this example, <code>Shape</code> is the superclass, and <code>Rectangle</code>, <code>Circle</code>, and <code>Triangle</code> are its subclasses. They all implement the <code>calculateArea()</code> method differently according to their specific shapes. When we call <code>calculateShapeArea()</code> with different shape objects, polymorphism allows the correct version of <code>calculateArea()</code> to be called based on the type of shape passed. This demonstrates how polymorphism enables code to handle different types of objects in a unified manner.</p>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h2 id="solid-principles">SOLID Principles</h2>
+<h3 id="whats-solid-meaning">What&#39;s SOLID meaning?</h3>
+<p>In software engineering, SOLID is a mnemonic acronym for five design principles intended to make software designs more understandable, flexible, and maintainable. The principles are a subset of many principles promoted by American software engineer and instructor Robert C. Martin, first introduced in his 2000 paper Design Principles and Design Patterns.</p>
+<img src="https://user-images.githubusercontent.com/37804060/153056635-449fedb7-fcbf-4cb1-b642-5798d29b9c6f.jpg"/>
+
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="1-single-responsibility-srp">1. Single Responsibility (SRP)</h3>
+<h4 id="original-definition">Original Definition</h4>
+<blockquote>
+<p>There should never be more than one reason for a class to change. Every class should have only one responsibility.</p>
+</blockquote>
+<h4 id="simple-definition">Simple Definition</h4>
+<blockquote>
+<p>SRP means that each class should only be responsible for one thing. It keeps classes focused and makes code easier to understand and maintain.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/153056645-8760ddfa-01f3-4c21-9279-ab6ba669a0fc.jpg"/>
+
+<h4 id="example">Example</h4>
+<p>Before following the Single Responsibility Principle (SRP), the <code>Profile</code> class was handling both user profile data (like email, bio, etc.) and user settings (theme and preferredLanguage). This violated SRP because a class should have only one reason to change, but here the Profile class had multiple reasons to change - if either the profile data structure or the settings structure changed.</p>
+<p>After following SRP, the code was refactored to separate concerns. The Profile class now only deals with profile-related information such as email and bio. The settings-related functionality has been moved to a new Settings class. This change improves maintainability and makes the codebase more flexible. Now, if there&#39;s a need to update how settings are handled, it only affects the Settings class, keeping the Profile class untouched. Additionally, it enhances code readability and makes it easier to understand the purpose of each class.</p>
+<h5 id="-before-following-srp">❌ Before following SRP:</h5>
+<pre><code class="language-typescript">class Profile {
+  private email: string;
+  private bio: string;
+  private theme: &quot;LIGHT&quot; | &quot;DARK&quot;;
+  private preferredLanguage: string;
+
+  constructor(params: { email: string; bio: string; theme: &quot;LIGHT&quot; | &quot;DARK&quot;; preferredLanguage: string }) {
+    const { email, bio, theme, preferredLanguage } = params;
+
+    this.email = email;
+    this.bio = bio;
+    this.theme = theme;
+    this.preferredLanguage = preferredLanguage;
+  }
+
+  public updateEmail(email: string): void {
+    this.email = email;
+  }
+
+  public updateBio(bio: string): void {
+    this.bio = bio;
+  }
+
+  public toggleTheme(): void {
+    if (this.theme === &quot;LIGHT&quot;) {
+      this.theme = &quot;DARK&quot;;
+    } else {
+      this.theme = &quot;LIGHT&quot;;
+    }
+  }
+
+  public updatePreferredLanguage(language: string): void {
+    this.preferredLanguage = language;
+  }
+
+  public getProfile() {
+    return {
+      email: this.email,
+      bio: this.bio,
+      theme: this.theme,
+      preferredLanguage: this.preferredLanguage,
+    };
+  }
+}
+</code></pre>
+<h5 id="️-after-following-srp">✔️ After following SRP:</h5>
+<pre><code class="language-typescript">class Settings {
+  constructor(
+    protected theme: &quot;LIGHT&quot; | &quot;DARK&quot;,
+    protected preferredLanguage: string,
+  ) {}
+
+  public toggleTheme(): void {
+    if (this.theme === &quot;LIGHT&quot;) {
+      this.theme = &quot;DARK&quot;;
+    } else {
+      this.theme = &quot;LIGHT&quot;;
+    }
+  }
+
+  public updatePreferredLanguage(language: string): void {
+    this.preferredLanguage = language;
+  }
+
+  public getSettings() {
+    return { theme: this.theme, preferredLanguage: this.preferredLanguage };
+  }
+}
+
+class Profile {
+  constructor(
+    protected email: string,
+    protected bio: string,
+    protected settings: Settings,
+  ) {}
+
+  public updateEmail(email: string): void {
+    this.email = email;
+  }
+
+  public updateBio(bio: string): void {
+    this.bio = bio;
+  }
+
+  public getProfile() {
+    return { email: this.email, bio: this.bio, settings: this.settings.getSettings() };
+  }
+}
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="2-openclosed-ocp">2. Open/Closed (OCP)</h3>
+<h4 id="original-definition-1">Original Definition</h4>
+<blockquote>
+<p>Software entities should be open for extension, but closed for modification.</p>
+</blockquote>
+<h4 id="simple-definition-1">Simple Definition</h4>
+<blockquote>
+<p>The Open/Closed Principle means that once you write a piece of code, you should be able to add new functionality to it without changing the existing code. It promotes extending the behavior of software rather than altering it, ensuring that changes don&#39;t break existing functionality.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/153056325-679b94dc-ea4f-4315-a682-93057845f9d5.jpg"/>
+
+<h4 id="example-1">Example</h4>
+<p>Before OCP implementation, the <code>QueryGenerator</code> class directly handles different types of databases, such as <em>MySQL</em>, <em>Redis</em>, and <em>Neo4j</em>, within its methods. This violates the Open/Closed Principle because if you want to add support for a new database, you would need to modify the <code>QueryGenerator</code> class by adding a new case to each switch statement. This could lead to the class becoming bloated and tightly coupled to specific database implementations, making it harder to maintain and extend.</p>
+<p>After implementing OCP, the code is refactored to use interfaces and separate classes for each database type. Now, the QueryGenerator interface defines common methods <code>getReadingQuery</code> and <code>getWritingQuery</code>, while individual database classes (<code>MySql</code>, <code>Redis</code>, and <code>Neo4j</code>) implement these methods according to their specific behavior.</p>
+<p>This approach adheres to the Open/Closed Principle because the <code>QueryGenerator</code> interface is open for extension, allowing you to add support for new databases by creating new classes that implement the interface, without modifying existing code. Additionally, it&#39;s closed for modification because changes to existing database classes won&#39;t affect the <code>QueryGenerator</code> interface or other database implementations. This results in a more flexible, maintainable, and scalable design.</p>
+<h5 id="-before-following-ocp">❌ Before following OCP:</h5>
+<pre><code class="language-typescript">type DB = &quot;MySQL&quot; | &quot;Redis&quot; | &quot;Neo4j&quot;;
+
+class QueryGenerator {
+  getReadingQuery(database: DB): string {
+    switch (database) {
+      case &quot;MySQL&quot;:
+        return &quot;SELECT * FROM MySQL&quot;;
+      case &quot;Redis&quot;:
+        return &quot;SCAN 0&quot;;
+      case &quot;Neo4j&quot;:
+        return &quot;MATCH (n) RETURN n&quot;;
+      default:
+        return &quot;Unknown&quot;;
+    }
+  }
+
+  getWritingQuery(database: DB, data: string): string {
+    switch (database) {
+      case &quot;MySQL&quot;:
+        return `INSERT INTO MySQL VALUES (${data})`;
+      case &quot;Redis&quot;:
+        return `SET ${data}`;
+      case &quot;Neo4j&quot;:
+        return `CREATE (${data})`;
+      default:
+        return &quot;Unknown&quot;;
+    }
+  }
+}
+</code></pre>
+<h5 id="️-after-following-ocp">✔️ After following OCP:</h5>
+<pre><code class="language-typescript">interface QueryGenerator {
+  getReadingQuery: () =&gt; string;
+  getWritingQuery: (data: string) =&gt; string;
+}
+
+class MySql implements QueryGenerator {
+  getReadingQuery() {
+    return &quot;SELECT * FROM MySQL&quot;;
+  }
+
+  getWritingQuery(data: string) {
+    return `INSERT INTO MySQL VALUES (${data})`;
+  }
+}
+
+class Redis implements QueryGenerator {
+  getReadingQuery() {
+    return &quot;SCAN 0&quot;;
+  }
+
+  getWritingQuery(data: string) {
+    return `SET ${data}`;
+  }
+}
+
+class Neo4j implements QueryGenerator {
+  getReadingQuery() {
+    return &quot;MATCH (n) RETURN n&quot;;
+  }
+
+  getWritingQuery(data: string) {
+    return `CREATE (${data})`;
+  }
+}
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="3-liskov-substitution-lsp">3. Liskov Substitution (LSP)</h3>
+<h4 id="original-definition-2">Original Definition</h4>
+<blockquote>
+<p>If <code>S</code> is a subtype of <code>T</code>, then objects of type <code>T</code> in a program may be replaced with objects of type <code>S</code> without altering any of the desirable properties of that program.</p>
+</blockquote>
+<h4 id="simple-definition-2">Simple Definition</h4>
+<blockquote>
+<p>The LSP says that if you have a class, you should be able to use any of its subclasses interchangeably without breaking the program.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/153056329-914cbbba-685b-452b-9dcf-4fcf6a4faabc.jpg"/>
+
+<h4 id="example-2">Example</h4>
+<p>In the initial example, we have an <code>ImageProcessor</code> class responsible for various image processing operations such as <strong>compression</strong>, <strong>enhancing size</strong>, <strong>removing background</strong>, and <strong>enhancing quality with AI</strong>. There&#39;s also a <code>LimitedImageProcessor</code> class that extends <code>ImageProcessor</code>, but it overrides the <code>removeBackground</code> and <code>enhanceQualityWithAI</code> methods to throw errors indicating that these features are only available in the premium version.</p>
+<p>This violates the Liskov Substitution Principle because substituting an instance of <code>LimitedImageProcessor</code> for an instance of <code>ImageProcessor</code> could lead to unexpected errors if code relies on those overridden methods.</p>
+<p>To adhere to the LSP, we refactor the classes. We create a <code>PremiumImageProcessor</code> class that extends <code>ImageProcessor</code> and implements the <code>removeBackground</code> and <code>enhanceQualityWithAI</code> methods. This way, both classes share a common interface and substituting an instance of <code>PremiumImageProcessor</code> for an instance of <code>ImageProcessor</code> won&#39;t break the program&#39;s correctness.</p>
+<p>In the refactored version, <code>ImageProcessor</code> is now focused on basic image processing operations like compression and enhancing size, while <code>PremiumImageProcessor</code> extends it to include premium features like removing background and enhancing quality with AI. This separation allows for better code organization and adherence to the Liskov Substitution Principle.</p>
+<h5 id="-before-following-lsp">❌ Before following LSP:</h5>
+<pre><code class="language-typescript">class AudioProcessor {
+  constructor(protected audioFile: File) {}
+
+  compress() {
+    // Compress the size of the audio
+  }
+
+  changeTempo() {
+    // Increase the size of the audio
+  }
+
+  separateMusicAndVocal() {
+    // Remove the background of the audio
+  }
+
+  enhanceQualityWithAI() {
+    // Enhance the quality of the audio with AI
+  }
+}
+
+class LimitedAudioProcessor extends AudioProcessor {
+  constructor(audioFile: File) {
+    super(audioFile);
+  }
+
+  override separateMusicAndVocal(): Error {
+    throw Error(&quot;You have to buy the premium version to access this feature!&quot;);
+  }
+
+  override enhanceQualityWithAI(): Error {
+    throw Error(&quot;You have to buy the premium version to access this feature!&quot;);
+  }
+}
+</code></pre>
+<h5 id="️-after-following-lsp">✔️ After following LSP:</h5>
+<pre><code class="language-typescript">class AudioProcessor {
+  constructor(protected audioFile: File) {}
+
+  compress() {
+    // Compress the size of the audio
+  }
+
+  changeTempo() {
+    // Increase the size of the audio
+  }
+}
+
+class PremiumAudioProcessor extends AudioProcessor {
+  constructor(audioFile: File) {
+    super(audioFile);
+  }
+
+  separateMusicAndVocal() {
+    // Remove the background of the audio
+  }
+
+  enhanceQualityWithAI() {
+    // Enhance the quality of the audio with AI
+  }
+}
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="4-interface-segregation-isp">4. Interface Segregation (ISP)</h3>
+<h4 id="original-definition-3">Original Definition</h4>
+<blockquote>
+<p>No code should be forced to depend on methods it does not use.</p>
+</blockquote>
+<h4 id="simple-definition-3">Simple Definition</h4>
+<blockquote>
+<p>The ISP means that clients should not be forced to implement methods they don&#39;t use. It&#39;s like saying, &quot;Don&#39;t make people take things they don&#39;t need.&quot;</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/153056335-7bf6d86f-da0b-4687-89fe-9ea97e2ec40e.jpg"/>
+
+<h4 id="example-3">Example</h4>
+<p>In the initial implementation before applying the ISP, the <code>VPNConnection</code> interface encompasses methods for various VPN protocols, including <code>useL2TP</code>, <code>useOpenVPN</code>, <code>useV2Ray</code>, and <code>useShadowsocks</code>. However, not all classes implementing this interface require all these methods. For instance, the <code>InternalNetwork</code> class only utilizes <code>useL2TP</code> and <code>useOpenVPN</code>, yet it is forced to implement all methods defined in the <code>VPNConnection</code> interface, leading to unnecessary dependencies and potential errors if methods are called inappropriately.</p>
+<p>To address this issue, the Interface Segregation Principle suggests breaking down the monolithic interface into smaller, more focused interfaces. In the improved implementation, two interfaces are introduced: <code>BaseVPNConnection</code> and <code>ExtraVPNConnection</code>. The <code>BaseVPNConnection</code> interface contains methods common to both external and internal networks (<code>useL2TP</code> and <code>useOpenVPN</code>), while the <code>ExtraVPNConnection</code> interface includes methods specific to external networks (<code>useV2Ray</code> and <code>useShadowsocks</code>).</p>
+<p>With this segregation, the <code>InternalNetwork</code> class now only needs to implement the methods relevant to its functionality, adhering to the principle of &quot;clients should not be forced to depend on interfaces they do not use.&quot; This restructuring enhances code clarity, reduces unnecessary dependencies, and makes the system more maintainable and flexible. Additionally, it mitigates the risk of errors by ensuring that classes only expose the methods they actually support, promoting better encapsulation and separation of concerns.</p>
+<h5 id="-before-following-isp">❌ Before following ISP:</h5>
+<pre><code class="language-typescript">interface VPNConnection {
+  useL2TP: () =&gt; void;
+  useOpenVPN: () =&gt; void;
+  useV2Ray: () =&gt; void;
+  useShadowsocks: () =&gt; void;
+}
+
+class ExternalNetwork implements VPNConnection {
+  useL2TP() {
+    console.log(&quot;L2TP VPN is ready for your external network!&quot;);
+  }
+
+  useOpenVPN() {
+    console.log(&quot;OpenVPN is ready for your external network!&quot;);
+  }
+
+  useV2Ray() {
+    console.log(&quot;V2Ray is ready for your external network!&quot;);
+  }
+
+  useShadowsocks() {
+    console.log(&quot;Shadowsocks is ready for your external network!&quot;);
+  }
+}
+
+class InternalNetwork implements VPNConnection {
+  useL2TP() {
+    console.log(&quot;L2TP VPN is ready for your internal network!&quot;);
+  }
+
+  useOpenVPN() {
+    console.log(&quot;OpenVPN is ready for your internal network!&quot;);
+  }
+
+  useV2Ray() {
+    throw Error(&quot;V2Ray is not available for your internal network!&quot;);
+  }
+
+  useShadowsocks() {
+    throw Error(&quot;Shadowsocks is not available for your internal network!&quot;);
+  }
+}
+</code></pre>
+<h5 id="️-after-following-isp">✔️ After following ISP:</h5>
+<pre><code class="language-typescript">interface BaseVPNConnection {
+  useL2TP: () =&gt; void;
+  useOpenVPN: () =&gt; void;
+}
+
+interface ExtraVPNConnection {
+  useV2Ray: () =&gt; void;
+  useShadowsocks: () =&gt; void;
+}
+
+class ExternalNetwork implements BaseVPNConnection, ExtraVPNConnection {
+  useL2TP() {
+    console.log(&quot;L2TP VPN is ready for your external network!&quot;);
+  }
+
+  useOpenVPN() {
+    console.log(&quot;OpenVPN is ready for your external network!&quot;);
+  }
+
+  useV2Ray() {
+    console.log(&quot;V2Ray is ready for your external network!&quot;);
+  }
+
+  useShadowsocks() {
+    console.log(&quot;Shadowsocks is ready for your external network!&quot;);
+  }
+}
+
+class InternalNetwork implements BaseVPNConnection {
+  useL2TP() {
+    console.log(&quot;L2TP VPN is ready for your internal network!&quot;);
+  }
+
+  useOpenVPN() {
+    console.log(&quot;OpenVPN is ready for your internal network!&quot;);
+  }
+}
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="5-dependency-inversion-dip">5. Dependency Inversion (DIP)</h3>
+<h4 id="original-definition-4">Original Definition</h4>
+<blockquote>
+<p>High-level modules should not import anything from low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.</p>
+</blockquote>
+<h4 id="simple-definition-4">Simple Definition</h4>
+<blockquote>
+<p>DIP means that instead of high-level modules depending directly on low-level modules, both should depend on abstractions. This way, changes in low-level modules don&#39;t directly affect high-level ones, promoting flexible and maintainable code.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/153056344-b32c3e4c-8dce-498c-8243-2aed646762f1.jpg"/>
+
+<h4 id="example-4">Example</h4>
+<p>In the original code, the <code>Messenger</code> class directly depends on specific implementations of messaging APIs like <code>TelegramApi</code>, <code>WhatsappApi</code>, and <code>SignalApi</code>. This tightly couples Messenger with these concrete implementations, making it difficult to change or extend the system without modifying the Messenger class itself. This violates the Dependency Inversion Principle (DIP), which suggests that high-level modules should not depend on low-level modules but rather on abstractions.</p>
+<p>To adhere to DIP, we introduce an interface called <code>MessengerApi</code>, which defines the methods that the Messenger class requires from a messaging API. Then, each messaging API class (<code>TelegramApi</code>, <code>WhatsappApi</code> and <code>SignalApi</code>) implements this interface, providing their own implementation of the connect and send methods.</p>
+<p>By doing this, we decouple the Messenger class from specific messaging API implementations. Now, Messenger depends on the MessengerApi interface rather than concrete implementations. This allows us to easily switch between different messaging APIs or add new ones without modifying the Messenger class. Additionally, it promotes code reusability and simplifies testing, as we can now easily mock the MessengerApi interface for testing purposes. Overall, following DIP enhances the flexibility, maintainability, and testability of the codebase.</p>
+<h5 id="-before-following-dip">❌ Before following DIP:</h5>
+<pre><code class="language-typescript">class TelegramApi {
+  start() {
+    console.log(&quot;You are connected to Telegram API!&quot;);
+  }
+
+  messageTo(targetId: number, message: string) {
+    console.log(`${message} sent to ${targetId} by Telegram!`);
+  }
+}
+
+class WhatsappApi {
+  setup() {
+    console.log(&quot;You are connected to Whatsapp API!&quot;);
+  }
+
+  pushMessage(message: string, targetId: number) {
+    console.log(`${message} sent to ${targetId} by Whatsapp!`);
+  }
+}
+
+class SignalApi {
+  open() {
+    console.log(&quot;You are connected to Signal API!&quot;);
+  }
+
+  postMessage(params: { id: number; text: string }) {
+    console.log(`${params.text} sent to ${params.id} by Signal!`);
+  }
+}
+
+class Messenger {
+  constructor(private api: TelegramApi | WhatsappApi | SignalApi) {}
+
+  sendMessage(targetId: number, message: string) {
+    if (this.api instanceof TelegramApi) {
+      this.api.start();
+      this.api.messageTo(targetId, message);
+    } else if (this.api instanceof WhatsappApi) {
+      this.api.setup();
+      this.api.pushMessage(message, targetId);
+    } else {
+      this.api.open();
+      this.api.postMessage({ id: targetId, text: message });
+    }
+  }
+}
+</code></pre>
+<h5 id="️-after-following-dip">✔️ After following DIP:</h5>
+<pre><code class="language-typescript">interface MessengerApi {
+  connect: () =&gt; void;
+  send: (targetId: string, message: string) =&gt; void;
+}
+
+class TelegramApi implements MessengerApi {
+  connect() {
+    console.log(&quot;You are connected to Telegram API!&quot;);
+  }
+
+  send(targetId: string, message: string) {
+    console.log(`${message} sent to ${targetId} by Telegram!`);
+  }
+}
+
+class WhatsappApi implements MessengerApi {
+  connect() {
+    console.log(&quot;You are connected to Whatsapp API!&quot;);
+  }
+
+  send(targetId: string, message: string) {
+    console.log(`${message} sent to ${targetId} by Whatsapp!`);
+  }
+}
+
+class SignalApi implements MessengerApi {
+  connect() {
+    console.log(&quot;You are connected to Signal API!&quot;);
+  }
+
+  send(targetId: string, message: string) {
+    console.log(`${message} sent to ${targetId} by Signal!`);
+  }
+}
+
+class Messenger {
+  constructor(private api: MessengerApi) {}
+
+  sendMessage(targetId: string, message: string) {
+    this.api.connect();
+    this.api.send(targetId, message);
+  }
+}
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h2 id="design-patterns">Design Patterns</h2>
+<h3 id="whats-a-design-pattern">What&#39;s a design pattern?</h3>
+<p>In software engineering, a software design pattern is a general, reusable solution to a commonly occurring problem within a given context in software design. It is not a finished design that can be transformed directly into source or machine code. Rather, it is a description or template for how to solve a problem that can be used in many different situations. Design patterns are formalized best practices that the programmer can use to solve common problems when designing an application or system.</p>
+<p>There are 23 design patterns that are grouped into 3 categories:</p>
+<ol>
+<li><p><strong>Creational</strong>: Creational patterns provide various object creation mechanisms, which increase flexibility and reuse of existing code. Includes:</p>
+<ul>
+<li>Abstract Factory</li>
+<li>Builder</li>
+<li>Factory Method</li>
+<li>Prototype</li>
+<li>Singleton</li>
+</ul>
+</li>
+<li><p><strong>Structural</strong>: Structural patterns explain how to assemble objects and classes into larger structures while keeping these structures flexible and efficient. Includes:</p>
+<ul>
+<li>Adapter</li>
+<li>Bridge</li>
+<li>Composite</li>
+<li>Decorator</li>
+<li>Facade</li>
+<li>Flyweight</li>
+<li>Proxy</li>
+</ul>
+</li>
+<li><p><strong>Behavioral</strong>: Behavioral design patterns are concerned with algorithms and the assignment of responsibilities between objects. Includes:</p>
+<ul>
+<li>Chain of Responsibility</li>
+<li>Command</li>
+<li>Interpreter</li>
+<li>Iterator</li>
+<li>Mediator</li>
+<li>Memento</li>
+<li>Observer</li>
+<li>State</li>
+<li>Strategy</li>
+<li>Template Method</li>
+<li>Visitor</li>
+</ul>
+</li>
+</ol>
+<p><strong>Tip</strong>: The order of design patterns isn&#39;t important. So, you can choose which one to learn, regardless of the category.</p>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="abstract-factory">Abstract Factory</h3>
+<blockquote>
+<p>Abstract Factory is a creational design pattern that lets you produce families of related objects without specifying their concrete classes. This pattern is particularly useful when a system needs to be independent of the way its products are created, composed, and represented. It also helps in enforcing that a set of products follow a consistent theme across different platforms.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165858016-40c37caf-d0c4-421c-8fca-a423d5add360.png"/>
+
+<h4 id="example-context">Example Context</h4>
+<p>In this example, we demonstrate the Abstract Factory pattern through a media API system where different types of API providers (<code>Normal</code> and <code>Premium</code>) can be generated for movies and audio tracks. Each provider offers multiple ways to search within its respective domain.</p>
+<ul>
+<li><p><strong>Interfaces Defined:</strong></p>
+<ul>
+<li><code>Movie</code>: Represents the structure of a movie object.</li>
+<li><code>AudioTrack</code>: Represents the structure of an audio track object.</li>
+<li><code>MovieApi</code> and <code>AudioApi</code>: Define the set of operations available for interacting with movies and audio tracks, respectively.</li>
+</ul>
+</li>
+<li><p><strong>Concrete Implementations:</strong></p>
+<ul>
+<li><code>NormalMovieApiProvider</code> and <code>NormalAudioApiProvider</code>: Implement the <code>MovieApi</code> and <code>AudioApi</code> interfaces with standard search operations.</li>
+<li><code>PremiumMovieApiProvider</code> and <code>PremiumAudioApiProvider</code>: Similar to the normal providers but designed to represent premium service capabilities.</li>
+</ul>
+</li>
+<li><p><strong>Factory Interfaces and Implementations:</strong></p>
+<ul>
+<li><code>ApiProviderFactory</code>: Defines the methods for creating movie and audio API providers.</li>
+<li><code>NormalApiProviderFactory</code> and <code>PremiumApiProviderFactory</code>: Implementations of the factory interface that create instances of normal and premium API providers.</li>
+</ul>
+</li>
+</ul>
+<h5 id="purpose">Purpose</h5>
+<p>This pattern allows for the dynamic creation of <code>MovieApi</code> and <code>AudioApi</code> services that adhere to whether the user has access to normal or premium features. The flexibility provided by the Abstract Factory pattern makes it easier to extend and maintain the system, as new provider types can be added with minimal changes to existing code.</p>
+<h5 id="how-it-works">How It Works</h5>
+<ul>
+<li>A client first decides on the type of factory to use (<code>NormalApiProviderFactory</code> or <code>PremiumApiProviderFactory</code>).</li>
+<li>The factory then creates instances of <code>MovieApi</code> and <code>AudioApi</code> providers based on the chosen type.</li>
+<li>From there, the client can utilize these providers to perform various search operations tailored to their specific needs.</li>
+</ul>
+<p>By abstracting the creation process, the code is cleaner and adheres to SOLID principles, making it a flexible solution for varying user tiers in media applications.</p>
+<pre><code class="language-typescript">interface Movie {
+  title: string;
+  artists: Array&lt;string&gt;;
+  director: string;
+  releaseYear: number;
+  awards: Array&lt;string&gt;;
+  duration: number;
+}
+
+interface AudioTrack {
+  title: string;
+  artist: string;
+  genre: string;
+  mood: string;
+  lyric: string;
+  duration: number;
+}
+
+interface MovieApi {
+  searchByTitle: (name: string) =&gt; Array&lt;Movie&gt;;
+  searchByActors: (actors: Array&lt;string&gt;) =&gt; Array&lt;Movie&gt;;
+  searchByAwards: (awards: Array&lt;string&gt;) =&gt; Array&lt;Movie&gt;;
+  searchByDirector: (director: string) =&gt; Array&lt;Movie&gt;;
+  releaseYear: (releaseYear: Date) =&gt; Array&lt;Movie&gt;;
+}
+
+interface AudioApi {
+  searchByTitle: (name: string) =&gt; Array&lt;AudioTrack&gt;;
+  searchByArtist: (artist: string) =&gt; Array&lt;AudioTrack&gt;;
+  searchByMood: (mood: string) =&gt; Array&lt;AudioTrack&gt;;
+  searchByGenre: (genre: string) =&gt; Array&lt;AudioTrack&gt;;
+  searchByLyric: (text: string) =&gt; Array&lt;AudioTrack&gt;;
+}
+
+class NormalMovieApiProvider implements MovieApi {
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByActors(actors: Array&lt;string&gt;) {
+    return [];
+  }
+  searchByAwards(awards: Array&lt;string&gt;) {
+    return [];
+  }
+  searchByDirector(director: string) {
+    return [];
+  }
+  releaseYear(releaseYear: Date) {
+    return [];
+  }
+}
+
+class NormalAudioApiProvider implements AudioApi {
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByArtist(artist: string) {
+    return [];
+  }
+  searchByMood(mood: string) {
+    return [];
+  }
+  searchByGenre(genre: string) {
+    return [];
+  }
+  searchByLyric(text: string) {
+    return [];
+  }
+}
+
+class PremiumMovieApiProvider implements MovieApi {
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByActors(actors: Array&lt;string&gt;) {
+    return [];
+  }
+  searchByAwards(awards: Array&lt;string&gt;) {
+    return [];
+  }
+  searchByDirector(director: string) {
+    return [];
+  }
+  releaseYear(releaseYear: Date) {
+    return [];
+  }
+}
+
+class PremiumAudioApiProvider implements AudioApi {
+  searchByTitle(name: string) {
+    return [];
+  }
+  searchByArtist(artist: string) {
+    return [];
+  }
+  searchByMood(mood: string) {
+    return [];
+  }
+  searchByGenre(genre: string) {
+    return [];
+  }
+  searchByLyric(text: string) {
+    return [];
+  }
+}
+
+interface ApiProviderFactory {
+  createMovieApiProvider: () =&gt; MovieApi;
+  createAudioApiProvider: () =&gt; AudioApi;
+}
+
+class NormalApiProviderFactory implements ApiProviderFactory {
+  createMovieApiProvider() {
+    return new NormalMovieApiProvider();
+  }
+
+  createAudioApiProvider() {
+    return new NormalAudioApiProvider();
+  }
+}
+
+class PremiumApiProviderFactory implements ApiProviderFactory {
+  createMovieApiProvider() {
+    return new PremiumMovieApiProvider();
+  }
+
+  createAudioApiProvider() {
+    return new PremiumAudioApiProvider();
+  }
+}
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="builder">Builder</h3>
+<blockquote>
+<p>Builder is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165857814-d11b7310-ec21-4596-9d53-26fc2acf1a57.png"/>
+
+<h4 id="example-context-1">Example Context</h4>
+<p>In this example, we illustrate the Builder pattern through the creation of a <code>Page</code> object, which can represent different types of web pages with varying headers, bodies, and footers. We utilize builders to construct pages for specific purposes, like a personal blog or an online shop.</p>
+<ul>
+<li><p><strong>Main Class:</strong></p>
+<ul>
+<li><code>Page</code>: Represents a web page composed of header, body, and footer parts. It provides methods to set these parts.</li>
+</ul>
+</li>
+<li><p><strong>Builder Interface:</strong></p>
+<ul>
+<li><code>PageBuilder</code>: Declares the generic methods for constructing different parts of a <code>Page</code> object, including the header, body, and footer.</li>
+</ul>
+</li>
+<li><p><strong>Concrete Builders:</strong></p>
+<ul>
+<li><code>PersonalBlogPageBuilder</code>: Implements the <code>PageBuilder</code> interface to construct a page suitable for a personal blog. The header, body, and footer have blog-specific parts.</li>
+<li><code>OnlineShopPageBuilder</code>: Another implementation of the <code>PageBuilder</code> interface for creating a page suited for an online shop, with distinct sections in the header, body, and footer.</li>
+</ul>
+</li>
+</ul>
+<h5 id="purpose-1">Purpose</h5>
+<p>The Builder pattern is employed here to manage the construction of a <code>Page</code> object that may consist of various optional parts, which allows for more flexible and maintainable code. By using different builders, we can easily create different representations of a page without altering the underlying logic and construction process.</p>
+<h5 id="how-it-works-1">How It Works</h5>
+<ul>
+<li><strong>Initialization</strong>: Each specific <code>PageBuilder</code> implementation initializes a new <code>Page</code> object.</li>
+<li><strong>Building Process</strong>: The client calls the builder&#39;s methods to set up each part of the page:<ul>
+<li><code>buildHeader()</code>: Constructs the header based on the page type.</li>
+<li><code>buildBody()</code>: Adds the body components specific to the page context.</li>
+<li><code>buildFooter()</code>: Defines the footer layout.</li>
+</ul>
+</li>
+</ul>
+<p>Upon completion, the <code>getPage()</code> method is used to retrieve the fully constructed <code>Page</code> object.</p>
+<p>This organized step-by-step construction process makes it easier to create complex page objects that can be adapted and extended to accommodate new requirements without modifying existing code directly, following SOLID principles effectively.</p>
+<pre><code class="language-typescript">class Page {
+  private headerParts: Array&lt;string&gt;;
+  private bodyParts: Array&lt;string&gt;;
+  private footerParts: Array&lt;string&gt;;
+
+  constructor() {
+    this.headerParts = [];
+    this.bodyParts = [];
+    this.footerParts = [];
+  }
+
+  public setHeaderParts(...parts: Array&lt;string&gt;) {
+    this.headerParts = parts;
+  }
+
+  public setBodyParts(...parts: Array&lt;string&gt;) {
+    this.bodyParts = parts;
+  }
+
+  public setFooterParts(...parts: Array&lt;string&gt;) {
+    this.footerParts = parts;
+  }
+
+  public getPage() {
+    return {
+      headerParts: this.headerParts,
+      bodyParts: this.bodyParts,
+      footerParts: this.footerParts,
+    };
+  }
+}
+
+interface PageBuilder {
+  getPage: () =&gt; Page;
+  buildHeader: () =&gt; void;
+  buildBody: () =&gt; void;
+  buildFooter: () =&gt; void;
+}
+
+class PersonalBlogPageBuilder implements PageBuilder {
+  private page: Page;
+
+  constructor() {
+    this.page = new Page();
+  }
+
+  public getPage() {
+    return this.page;
+  }
+
+  public buildHeader() {
+    this.page.setHeaderParts(&quot;Title&quot;, &quot;Author Information&quot;);
+  }
+
+  public buildBody() {
+    this.page.setBodyParts(&quot;Recent Posts&quot;, &quot;Favorite Posts&quot;, &quot;Last Comments&quot;);
+  }
+
+  public buildFooter() {
+    this.page.setFooterParts(&quot;CopyRights&quot;, &quot;Author Email Address&quot;);
+  }
+}
+
+class OnlineShopPageBuilder implements PageBuilder {
+  private page: Page;
+
+  constructor() {
+    this.page = new Page();
+  }
+
+  public getPage() {
+    return this.page;
+  }
+
+  public buildHeader() {
+    this.page.setHeaderParts(&quot;Logo&quot;, &quot;Description&quot;, &quot;Products Category Menu&quot;);
+  }
+
+  public buildBody() {
+    this.page.setBodyParts(&quot;New Products&quot;, &quot;Daily Off&quot;, &quot;Suggested Products&quot;);
+  }
+
+  public buildFooter() {
+    this.page.setFooterParts(&quot;About Us&quot;, &quot;Address&quot;, &quot;Legal Certificate Link&quot;);
+  }
+}
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="factory-method">Factory Method</h3>
+<blockquote>
+<p>Factory Method is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165857922-b719ba3a-458c-4761-8e98-f0d05a93940c.png"/>
+
+<pre><code class="language-typescript">enum PaymentType {
+  Paypal = &quot;PAYPAL&quot;,
+  Bitcoin = &quot;BITCOIN&quot;,
+  VisaCard = &quot;VISA_CARD&quot;,
+}
+
+abstract class PaymentService {
+  public abstract payMoney(amount: number): void;
+}
+
+class Paypal extends PaymentService {
+  public override payMoney(amount: number) {
+    console.log(`You paid ${amount} dollars by Paypal.`);
+  }
+}
+
+class Bitcoin extends PaymentService {
+  public override payMoney(amount: number) {
+    console.log(`You paid ${amount} dollars by Bitcoin.`);
+  }
+}
+
+class VisaCard extends PaymentService {
+  public override payMoney(amount: number) {
+    console.log(`You paid ${amount} dollars by VisaCard.`);
+  }
+}
+
+abstract class PaymentFactory {
+  public abstract createService(): PaymentService;
+}
+
+class PaypalFactory extends PaymentFactory {
+  public override createService(): PaymentService {
+    return new Paypal();
+  }
+}
+
+class BitcoinFactory extends PaymentFactory {
+  public override createService(): PaymentService {
+    return new Bitcoin();
+  }
+}
+
+class VisaCardFactory extends PaymentFactory {
+  public override createService(): PaymentService {
+    return new VisaCard();
+  }
+}
+
+// Usage
+
+function getPaymentFactory(paymentType: PaymentType): PaymentFactory {
+  switch (paymentType) {
+    case PaymentType.Paypal:
+      return new PaypalFactory();
+    case PaymentType.Bitcoin:
+      return new BitcoinFactory();
+    case PaymentType.VisaCard:
+      return new VisaCardFactory();
+    default:
+      throw new Error(&quot;Invalid payment type.&quot;);
+  }
+}
+
+const paypalService = getPaymentFactory(PaymentType.Paypal).createService();
+
+paypalService.payMoney(100); // You paid 100 dollars by Paypal.
+
+const bitcoinService = getPaymentFactory(PaymentType.Bitcoin).createService();
+
+bitcoinService.payMoney(200); // You paid 200 dollars by Bitcoin.
+
+const visaCardService = getPaymentFactory(PaymentType.VisaCard).createService();
+
+visaCardService.payMoney(300); // You paid 300 dollars by VisaCard.
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="prototype">Prototype</h3>
+<blockquote>
+<p>Prototype is a creational design pattern that lets you copy existing objects without making your code dependent on their classes.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165857765-643633b0-72eb-43ed-9f0c-9dca50c0939b.png"/>
+
+<pre><code class="language-typescript">interface IPrototype {
+  clone: () =&gt; IPrototype;
+}
+
+class Product implements IPrototype {
+  private name: string;
+  private price: number;
+  private warranty: Date | null;
+
+  constructor(name: string, price: number, warranty: Date | null) {
+    this.name = name;
+    this.price = price;
+    this.warranty = warranty;
+  }
+
+  // Assume we implement methods, getters and setters all here
+
+  public clone() {
+    return new Product(this.name, this.price, this.warranty);
+  }
+}
+
+const productOne = new Product(&quot;Laptop&quot;, 2500000, new Date(2050));
+
+const productTwo = productOne.clone();
+
+// productOne !== productTwo but their properties are the same
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="singleton">Singleton</h3>
+<blockquote>
+<p>Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165857698-b1cbb582-4e8c-4cb7-af89-b11edc687626.png"/>
+
+<pre><code class="language-typescript">class Weather {
+  private static instance: Weather | null = null;
+
+  private statusOfCities: Array&lt;{
+    city: string;
+    status: &quot;SUNNY&quot; | &quot;CLOUDY&quot; | &quot;RAINY&quot; | &quot;SNOWY&quot;;
+  }&gt;;
+
+  private constructor() {
+    const data = []; // Get data from API
+
+    this.statusOfCities = data;
+  }
+
+  public getTemperatureByCity(city: string) {
+    return this.statusOfCities.find((data) =&gt; data.city === city);
+  }
+
+  public static getInstance() {
+    if (this.instance == null) {
+      this.instance = new Weather();
+    }
+
+    return this.instance;
+  }
+}
+
+const instanceOne = Weather.getInstance();
+const instanceTwo = Weather.getInstance();
+// instanceOne is equal to instanceTwo (instanceOne === instanceTwo)
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="adapter-wrapper">Adapter (Wrapper)</h3>
+<blockquote>
+<p>Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165858390-a0bdcf53-22bb-42b3-b499-70b51384a61c.png"/>
+
+<pre><code class="language-typescript">interface StandardUser {
+  fullName: string;
+  skills: Array&lt;string&gt;;
+  age: number;
+  contact: {
+    email: string;
+    phone: string;
+  };
+}
+
+abstract class ResumeServiceApi {
+  static generateResume(data: StandardUser) {
+    /* Implementation */
+  }
+}
+
+class User {
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly birthday: Date;
+  readonly skills: Record&lt;string, 1 | 2 | 3 | 4 | 5&gt;;
+  readonly email?: string;
+  readonly phone?: string;
+
+  constructor({
+    firstName,
+    lastName,
+    birthday,
+    skills,
+    email,
+    phone,
+  }: {
+    firstName: string;
+    lastName: string;
+    birthday: Date;
+    skills: Record&lt;string, 1 | 2 | 3 | 4 | 5&gt;;
+    email?: string;
+    phone?: string;
+  }) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthday = birthday;
+    this.skills = skills;
+    this.email = email;
+    this.phone = phone;
+  }
+}
+
+class UserAdapter implements StandardUser {
+  private user: User;
+
+  constructor(user: User) {
+    this.user = user;
+  }
+
+  get fullName() {
+    return `${this.user.firstName} ${this.user.lastName}`;
+  }
+
+  get skills() {
+    return Object.keys(this.user.skills);
+  }
+
+  get age() {
+    return new Date().getFullYear() - this.user.birthday.getFullYear();
+  }
+
+  get contact() {
+    return { email: this.user.email ?? &quot;&quot;, phone: this.user.phone ?? &quot;&quot; };
+  }
+}
+
+// Usage
+
+const user = new User({
+  firstName: &quot;Ahmad&quot;,
+  lastName: &quot;Jafari&quot;,
+  birthday: new Date(1999, 1, 1, 0, 0, 0, 0),
+  skills: { TypeScript: 4, JavaScript: 3, OOP: 4, CSharp: 2, Java: 1 },
+  email: &quot;a99jafari@gmail.com&quot;,
+  phone: &quot;+98 930 848 XXXX&quot;,
+});
+
+// const resume = ResumeServiceApi.generateResume(user); |-&gt; Type Error!
+
+const standardUser = new UserAdapter(user);
+const resume = ResumeServiceApi.generateResume(standardUser); // OK!
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="bridge">Bridge</h3>
+<blockquote>
+<p>Bridge is a structural design pattern that lets you split a large class or a set of closely related classes into two separate hierarchies—abstraction and implementation—which can be developed independently of each other.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165858360-9b8ab73c-9b08-41d1-b7b9-84a2e5ef5028.png"/>
+
+<pre><code class="language-typescript">interface Player {
+  play(): string;
+  stop(): string;
+}
+
+class AudioPlayer implements Player {
+  play(): string {
+    return &quot;Audio is playing&quot;;
+  }
+
+  stop(): string {
+    return &quot;Audio is stopped&quot;;
+  }
+}
+
+class VideoPlayer implements Player {
+  play(): string {
+    return &quot;Video is playing&quot;;
+  }
+
+  stop(): string {
+    return &quot;Video is stopped&quot;;
+  }
+}
+
+interface Platform {
+  play(): string;
+  stop(): string;
+}
+
+class Desktop implements Platform {
+  private player: Player;
+
+  constructor(player: Player) {
+    this.player = player;
+  }
+
+  play(): string {
+    return `${this.player.play()} on desktop`;
+  }
+
+  stop(): string {
+    return `${this.player.stop()} on desktop`;
+  }
+}
+
+class Mobile implements Platform {
+  private player: Player;
+
+  constructor(player: Player) {
+    this.player = player;
+  }
+
+  play(): string {
+    return `${this.player.play()} on mobile`;
+  }
+
+  stop(): string {
+    return `${this.player.stop()} on mobile`;
+  }
+}
+
+// Usage
+const audioPlayer = new AudioPlayer();
+const videoPlayer = new VideoPlayer();
+
+const desktopVideoPlayer = new Desktop(videoPlayer);
+const desktopAudioPlayer = new Desktop(audioPlayer);
+const mobileVideoPlayer = new Mobile(videoPlayer);
+const mobileAudioPlayer = new Mobile(audioPlayer);
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="composite-object-tree">Composite (Object Tree)</h3>
+<blockquote>
+<p>Composite is a structural design pattern that lets you compose objects into tree structures and then work with these structures as if they were individual objects.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165858367-a2ba0672-4bb3-4b11-a63c-7843df0cfb7c.png"/>
+
+<pre><code class="language-typescript">abstract class BaseUnit&lt;T&gt; {
+  constructor(
+    private readonly id: string,
+    private readonly units: Array&lt;BaseUnit&lt;T&gt;&gt; = [],
+  ) {}
+
+  getUnit(unitId: string): BaseUnit&lt;T&gt; | null {
+    return this.units.find((unit) =&gt; unit.id === unitId) ?? null;
+  }
+
+  getSalary(): number {
+    return this.units.reduce((acc, unit) =&gt; acc + unit.getSalary(), 0);
+  }
+
+  increaseSalary(percentage: number): void {
+    this.units.forEach((unit) =&gt; unit.increaseSalary(percentage));
+  }
+}
+
+class Employee extends BaseUnit&lt;null&gt; {
+  private salary: number;
+
+  constructor(id: string, salary: number) {
+    super(id);
+    this.salary = salary;
+  }
+
+  getUnit(): never {
+    throw new Error(&quot;Employee cannot have sub-units&quot;);
+  }
+
+  getSalary() {
+    return this.salary;
+  }
+
+  increaseSalary(percentage: number) {
+    this.salary = this.salary + (this.salary * percentage) / 100;
+  }
+}
+
+class Department extends BaseUnit&lt;Employee&gt; {}
+
+class Faculty extends BaseUnit&lt;Department&gt; {}
+
+class University extends BaseUnit&lt;Faculty&gt; {}
+
+// Usage
+
+const harvardUniversity = new University(&quot;Harvard&quot;, [
+  new Faculty(&quot;Engineering&quot;, [
+    new Department(&quot;Computer&quot;, [new Employee(&quot;C1&quot;, 6200), new Employee(&quot;C2&quot;, 5400), new Employee(&quot;C3&quot;, 5600)]),
+    new Department(&quot;Electrical&quot;, [new Employee(&quot;E1&quot;, 4800), new Employee(&quot;E2&quot;, 5800)]),
+  ]),
+  new Faculty(&quot;Science&quot;, [
+    new Department(&quot;Physics&quot;, [new Employee(&quot;P1&quot;, 3800), new Employee(&quot;P2&quot;, 4600)]),
+    new Department(&quot;Mathematics&quot;, [new Employee(&quot;M1&quot;, 5200), new Employee(&quot;M2&quot;, 5600), new Employee(&quot;M3&quot;, 4600)]),
+  ]),
+]);
+
+console.log(harvardUniversity.getSalary());
+harvardUniversity.increaseSalary(10);
+console.log(harvardUniversity.getSalary());
+
+const engineeringFaculty = harvardUniversity.getUnit(&quot;Engineering&quot;) as Faculty;
+
+console.log(engineeringFaculty.getSalary());
+engineeringFaculty.increaseSalary(10);
+console.log(engineeringFaculty.getSalary());
+
+const computerDepartment = engineeringFaculty.getUnit(&quot;Computer&quot;) as Department;
+
+console.log(computerDepartment.getSalary());
+computerDepartment.increaseSalary(10);
+console.log(computerDepartment.getSalary());
+
+const employee = computerDepartment.getUnit(&quot;C1&quot;) as Employee;
+
+console.log(employee.getSalary());
+employee.increaseSalary(10);
+console.log(employee.getSalary());
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="decorator-wrapper">Decorator (Wrapper)</h3>
+<blockquote>
+<p>Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165858382-6ece64aa-4c9f-4e4e-944e-f7a67fcdd162.png"/>
+
+<pre><code class="language-typescript">interface ImageProcessor {
+  processImage: () =&gt; File;
+}
+
+class ImageFile implements ImageProcessor {
+  private image: File;
+
+  constructor(imageBlobs: Array&lt;Blob&gt;, imageName: string) {
+    this.image = new File(imageBlobs, imageName);
+  }
+
+  processImage() {
+    // Converts the blobs to a visible image
+    return this.image;
+  }
+}
+
+abstract class ImageDecorator implements ImageProcessor {
+  protected image: File;
+
+  constructor(image: File) {
+    this.image = image;
+  }
+
+  abstract processImage(): File;
+}
+
+class ImageCompressor extends ImageDecorator {
+  processImage(): File {
+    // Compresses image size
+    return this.image;
+  }
+}
+
+class ImageEnhancer extends ImageDecorator {
+  processImage(): File {
+    // Enhances image quality
+    return this.image;
+  }
+}
+
+class ImageResizer extends ImageDecorator {
+  processImage() {
+    // Changes image width and height
+    return this.image;
+  }
+}
+
+// Usage
+
+const image = new ImageFile([], &quot;Picture.jpg&quot;).processImage();
+const compressedImage = new ImageCompressor(image).processImage();
+const enhancedImage = new ImageCompressor(compressedImage).processImage();
+const resizedImage = new ImageResizer(enhancedImage).processImage();
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="facade">Facade</h3>
+<blockquote>
+<p>Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165858377-16fc76a5-3b79-4837-bf3c-3f38539a4ac3.png"/>
+
+<pre><code class="language-typescript">class GitChecker {
+  private repositoryPath: string;
+
+  constructor(repositoryPath: string) {
+    this.repositoryPath = repositoryPath;
+  }
+
+  analyzeCommits() {
+    // Checks the quality of commit messages
+  }
+
+  analyzeUnmergedBranches() {
+    // Checks the
+  }
+}
+
+class Linter {
+  private rules: Array&lt;string&gt;;
+
+  constructor(rules: Array&lt;string&gt;) {
+    this.rules = rules;
+  }
+
+  findIssues() {
+    // Checks codebase and finds all issues
+  }
+
+  resolveFixableIssues() {
+    // Checks codebase and fix all fixable issues
+  }
+}
+
+class PackageManager {
+  private dependencies: Array&lt;{ name: string; version: number }&gt;;
+
+  constructor(dependencies: Array&lt;{ name: string; version: number }&gt;) {
+    this.dependencies = dependencies;
+  }
+
+  findUnsecureLibraries() {
+    // Analyzes all dependencies and finds all of unsecure libraries
+  }
+
+  findDeprecatedLibraries() {
+    // Analyzes all dependencies and finds all of deprecated libraries
+  }
+}
+
+// Facade Class
+class CodebaseAnalyzer {
+  private gitChecker: GitChecker;
+  private linter: Linter;
+  private packageManager: PackageManager;
+
+  constructor({
+    repositoryPath,
+    linterRules,
+    dependencies,
+  }: {
+    repositoryPath: string;
+    linterRules: Array&lt;string&gt;;
+    dependencies: Array&lt;{ name: string; version: number }&gt;;
+  }) {
+    this.gitChecker = new GitChecker(repositoryPath);
+    this.linter = new Linter(linterRules);
+    this.packageManager = new PackageManager(dependencies);
+  }
+
+  // This method is the facade method and does all of the work
+  analyze() {
+    this.gitChecker.analyzeCommits();
+    this.gitChecker.analyzeUnmergedBranches();
+    this.linter.findIssues();
+    this.linter.resolveFixableIssues();
+    this.packageManager.findUnsecureLibraries();
+    this.packageManager.findDeprecatedLibraries();
+  }
+}
+
+// Usage
+const codebaseAnalyzer = new CodebaseAnalyzer({
+  repositoryPath: &quot;root/design-patterns/structural/facade/&quot;,
+  linterRules: [&quot;rule1&quot;, &quot;rule2&quot;, &quot;rule3&quot;, &quot;rule4&quot;],
+  dependencies: [
+    { name: &quot;ABC&quot;, version: 19 },
+    { name: &quot;MNP&quot;, version: 14 },
+    { name: &quot;XYZ&quot;, version: 23 },
+  ],
+});
+
+codebaseAnalyzer.analyze();
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="flyweight-cache">Flyweight (Cache)</h3>
+<blockquote>
+<p>Flyweight is a structural design pattern that lets you fit more objects into the available amount of RAM by sharing common parts of state between multiple objects instead of keeping all of the data in each object.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165858370-1ec33962-9bad-4f5d-8078-132bf7d9da29.png"/>
+
+<pre><code class="language-typescript">interface IRequest {
+  readonly method: &quot;GET&quot; | &quot;POST&quot; | &quot;PUT&quot; | &quot;DELETE&quot;;
+  readonly url: string;
+  readonly body: Record&lt;string, string&gt;;
+  send(): Promise&lt;unknown&gt;;
+}
+
+class MinimalRequest implements IRequest {
+  constructor(
+    public readonly method: &quot;GET&quot; | &quot;POST&quot; | &quot;PUT&quot; | &quot;DELETE&quot;,
+    public readonly url: string,
+    public readonly body: Record&lt;string, string&gt; = {},
+  ) {}
+
+  public async send(): Promise&lt;unknown&gt; {
+    const options = { method: this.method, body: JSON.stringify(this.body) };
+
+    const response = await fetch(this.url, options);
+
+    return response.json();
+  }
+}
+
+class RequestFactory {
+  private requests: Map&lt;string, IRequest&gt; = new Map();
+
+  public createRequest(
+    method: &quot;GET&quot; | &quot;POST&quot; | &quot;PUT&quot; | &quot;DELETE&quot;,
+    url: string,
+    body: Record&lt;string, string&gt; = {},
+  ): IRequest {
+    const key = `${method}-${url}`;
+
+    if (!this.requests.has(key)) {
+      const request = new MinimalRequest(method, url, body);
+
+      this.requests.set(key, request);
+    }
+
+    return this.requests.get(key)!; // Type assertion for clarity
+  }
+}
+
+class ParallelRequestsHandler {
+  private factory: RequestFactory;
+
+  constructor(factory: RequestFactory) {
+    this.factory = factory;
+  }
+
+  public async sendAll(
+    requestsInfo: Array&lt;{
+      method: &quot;GET&quot; | &quot;POST&quot; | &quot;PUT&quot; | &quot;DELETE&quot;;
+      url: string;
+      body?: Record&lt;string, string&gt;;
+    }&gt;,
+  ): Promise&lt;Array&lt;unknown&gt;&gt; {
+    const requests = requestsInfo.map((requestInfo) =&gt;
+      this.factory.createRequest(requestInfo.method, requestInfo.url, requestInfo.body),
+    );
+    const responses = await Promise.all(requests.map((request) =&gt; request.send()));
+
+    return responses;
+  }
+}
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="proxy">Proxy</h3>
+<blockquote>
+<p>Proxy is a structural design pattern that lets you provide a substitute or placeholder for another object. A proxy controls access to the original object, allowing you to perform something either before or after the request gets through to the original object.</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/37804060/165858391-e373f505-107c-492d-b354-6a10d6441e35.png"/>
+
+<pre><code class="language-typescript">interface IRequestHandler {
+  sendRequest(method: string, url: string, body?: string): void;
+}
+
+class RequestHandler implements IRequestHandler {
+  sendRequest(method: string, url: string, body?: string): void {
+    console.log(`Request sent: ${method} ${url} ${body}`);
+  }
+}
+
+class RequestHandlerProxy implements IRequestHandler {
+  private realApi: RequestHandler;
+
+  constructor(realApi: RequestHandler) {
+    this.realApi = realApi;
+  }
+
+  private logRequest(method: string, url: string, body?: string): void {
+    console.log(`Request logged: ${method} ${url} ${body}`);
+  }
+
+  private validateRequestUrl(url: string): boolean {
+    return url.startsWith(&quot;/api&quot;);
+  }
+
+  sendRequest(method: string, url: string, body?: string): void {
+    if (this.validateRequestUrl(url)) {
+      this.realApi.sendRequest(method, url, body);
+      this.logRequest(method, url, body);
+    }
+  }
+}
+
+// Usage
+
+const realRequestHandler = new RequestHandler();
+const proxyRequestHandler = new RequestHandlerProxy(realRequestHandler);
+
+proxyRequestHandler.sendRequest(&quot;GET&quot;, &quot;/api/users&quot;);
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="chain-of-responsibility">Chain of Responsibility</h3>
+<blockquote>
+<p>Chain of Responsibility is a behavioral design pattern that lets you pass requests along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.</p>
+</blockquote>
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/2bea3788-2ba7-49e9-87d2-a9aa8d81e43e"/>
+
+<pre><code class="language-typescript">interface IResponse {
+  statusCode: number;
+  body: Record&lt;string, unknown&gt;;
+  authentication: Record&lt;string, string&gt;;
+  message?: string;
+}
+
+class ResponseHandler {
+  private nextHandler?: ResponseHandler;
+
+  protected process(response: IResponse): IResponse {
+    return response;
+  }
+
+  public setNext(ResponseHandler: ResponseHandler): ResponseHandler {
+    this.nextHandler = ResponseHandler;
+
+    return ResponseHandler;
+  }
+
+  public handle(response: IResponse): IResponse {
+    const processedResponse = this.process(response);
+
+    if (this.nextHandler == null) {
+      return processedResponse;
+    } else {
+      return this.nextHandler.handle(processedResponse);
+    }
+  }
+}
+
+class Encryptor extends ResponseHandler {
+  private encryptTokens(response: IResponse) {
+    const { authentication } = response;
+    const encryptedAuthTokens: Record&lt;string, string&gt; = {};
+
+    for (const key in authentication) {
+      encryptedAuthTokens[key] = `encrypted-${authentication[key]}`;
+    }
+
+    return { ...response, authentication: encryptedAuthTokens };
+  }
+
+  protected process(response: IResponse) {
+    const encryptedResponse = this.encryptTokens(response);
+
+    return encryptedResponse;
+  }
+}
+
+class BodyFormatter extends ResponseHandler {
+  private transformKeysToCamelCase(body: Record&lt;string, unknown&gt;) {
+    const newBody: Record&lt;string, unknown&gt; = {};
+
+    for (const key in body) {
+      const camelCaseKey = key.replace(/_([a-z])/g, (subString) =&gt; subString[1].toUpperCase());
+
+      newBody[camelCaseKey] = body[key];
+    }
+
+    return newBody;
+  }
+
+  protected process(response: IResponse) {
+    const clonedResponseBody = JSON.parse(JSON.stringify(response.body));
+    const formattedBody = this.transformKeysToCamelCase(clonedResponseBody);
+    const formattedResponse = { ...response, body: formattedBody };
+
+    return formattedResponse;
+  }
+}
+
+class MetadataAdder extends ResponseHandler {
+  private getResponseMetadata(statusCode: number) {
+    if (statusCode &lt; 200) {
+      return &quot;Informational&quot;;
+    } else if (statusCode &lt; 300) {
+      return &quot;Success&quot;;
+    } else if (statusCode &lt; 400) {
+      return &quot;Redirection&quot;;
+    } else if (statusCode &lt; 500) {
+      return &quot;Client Error&quot;;
+    } else {
+      return &quot;Server Error&quot;;
+    }
+  }
+
+  protected process(response: IResponse) {
+    const updatedResponse = {
+      ...response,
+      message: this.getResponseMetadata(response.statusCode),
+    };
+
+    return updatedResponse;
+  }
+}
+
+// Usage
+const response: IResponse = {
+  statusCode: 200,
+  body: {
+    design_pattern_name: &quot;Chain of Responsibility&quot;,
+    pattern_category: &quot;Behavioral&quot;,
+    complexity_percentage: 80,
+  },
+  authentication: {
+    api_token: &quot;12345678&quot;,
+    refresh_token: &quot;ABCDEFGH&quot;,
+  },
+};
+
+const responseHandler = new ResponseHandler();
+const encryptor = new Encryptor();
+const bodyFormatter = new BodyFormatter();
+const metadataAdder = new MetadataAdder();
+
+responseHandler.setNext(encryptor).setNext(bodyFormatter).setNext(metadataAdder);
+
+const resultResponse = responseHandler.handle(response);
+
+console.log(resultResponse);
+/*
+{
+  &quot;statusCode&quot;: 200,
+  &quot;body&quot;: {
+    &quot;designPatternName&quot;: &quot;Chain of Responsibility&quot;,
+    &quot;patternCategory&quot;: &quot;Behavioral&quot;,
+    &quot;complexityPercentage&quot;: 80
+  },
+  &quot;authentication&quot;: {
+    &quot;api_token&quot;: &quot;encrypted-12345678&quot;,
+    &quot;refresh_token&quot;: &quot;encrypted-ABCDEFGH&quot;
+  },
+  &quot;message&quot;: &quot;Success&quot;
+}
+*/
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="command">Command</h3>
+<blockquote>
+<p>Command is a behavioral design pattern that turns a request into a stand-alone object that contains all information about the request. This transformation lets you pass requests as a method arguments, delay or queue a request’s execution, and support undoable operations.</p>
+</blockquote>
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/c685b9d8-f7a5-4915-b75c-4e897fe70014"/>
+
+<pre><code class="language-typescript">interface Command {
+  execute(): void;
+  undo(): void;
+}
+
+class AddTextCommand implements Command {
+  private prevText: string = &quot;&quot;;
+
+  constructor(
+    private editor: TextEditor,
+    private text: string,
+  ) {}
+
+  execute() {
+    this.prevText = this.editor.content;
+    this.editor.content += this.text;
+  }
+
+  undo() {
+    this.editor.content = this.prevText;
+  }
+}
+
+class DeleteTextCommand implements Command {
+  private prevText: string = &quot;&quot;;
+
+  constructor(private editor: TextEditor) {}
+
+  execute() {
+    this.prevText = this.editor.content;
+    this.editor.content = &quot;&quot;;
+  }
+
+  undo() {
+    this.editor.content = this.prevText;
+  }
+}
+
+class TextEditor {
+  content: string = &quot;&quot;;
+}
+
+class CommandInvoker {
+  private commandHistory: Array&lt;Command&gt; = [];
+  private currentCommandIndex: number = -1;
+
+  executeCommand(command: Command) {
+    if (this.currentCommandIndex &lt; this.commandHistory.length - 1) {
+      this.commandHistory = this.commandHistory.slice(0, this.currentCommandIndex + 1);
+    }
+
+    command.execute();
+    this.commandHistory.push(command);
+    this.currentCommandIndex++;
+  }
+
+  undo() {
+    if (this.currentCommandIndex &gt;= 0) {
+      const command = this.commandHistory[this.currentCommandIndex];
+
+      command.undo();
+      this.currentCommandIndex--;
+    } else {
+      console.log(&quot;Nothing to undo.&quot;);
+    }
+  }
+
+  redo() {
+    if (this.currentCommandIndex &lt; this.commandHistory.length - 1) {
+      const command = this.commandHistory[this.currentCommandIndex + 1];
+
+      command.execute();
+      this.currentCommandIndex++;
+    } else {
+      console.log(&quot;Nothing to redo.&quot;);
+    }
+  }
+}
+
+// Client Code
+const editor = new TextEditor();
+const invoker = new CommandInvoker();
+
+const addTextCmd = new AddTextCommand(editor, &quot;Hello, World!&quot;);
+
+invoker.executeCommand(addTextCmd);
+console.log(editor.content); // &quot;Hello, World!&quot;
+
+const deleteTextCmd = new DeleteTextCommand(editor);
+
+invoker.executeCommand(deleteTextCmd);
+console.log(editor.content); // &quot;&quot;
+
+invoker.undo();
+console.log(editor.content); // &quot;Hello, World!&quot;
+
+invoker.redo();
+console.log(editor.content); // &quot;&quot;
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="interpreter">Interpreter</h3>
+<blockquote>
+<p>Interpreter is a behavioral design pattern that provides a way to interpret and evaluate sentences or expressions in a language. This pattern defines a language grammar, along with an interpreter that can parse and execute the expressions.</p>
+</blockquote>
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/b5b36a91-dd3d-4bf5-a476-bae961c1d421"/>
+
+<pre><code class="language-typescript">interface Expression {
+  interpret(): number;
+}
+
+class NumberExpression implements Expression {
+  constructor(private value: number) {}
+
+  interpret(): number {
+    return this.value;
+  }
+}
+
+class PlusExpression implements Expression {
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
+
+  interpret(): number {
+    return this.left.interpret() + this.right.interpret();
+  }
+}
+
+class MinusExpression implements Expression {
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
+
+  interpret(): number {
+    return this.left.interpret() - this.right.interpret();
+  }
+}
+
+class MultiplyExpression implements Expression {
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
+
+  interpret(): number {
+    return this.left.interpret() * this.right.interpret();
+  }
+}
+
+class DivideExpression implements Expression {
+  constructor(
+    private left: Expression,
+    private right: Expression,
+  ) {}
+
+  interpret(): number {
+    return this.left.interpret() / this.right.interpret();
+  }
+}
+
+class Interpreter {
+  interpret(expression: string): number {
+    const stack: Array&lt;Expression&gt; = [];
+
+    const tokens = expression.split(&quot; &quot;);
+
+    for (const token of tokens) {
+      if (this.isOperator(token)) {
+        const right = stack.pop()!;
+        const left = stack.pop()!;
+        const operator = this.createExpression(token, left, right);
+
+        stack.push(operator);
+      } else {
+        stack.push(new NumberExpression(parseFloat(token)));
+      }
+    }
+
+    return stack.pop()!.interpret();
+  }
+
+  private isOperator(token: string): boolean {
+    return token === &quot;+&quot; || token === &quot;-&quot; || token === &quot;*&quot; || token === &quot;/&quot;;
+  }
+
+  private createExpression(operator: string, left: Expression, right: Expression): Expression {
+    switch (operator) {
+      case &quot;+&quot;:
+        return new PlusExpression(left, right);
+      case &quot;-&quot;:
+        return new MinusExpression(left, right);
+      case &quot;*&quot;:
+        return new MultiplyExpression(left, right);
+      case &quot;/&quot;:
+        return new DivideExpression(left, right);
+      default:
+        throw new Error(`Invalid operator: ${operator}`);
+    }
+  }
+}
+
+// Usage
+const interpreter = new Interpreter();
+
+console.log(interpreter.interpret(&quot;3 4 +&quot;)); // Output: 7
+console.log(interpreter.interpret(&quot;5 2 * 3 +&quot;)); // Output: 13
+console.log(interpreter.interpret(&quot;10 2 /&quot;)); // Output: 5
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="iterator">Iterator</h3>
+<blockquote>
+<p>Iterator is a behavioral design pattern that lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).</p>
+</blockquote>
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/20229eb8-caa0-4953-adf0-87f516332966"/>
+
+<pre><code class="language-typescript">interface MyIterator&lt;T&gt; {
+  hasPrevious: () =&gt; boolean;
+  hasNext: () =&gt; boolean;
+  previous: () =&gt; T;
+  next: () =&gt; T;
+}
+
+class Book {
+  readonly title: string;
+  readonly author: string;
+  readonly isbn: string;
+
+  constructor(title: string, author: string, isbn: string = &quot;&quot;) {
+    this.title = title;
+    this.author = author;
+    this.isbn = isbn;
+  }
+}
+
+class BookShelf {
+  private books: Array&lt;Book&gt; = [];
+
+  getLength(): number {
+    return this.books.length;
+  }
+
+  addBook(book: Book): void {
+    this.books.push(book);
+  }
+
+  getBookAt(index: number): Book {
+    return this.books[index];
+  }
+
+  createIterator() {
+    return new BookShelfIterator(this);
+  }
+}
+
+class BookShelfIterator implements MyIterator&lt;Book&gt; {
+  private bookShelf: BookShelf;
+  private currentIndex: number;
+
+  constructor(bookShelf: BookShelf) {
+    this.bookShelf = bookShelf;
+    this.currentIndex = 0;
+  }
+
+  hasNext() {
+    return this.currentIndex &lt; this.bookShelf.getLength();
+  }
+
+  hasPrevious() {
+    return this.currentIndex &gt; 0;
+  }
+
+  next() {
+    this.currentIndex += 1;
+
+    return this.bookShelf.getBookAt(this.currentIndex);
+  }
+
+  previous() {
+    this.currentIndex -= 1;
+
+    return this.bookShelf.getBookAt(this.currentIndex);
+  }
+}
+
+// Usage
+const shelf = new BookShelf();
+
+shelf.addBook(new Book(&quot;Design Patterns&quot;, &quot;Gang of Four&quot;));
+shelf.addBook(new Book(&quot;Clean Code&quot;, &quot;Robert C. Martin&quot;));
+shelf.addBook(new Book(&quot;You Don&#39;t Know JS&quot;, &quot;Kyle Simpson&quot;));
+
+const MyIterator = shelf.createIterator();
+
+while (MyIterator.hasNext()) {
+  const book = MyIterator.next();
+
+  console.log(`${book.title} by ${book.author}`);
+}
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="mediator">Mediator</h3>
+<blockquote>
+<p>Mediator is a behavioral design pattern that lets you reduce chaotic dependencies between objects. The pattern restricts direct communications between the objects and forces them to collaborate only via a mediator object.</p>
+</blockquote>
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/e898a7aa-a40e-4679-af89-e41d26d77cfb"/>
+
+<pre><code class="language-typescript">interface ChatMediator {
+  sendMessage(receiver: User, message: string): void;
+}
+
+class ConcreteChatMediator implements ChatMediator {
+  private users: Array&lt;User&gt; = [];
+
+  addUser(user: User): void {
+    this.users.push(user);
+  }
+
+  sendMessage(receiver: User, message: string): void {
+    for (const user of this.users) {
+      // Don&#39;t send the message to the user who sent it
+      if (user !== receiver) {
+        user.receiveMessage(message);
+      }
+    }
+  }
+}
+
+class User {
+  private mediator: ChatMediator;
+  private name: string;
+
+  constructor(mediator: ChatMediator, name: string) {
+    this.mediator = mediator;
+    this.name = name;
+  }
+
+  sendMessage(message: string): void {
+    console.log(`${this.name} sends: ${message}`);
+    this.mediator.sendMessage(this, message);
+  }
+
+  receiveMessage(message: string): void {
+    console.log(`${this.name} receives: ${message}`);
+  }
+}
+
+// Usage
+const mediator = new ConcreteChatMediator();
+
+const user1 = new User(mediator, &quot;Alice&quot;);
+const user2 = new User(mediator, &quot;Bob&quot;);
+const user3 = new User(mediator, &quot;Charlie&quot;);
+
+mediator.addUser(user1);
+mediator.addUser(user2);
+mediator.addUser(user3);
+
+user1.sendMessage(&quot;Hello, everyone!&quot;);
+
+user2.sendMessage(&quot;Hi, Alice!&quot;);
+
+user3.sendMessage(&quot;Hey, Bob!&quot;);
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="memento">Memento</h3>
+<blockquote>
+<p>Memento is a behavioral design pattern that lets you save and restore the previous state of an object without revealing the details of its implementation.</p>
+</blockquote>
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/4e0b609d-233e-461a-871d-87d5949eb37d"/>
+
+<pre><code class="language-typescript">class EditorMemento {
+  constructor(private readonly content: string) {}
+
+  getContent(): string {
+    return this.content;
+  }
+}
+
+class Editor {
+  constructor(private content: string = &quot;&quot;) {}
+
+  getContent(): string {
+    return this.content;
+  }
+
+  setContent(content: string): void {
+    this.content = content;
+  }
+
+  createSnapshot(): EditorMemento {
+    return new EditorMemento(this.content);
+  }
+
+  restoreSnapshot(snapshot: EditorMemento): void {
+    this.content = snapshot.getContent();
+  }
+}
+
+class MinimalHistory {
+  private snapshots: Array&lt;EditorMemento&gt; = [];
+
+  push(snapshot: EditorMemento): void {
+    this.snapshots.push(snapshot);
+  }
+
+  pop(): EditorMemento | undefined {
+    return this.snapshots.pop();
+  }
+}
+
+// Usage
+const editor = new Editor();
+const minimalHistory = new MinimalHistory();
+
+editor.setContent(&quot;Hello, World!&quot;);
+editor.setContent(&quot;Hello, TypeScript!&quot;);
+minimalHistory.push(editor.createSnapshot());
+editor.setContent(&quot;Hello, Memento Pattern!&quot;);
+
+const lastSnapshot = minimalHistory.pop();
+
+if (lastSnapshot) {
+  editor.restoreSnapshot(lastSnapshot);
+}
+
+console.log(editor.getContent()); // Output: Hello, TypeScript!
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="observer">Observer</h3>
+<blockquote>
+<p>Observer is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing.</p>
+</blockquote>
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/6ae11f38-d6ed-4c86-a2ed-b59070a56112"/>
+
+<pre><code class="language-typescript">interface Subject {
+  registerObserver(observer: Observer): void;
+  removeObserver(observer: Observer): void;
+  notifyObservers(): void;
+}
+
+interface Observer {
+  update(notification: string): void;
+}
+
+class Celebrity implements Subject {
+  private followers: Array&lt;Observer&gt;;
+  private posts: Array&lt;string&gt;;
+
+  constructor() {
+    this.followers = [];
+    this.posts = [];
+  }
+
+  // Method to make a new post
+  sendPost(newPost: string) {
+    this.posts = [...this.posts, newPost];
+    this.notifyFollowers();
+  }
+
+  // Method to notify followers
+  private notifyFollowers() {
+    this.followers.forEach((follower) =&gt; {
+      const latestPost = this.posts[this.posts.length - 1];
+
+      follower.update(latestPost);
+    });
+  }
+
+  // Register a new follower
+  registerObserver(observer: Observer) {
+    this.followers.push(observer);
+  }
+
+  // Remove a follower
+  removeObserver(observer: Observer) {
+    const index = this.followers.indexOf(observer);
+
+    if (index !== -1) {
+      this.followers.splice(index, 1);
+    }
+  }
+
+  // Notify all followers
+  notifyObservers() {
+    this.notifyFollowers();
+  }
+}
+
+class Follower implements Observer {
+  private followerName: string;
+
+  constructor(name: string) {
+    this.followerName = name;
+  }
+
+  // Update method to receive notifications
+  update(notification: string) {
+    console.log(`${this.followerName} received a notification: ${notification}`);
+  }
+}
+
+// Usage
+const celebrity1 = new Celebrity();
+const celebrity2 = new Celebrity();
+
+const follower1 = new Follower(&quot;John&quot;);
+const follower2 = new Follower(&quot;Alice&quot;);
+const follower3 = new Follower(&quot;Bob&quot;);
+
+celebrity1.registerObserver(follower1);
+celebrity1.registerObserver(follower2);
+celebrity2.registerObserver(follower3);
+
+celebrity1.sendPost(&quot;Hello World!&quot;);
+celebrity2.sendPost(&quot;I love coding!&quot;);
+
+celebrity1.removeObserver(follower1);
+celebrity1.removeObserver(follower2);
+
+celebrity1.sendPost(&quot;Observer pattern is awesome!&quot;);
+
+// Output:
+// John received a notification: Hello World!
+// Alice received a notification: Hello World!
+// Bob received a notification: I love coding!
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="state">State</h3>
+<blockquote>
+<p>State is a behavioral design pattern that lets an object alter its behavior when its internal state changes. It appears as if the object changed its class.</p>
+</blockquote>
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/d77e7972-083f-4fee-b2a7-640f017144f5"/>
+
+<pre><code class="language-typescript">interface PipelineState {
+  start(pipeline: Pipeline): void;
+  fail(pipeline: Pipeline): void;
+  complete(pipeline: Pipeline): void;
+}
+
+class IdleState implements PipelineState {
+  start(pipeline: Pipeline) {
+    console.log(&quot;Pipeline started. Building...&quot;);
+    pipeline.setState(new BuildingState());
+  }
+
+  fail(_pipeline: Pipeline) {
+    console.log(&quot;Pipeline is idle. Nothing to fail.&quot;);
+  }
+
+  complete(_pipeline: Pipeline) {
+    console.log(&quot;Pipeline is idle. Nothing to complete.&quot;);
+  }
+}
+
+class BuildingState implements PipelineState {
+  start(_pipeline: Pipeline) {
+    console.log(&quot;Pipeline is already building.&quot;);
+  }
+
+  fail(pipeline: Pipeline) {
+    console.log(&quot;Build failed.&quot;);
+    pipeline.setState(new FailedState());
+  }
+
+  complete(pipeline: Pipeline) {
+    console.log(&quot;Build complete. Testing...&quot;);
+    pipeline.setState(new TestingState());
+  }
+}
+
+class TestingState implements PipelineState {
+  start(_pipeline: Pipeline) {
+    console.log(&quot;Pipeline is already in progress.&quot;);
+  }
+
+  fail(pipeline: Pipeline) {
+    console.log(&quot;Testing failed.&quot;);
+    pipeline.setState(new FailedState());
+  }
+
+  complete(pipeline: Pipeline) {
+    console.log(&quot;Testing complete. Deploying...&quot;);
+    pipeline.setState(new DeployingState());
+  }
+}
+
+class DeployingState implements PipelineState {
+  start(_pipeline: Pipeline) {
+    console.log(&quot;Pipeline is already deploying.&quot;);
+  }
+
+  fail(pipeline: Pipeline) {
+    console.log(&quot;Deployment failed.&quot;);
+    pipeline.setState(new FailedState());
+  }
+
+  complete(pipeline: Pipeline) {
+    console.log(&quot;Deployment successful!&quot;);
+    pipeline.setState(new IdleState());
+  }
+}
+
+class FailedState implements PipelineState {
+  start(_pipeline: Pipeline) {
+    console.log(&quot;Fix the issues and start the pipeline again.&quot;);
+  }
+
+  fail(_pipeline: Pipeline) {
+    console.log(&quot;Pipeline already in failed state.&quot;);
+  }
+
+  complete(_pipeline: Pipeline) {
+    console.log(&quot;Cannot complete. The pipeline has failed.&quot;);
+  }
+}
+
+// 3. Context
+class Pipeline {
+  private state: PipelineState;
+
+  constructor() {
+    // Initial state
+    this.state = new IdleState();
+  }
+
+  setState(state: PipelineState) {
+    this.state = state;
+  }
+
+  start() {
+    this.state.start(this);
+  }
+
+  fail() {
+    this.state.fail(this);
+  }
+
+  complete() {
+    this.state.complete(this);
+  }
+}
+
+// Client Code
+const pipeline = new Pipeline();
+
+pipeline.start(); // Output: Pipeline started. Building...
+pipeline.complete(); // Output: Build complete. Testing...
+pipeline.fail(); // Output: Testing failed.
+
+pipeline.setState(new BuildingState());
+pipeline.start(); // Output: Pipeline is already building.
+pipeline.complete(); // Output: Testing complete. Deploying...
+pipeline.complete(); // Output: Deployment successful!
+
+pipeline.setState(new TestingState());
+pipeline.start(); // Output: Pipeline is already in progress.
+pipeline.fail(); // Output: Testing failed.
+pipeline.complete(); // Output: Deployment successful!
+
+pipeline.setState(new DeployingState());
+pipeline.start(); // Output: Pipeline is already deploying.
+pipeline.fail(); // Output: Deployment failed.
+pipeline.complete(); // Output: Deployment successful!
+
+pipeline.setState(new FailedState());
+pipeline.start(); // Output: Fix the issues and start the pipeline again.
+pipeline.fail(); // Output: Pipeline already in failed state.
+pipeline.complete(); // Output: Cannot complete. The pipeline has failed.
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="strategy">Strategy</h3>
+<blockquote>
+<p>Strategy is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.</p>
+</blockquote>
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/98b8e8e1-bd42-4205-8237-beff23546128"/>
+
+<pre><code class="language-typescript">interface RenderStrategy {
+  renderShape(shape: Shape): void;
+}
+
+class RasterRender implements RenderStrategy {
+  renderShape(shape: Shape) {
+    console.log(`Raster rendering the ${shape.getName()}`);
+  }
+}
+
+class VectorRender implements RenderStrategy {
+  renderShape(shape: Shape) {
+    console.log(`Vector rendering the ${shape.getName()}`);
+  }
+}
+
+class Shape {
+  private name: string;
+  private renderStrategy: RenderStrategy;
+
+  constructor(name: string, strategy: RenderStrategy) {
+    this.name = name;
+    this.renderStrategy = strategy;
+  }
+
+  setRenderStrategy(strategy: RenderStrategy) {
+    this.renderStrategy = strategy;
+  }
+
+  render() {
+    this.renderStrategy.renderShape(this);
+  }
+
+  getName(): string {
+    return this.name;
+  }
+}
+
+// Usage
+const rasterRender = new RasterRender();
+const vectorRender = new VectorRender();
+
+const circle = new Shape(&quot;Circle&quot;, rasterRender);
+
+circle.render();
+
+circle.setRenderStrategy(vectorRender);
+circle.render();
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="template-method">Template Method</h3>
+<blockquote>
+<p>Template Method is a behavioral design pattern that defines the skeleton of an algorithm in the superclass but lets subclasses override specific steps of the algorithm without changing its structure.</p>
+</blockquote>
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/7065675a-ad94-488b-a9b7-96fcb2aa7867"/>
+
+<pre><code class="language-typescript">abstract class SocialMediaPostAnalyzer {
+  private readonly HARMFUL_WORDS = [
+    &quot;dumb&quot;,
+    &quot;stupid&quot;,
+    &quot;idiot&quot;,
+    &quot;loser&quot;,
+    &quot;ugly&quot;,
+    &quot;fat&quot;,
+    &quot;skinny&quot;,
+    &quot;weird&quot;,
+    &quot;hate&quot;,
+    &quot;rude&quot;,
+    &quot;nasty&quot;,
+  ];
+
+  preprocessData(data: string): Array&lt;string&gt; {
+    return data.split(&quot; &quot;).map((word) =&gt; word.replace(/[^a-zA-Z ]/g, &quot;&quot;).toLowerCase());
+  }
+
+  analyze(data: Array&lt;string&gt;): Array&lt;string&gt; {
+    return data.filter((word) =&gt; this.HARMFUL_WORDS.includes(word));
+  }
+
+  displayResults(data: Array&lt;string&gt;): void {
+    console.log(`The number of harmful words in this post is ${data.length}, including ${data.join(&quot;, &quot;)}.`);
+  }
+
+  async analyzePosts(): Promise&lt;void&gt; {
+    const data = await this.fetchData();
+    const preprocessedData = this.preprocessData(data);
+    const analyticsResult = this.analyze(preprocessedData);
+
+    this.displayResults(analyticsResult);
+  }
+
+  abstract fetchData(): Promise&lt;string&gt;;
+}
+
+class TwitterPostAnalyzer extends SocialMediaPostAnalyzer {
+  // Fetches data from Twitter API and returns its data
+  async fetchData() {
+    return &quot;&quot;; // Dummy data
+  }
+}
+
+class InstagramPostAnalyzer extends SocialMediaPostAnalyzer {
+  // Fetches data from Instagram API and returns its data
+  async fetchData() {
+    return &quot;&quot;; // Dummy data
+  }
+}
+
+// Usage
+const twitterAnalysis = new TwitterPostAnalyzer();
+
+twitterAnalysis.analyzePosts();
+
+const instagramAnalysis = new InstagramPostAnalyzer();
+
+instagramAnalysis.analyzePosts();
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h3 id="visitor">Visitor</h3>
+<blockquote>
+<p>Visitor is a behavioral design pattern that lets you separate algorithms from the objects on which they operate.</p>
+</blockquote>
+<img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/592e44d8-f8db-467d-89b1-fea1088820c2"/>
+
+<pre><code class="language-typescript">interface Visitor {
+  visitDesigner(manager: Designer): void;
+  visitDeveloper(developer: Developer): void;
+}
+
+interface Employee {
+  accept(visitor: Visitor): void;
+}
+
+class Designer implements Employee {
+  name: string;
+  numberOfDesignedPages: number;
+
+  constructor(name: string, numberOfDesignedPages: number) {
+    this.name = name;
+    this.numberOfDesignedPages = numberOfDesignedPages;
+  }
+
+  accept(visitor: Visitor): void {
+    visitor.visitDesigner(this);
+  }
+}
+
+class Developer implements Employee {
+  name: string;
+  baseSalary: number;
+  storyPoints: number;
+
+  constructor(name: string, baseSalary: number, storyPoints: number) {
+    this.name = name;
+    this.baseSalary = baseSalary;
+    this.storyPoints = storyPoints;
+  }
+
+  accept(visitor: Visitor): void {
+    visitor.visitDeveloper(this);
+  }
+}
+
+class SalaryCalculator implements Visitor {
+  totalSalary: number = 0;
+
+  visitDesigner(manager: Designer): void {
+    this.totalSalary += manager.numberOfDesignedPages * 200;
+  }
+
+  visitDeveloper(developer: Developer): void {
+    this.totalSalary += developer.baseSalary + developer.storyPoints * 30;
+  }
+}
+
+// Usage
+const employees: Array&lt;Employee&gt; = [
+  new Designer(&quot;Alice&quot;, 15),
+  new Designer(&quot;James&quot;, 20),
+  new Developer(&quot;Ahmad&quot;, 3000, 40),
+  new Developer(&quot;Kate&quot;, 2000, 60),
+];
+
+const salaryCalculator = new SalaryCalculator();
+
+for (const employee of employees) {
+  employee.accept(salaryCalculator);
+}
+
+console.log(&quot;Total salary:&quot;, salaryCalculator.totalSalary);
+</code></pre>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h2 id="references">References</h2>
+<p>In creating this repository, I aimed to provide original examples to facilitate learning about object-oriented programming (OOP) pillars, SOLID principles, and design patterns using TypeScript. While there may be similarities between examples found in this repository and those in other resources, it&#39;s essential to emphasize that all code and documentation within this repository are original creations.</p>
+<p>The following list includes resources that have inspired and informed my understanding of OOP, SOLID principles, and design patterns:</p>
+<ol>
+<li>Head First Design Patterns (by Eric Freeman and Elisabeth Robson)</li>
+<li>Dive Into Design Patterns (by Alexander Shvets)</li>
+<li><a href="https://www.geeksforgeeks.org/">GeeksForGeeks Website</a></li>
+<li><a href="https://www.wikipedia.org/">WikiPedia Website</a></li>
+<li>+5 years of experience in the software development industry</li>
+</ol>
+<p>The resources for the images in the repository are:</p>
+<ol>
+<li><a href="https://medium.com/backticks-tildes/the-s-o-l-i-d-principles-in-pictures-b34ce2f1e898">The S.O.L.I.D Principles in Pictures</a></li>
+<li><a href="https://refactoring.guru/">Refactoring.guru Website</a></li>
+<li>Google!</li>
+</ol>
+<blockquote>
+<p>Please note that while the concepts discussed in these resources may overlap with the content of this repository, all examples and code within this repository have been independently developed by myself with the goal of providing real-world scenarios and applications.</p>
+</blockquote>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+<h2 id="contributing-and-supporting">Contributing and Supporting</h2>
+<p>Thank you for exploring <strong>OOP Expert with TypeScript</strong>. This repository serves as a comprehensive resource for mastering object-oriented programming principles, SOLID design, and design patterns through the lens of TypeScript.</p>
+<p>Your contributions can enhance the learning experience for countless individuals. Whether it&#39;s correcting a typo, suggesting improvements to code examples, or adding new content, your input is invaluable in ensuring the repository remains a top-notch educational tool.</p>
+<p>By collaborating with me, you not only enrich the learning journey for others but also sharpen your own skills. Every line of code, every explanation, and every suggestion can make a significant difference.</p>
+<p>If you&#39;ve found this repository helpful, kindly consider giving it a ⭐. Your support encourages me to continue refining and expanding its content, benefitting the entire community of developers striving to master object-oriented programming with TypeScript.</p>
+<p>Let&#39;s work together to cultivate a vibrant learning environment where knowledge is shared, refined, and celebrated. Your contributions are deeply appreciated. Thank you for being a part of this journey.</p>
+<p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
+
+  </div>
+</body>
+<script await src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script await src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+</html>

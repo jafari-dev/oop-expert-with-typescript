@@ -2,6 +2,7 @@
   font-family: "DankMono";
   src: url("./DankMono-Regular.ttf") format("truetype");
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -32,9 +33,10 @@ header {
   padding-block: 16px;
   font-size: 20px;
   font-weight: 500;
-}
-header > a {
-  color: var(--spec-primary);
+
+  > a {
+    color: var(--spec-primary);
+  }
 }
 
 h1 {
@@ -96,31 +98,33 @@ li {
 
 pre {
   margin-block: 16px;
-}
-pre code {
-  border-radius: 8px;
-}
-pre * {
-  font-family: "DankMono", serif;
-  font-weight: 600;
-  font-size: 18px;
+
+  code {
+    border-radius: 8px;
+  }
+
+  * {
+    font-family: "DankMono", serif;
+    font-weight: 600;
+    font-size: 18px;
+  }
 }
 
 a {
   color: var(--link-primary);
   text-decoration: none;
+
+  &[href="#table-of-contents"] {
+    color: var(--spec-primary);
+    border: 2px dashed var(--spec-primary);
+    padding: 8px 32px;
+    border-radius: 8px;
+    display: block;
+    width: fit-content;
+    margin-inline: auto;
+    margin-top: 16px;
+    margin-bottom: 64px;
+    font-weight: 700;
+    font-size: 20px;
+  }
 }
-a[href="#table-of-contents"] {
-  color: var(--spec-primary);
-  border: 2px dashed var(--spec-primary);
-  padding: 8px 32px;
-  border-radius: 8px;
-  display: block;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-inline: auto;
-  margin-top: 16px;
-  margin-bottom: 64px;
-  font-weight: 700;
-  font-size: 20px;
-}/*# sourceMappingURL=styles.css.map */
