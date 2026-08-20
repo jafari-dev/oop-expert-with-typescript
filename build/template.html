@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OOP Expert with TypeScript — Pillars, SOLID &amp; Design Patterns</title>
+  <meta name="description"
+    content="A complete, example-driven guide to object-oriented programming pillars, SOLID principles and the 23 Gang of Four design patterns, written in TypeScript." />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0b0d17" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="OOP Expert with TypeScript" />
+  <meta property="og:description"
+    content="Object-oriented programming pillars, SOLID principles and 23 design patterns — explained with practical TypeScript examples." />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%238b5cf6'/><text x='50' y='70' font-size='58' font-family='monospace' font-weight='bold' text-anchor='middle' fill='white'>OOP</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+
+  <script>
+    // Applied before first paint so the chosen theme never flashes.
+    (function () {
+      var stored = null;
+      try { stored = localStorage.getItem("theme"); } catch (error) { /* private mode */ }
+      if (stored === "light" || stored === "dark") {
+        document.documentElement.setAttribute("data-theme", stored);
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+
+  <header class="topbar">
+    <button class="topbar__menu icon-button" type="button" aria-label="Toggle navigation" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </button>
+
+    <a class="brand" href="#top">
+      <span class="brand__mark" aria-hidden="true">{ }</span>
+      <span class="brand__text">OOP<span class="brand__accent">Expert</span></span>
+    </a>
+
+    <div class="search">
+      <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-3.5-3.5" />
+      </svg>
+      <input class="search__input" type="search" placeholder="Search topics…" aria-label="Search topics"
+        autocomplete="off" />
+      <kbd class="search__hint">/</kbd>
+      <ul class="search__results" role="listbox" hidden></ul>
+    </div>
+
+    <div class="topbar__actions">
+      <button class="icon-button theme-toggle" type="button" aria-label="Switch theme">
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" />
+          <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" />
+        </svg>
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5Z" />
+        </svg>
+      </button>
+
+      <a class="button button--ghost button--sm topbar__repo"
+        href="https://github.com/jafari-dev/oop-expert-with-typescript" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-github">
+          <path
+            d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" />
+        </svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="shell" id="top">
+    <div class="sidebar__scrim" hidden></div>
+
+    <aside class="sidebar" aria-label="Table of contents">
+      <nav class="nav">
+        <p class="nav__title">Contents</p>
+        <ul class="nav__sections">
+          <!-- SIDEBAR -->
+        </ul>
+        <p class="nav__empty" hidden>No topics match your search.</p>
+      </nav>
+    </aside>
+
+    <main class="main" id="content">
+      <!-- HERO -->
+      <article class="prose">
+        <!-- CONTENT -->
+      </article>
+
+      <footer class="footer">
+        <p>
+          Built from the Markdown sources in <code>Documentations/</code> and the TypeScript files in
+          <code>Examples/</code>.
+        </p>
+        <p>
+          <a href="https://github.com/jafari-dev/oop-expert-with-typescript" target="_blank"
+            rel="noopener noreferrer">Star the repository</a>
+          ·
+          <a href="https://github.com/jafari-dev/oop-expert-with-typescript/blob/master/Documentations/40%20-%20Contributing.md"
+            target="_blank" rel="noopener noreferrer">Contribute</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+
+  <button class="to-top icon-button" type="button" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
+  </button>
+
+  <script src="./app.js" defer></script>
+</body>
+
+</html>

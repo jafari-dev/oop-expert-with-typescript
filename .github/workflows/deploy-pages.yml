@@ -1,0 +1,58 @@
+name: Deploy website to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "Documentations/**"
+      - "README.md"
+      - "Examples/**"
+      - "website/**"
+      - "script.ts"
+      - "html-generator.ts"
+      - "package.json"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+# Allow only one concurrent deployment, without cancelling a run in progress.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      # Switch to `bun install --frozen-lockfile` once bun.lockb has been
+      # refreshed locally with `bun install` and committed.
+      - run: bun install
+
+      # Rebuilds README.md from Documentations/ + Examples/, then renders the site.
+      - run: bun run readme
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./website
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
