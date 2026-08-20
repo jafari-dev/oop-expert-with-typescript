@@ -11,7 +11,21 @@ function wrapInTypeScriptBlock(content: string) {
   return `${PREFIX}\n${content}\n${SUFFIX}`;
 }
 
-const contents = fs.readdirSync(DOCS_DIRECTORY).map((fileName) => {
+/**
+ * `readdirSync` returns entries in filesystem order, which is alphabetical on
+ * macOS but arbitrary on Linux. The documents must be concatenated in the order
+ * of their numeric prefix, otherwise the README comes out scrambled on CI.
+ */
+function getDocumentFileNames(): Array<string> {
+  const leadingNumberOf = (fileName: string) => Number.parseInt(fileName, 10);
+
+  return fs
+    .readdirSync(DOCS_DIRECTORY)
+    .filter((fileName) => fileName.endsWith(".md"))
+    .sort((first, second) => leadingNumberOf(first) - leadingNumberOf(second) || first.localeCompare(second));
+}
+
+const contents = getDocumentFileNames().map((fileName) => {
   const fileContent = fs.readFileSync(`${DOCS_DIRECTORY}/${fileName}`, "utf-8");
 
   const lines = fileContent.split("\n");
