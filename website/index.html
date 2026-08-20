@@ -583,11 +583,11 @@ class LimitedAudioProcessor extends AudioProcessor {
     super(audioFile);
   }
 
-  override separateMusicAndVocal(): Error {
+  override separateMusicAndVocal(): never {
     throw Error(&quot;You have to buy the premium version to access this feature!&quot;);
   }
 
-  override enhanceQualityWithAI(): Error {
+  override enhanceQualityWithAI(): never {
     throw Error(&quot;You have to buy the premium version to access this feature!&quot;);
   }
 }
@@ -740,7 +740,7 @@ class InternalNetwork implements BaseVPNConnection {
     console.log(&quot;You are connected to Telegram API!&quot;);
   }
 
-  messageTo(targetId: number, message: string) {
+  messageTo(targetId: string, message: string) {
     console.log(`${message} sent to ${targetId} by Telegram!`);
   }
 }
@@ -750,7 +750,7 @@ class WhatsappApi {
     console.log(&quot;You are connected to Whatsapp API!&quot;);
   }
 
-  pushMessage(message: string, targetId: number) {
+  pushMessage(message: string, targetId: string) {
     console.log(`${message} sent to ${targetId} by Whatsapp!`);
   }
 }
@@ -760,7 +760,7 @@ class SignalApi {
     console.log(&quot;You are connected to Signal API!&quot;);
   }
 
-  postMessage(params: { id: number; text: string }) {
+  postMessage(params: { id: string; text: string }) {
     console.log(`${params.text} sent to ${params.id} by Signal!`);
   }
 }
@@ -768,7 +768,7 @@ class SignalApi {
 class Messenger {
   constructor(private api: TelegramApi | WhatsappApi | SignalApi) {}
 
-  sendMessage(targetId: number, message: string) {
+  sendMessage(targetId: string, message: string) {
     if (this.api instanceof TelegramApi) {
       this.api.start();
       this.api.messageTo(targetId, message);
@@ -932,7 +932,7 @@ interface MovieApi {
   searchByActors: (actors: Array&lt;string&gt;) =&gt; Array&lt;Movie&gt;;
   searchByAwards: (awards: Array&lt;string&gt;) =&gt; Array&lt;Movie&gt;;
   searchByDirector: (director: string) =&gt; Array&lt;Movie&gt;;
-  releaseYear: (releaseYear: Date) =&gt; Array&lt;Movie&gt;;
+  searchByReleaseYear: (releaseYear: number) =&gt; Array&lt;Movie&gt;;
 }
 
 interface AudioApi {
@@ -956,7 +956,7 @@ class NormalMovieApiProvider implements MovieApi {
   searchByDirector(director: string) {
     return [];
   }
-  releaseYear(releaseYear: Date) {
+  searchByReleaseYear(releaseYear: number) {
     return [];
   }
 }
@@ -992,7 +992,7 @@ class PremiumMovieApiProvider implements MovieApi {
   searchByDirector(director: string) {
     return [];
   }
-  releaseYear(releaseYear: Date) {
+  searchByReleaseYear(releaseYear: number) {
     return [];
   }
 }
@@ -1277,11 +1277,13 @@ class Product implements IPrototype {
   // Assume we implement methods, getters and setters all here
 
   public clone() {
-    return new Product(this.name, this.price, this.warranty);
+    // `warranty` is a mutable object, so it must be copied too. Handing the same
+    // `Date` instance to the clone would let one product mutate the other.
+    return new Product(this.name, this.price, this.warranty == null ? null : new Date(this.warranty));
   }
 }
 
-const productOne = new Product(&quot;Laptop&quot;, 2500000, new Date(2050));
+const productOne = new Product(&quot;Laptop&quot;, 2500000, new Date(&quot;2050-01-01&quot;));
 
 const productTwo = productOne.clone();
 
@@ -1294,21 +1296,23 @@ const productTwo = productOne.clone();
 </blockquote>
 <img src="https://user-images.githubusercontent.com/37804060/165857698-b1cbb582-4e8c-4cb7-af89-b11edc687626.png"/>
 
-<pre><code class="language-typescript">class Weather {
+<pre><code class="language-typescript">type CityStatus = {
+  city: string;
+  status: &quot;SUNNY&quot; | &quot;CLOUDY&quot; | &quot;RAINY&quot; | &quot;SNOWY&quot;;
+};
+
+class Weather {
   private static instance: Weather | null = null;
 
-  private statusOfCities: Array&lt;{
-    city: string;
-    status: &quot;SUNNY&quot; | &quot;CLOUDY&quot; | &quot;RAINY&quot; | &quot;SNOWY&quot;;
-  }&gt;;
+  private statusOfCities: Array&lt;CityStatus&gt;;
 
   private constructor() {
-    const data = []; // Get data from API
+    const data: Array&lt;CityStatus&gt; = []; // Get data from API
 
     this.statusOfCities = data;
   }
 
-  public getTemperatureByCity(city: string) {
+  public getStatusByCity(city: string): CityStatus | undefined {
     return this.statusOfCities.find((data) =&gt; data.city === city);
   }
 
@@ -1342,9 +1346,11 @@ const instanceTwo = Weather.getInstance();
   };
 }
 
-abstract class ResumeServiceApi {
-  static generateResume(data: StandardUser) {
+// The third-party service we cannot change: it only understands `StandardUser`.
+class ResumeServiceApi {
+  static generateResume(data: StandardUser): string {
     /* Implementation */
+    return `Resume of ${data.fullName}`;
   }
 }
 
@@ -1396,7 +1402,14 @@ class UserAdapter implements StandardUser {
   }
 
   get age() {
-    return new Date().getFullYear() - this.user.birthday.getFullYear();
+    const today = new Date();
+    const birthday = this.user.birthday;
+    const age = today.getFullYear() - birthday.getFullYear();
+    const hasHadBirthdayThisYear =
+      today.getMonth() &gt; birthday.getMonth() ||
+      (today.getMonth() === birthday.getMonth() &amp;&amp; today.getDate() &gt;= birthday.getDate());
+
+    return hasHadBirthdayThisYear ? age : age - 1;
   }
 
   get contact() {
@@ -1419,6 +1432,8 @@ const user = new User({
 
 const standardUser = new UserAdapter(user);
 const resume = ResumeServiceApi.generateResume(standardUser); // OK!
+
+console.log(resume); // Output: Resume of Ahmad Jafari
 </code></pre>
 <p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
 <h3 id="bridge">Bridge</h3>
@@ -1427,76 +1442,70 @@ const resume = ResumeServiceApi.generateResume(standardUser); // OK!
 </blockquote>
 <img src="https://user-images.githubusercontent.com/37804060/165858360-9b8ab73c-9b08-41d1-b7b9-84a2e5ef5028.png"/>
 
-<pre><code class="language-typescript">interface Player {
-  play(): string;
-  stop(): string;
-}
-
-class AudioPlayer implements Player {
-  play(): string {
-    return &quot;Audio is playing&quot;;
-  }
-
-  stop(): string {
-    return &quot;Audio is stopped&quot;;
-  }
-}
-
-class VideoPlayer implements Player {
-  play(): string {
-    return &quot;Video is playing&quot;;
-  }
-
-  stop(): string {
-    return &quot;Video is stopped&quot;;
-  }
-}
-
+<pre><code class="language-typescript">// Implementation hierarchy: the low-level, platform-specific details.
 interface Platform {
-  play(): string;
-  stop(): string;
+  renderPlayback(mediaType: string): string;
+  renderStop(mediaType: string): string;
 }
 
 class Desktop implements Platform {
-  private player: Player;
-
-  constructor(player: Player) {
-    this.player = player;
+  renderPlayback(mediaType: string): string {
+    return `${mediaType} is playing on desktop`;
   }
 
-  play(): string {
-    return `${this.player.play()} on desktop`;
-  }
-
-  stop(): string {
-    return `${this.player.stop()} on desktop`;
+  renderStop(mediaType: string): string {
+    return `${mediaType} is stopped on desktop`;
   }
 }
 
 class Mobile implements Platform {
-  private player: Player;
-
-  constructor(player: Player) {
-    this.player = player;
+  renderPlayback(mediaType: string): string {
+    return `${mediaType} is playing on mobile`;
   }
 
+  renderStop(mediaType: string): string {
+    return `${mediaType} is stopped on mobile`;
+  }
+}
+
+// Abstraction hierarchy: it holds a reference to the implementation (the bridge)
+// instead of inheriting from it, so both sides can grow independently.
+abstract class Player {
+  constructor(protected platform: Platform) {}
+
+  abstract play(): string;
+  abstract stop(): string;
+}
+
+class AudioPlayer extends Player {
   play(): string {
-    return `${this.player.play()} on mobile`;
+    return this.platform.renderPlayback(&quot;Audio&quot;);
   }
 
   stop(): string {
-    return `${this.player.stop()} on mobile`;
+    return this.platform.renderStop(&quot;Audio&quot;);
+  }
+}
+
+class VideoPlayer extends Player {
+  play(): string {
+    return this.platform.renderPlayback(&quot;Video&quot;);
+  }
+
+  stop(): string {
+    return this.platform.renderStop(&quot;Video&quot;);
   }
 }
 
 // Usage
-const audioPlayer = new AudioPlayer();
-const videoPlayer = new VideoPlayer();
+const desktop = new Desktop();
+const mobile = new Mobile();
 
-const desktopVideoPlayer = new Desktop(videoPlayer);
-const desktopAudioPlayer = new Desktop(audioPlayer);
-const mobileVideoPlayer = new Mobile(videoPlayer);
-const mobileAudioPlayer = new Mobile(audioPlayer);
+// Two players x two platforms, without writing four combined classes.
+console.log(new AudioPlayer(desktop).play()); // Output: Audio is playing on desktop
+console.log(new VideoPlayer(desktop).play()); // Output: Video is playing on desktop
+console.log(new AudioPlayer(mobile).play()); // Output: Audio is playing on mobile
+console.log(new VideoPlayer(mobile).stop()); // Output: Video is stopped on mobile
 </code></pre>
 <p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
 <h3 id="composite-object-tree">Composite (Object Tree)</h3>
@@ -1505,51 +1514,56 @@ const mobileAudioPlayer = new Mobile(audioPlayer);
 </blockquote>
 <img src="https://user-images.githubusercontent.com/37804060/165858367-a2ba0672-4bb3-4b11-a63c-7843df0cfb7c.png"/>
 
-<pre><code class="language-typescript">abstract class BaseUnit&lt;T&gt; {
+<pre><code class="language-typescript">interface OrganizationUnit {
+  readonly id: string;
+  getSalary(): number;
+  increaseSalary(percentage: number): void;
+}
+
+// The type parameter names the kind of child a composite may hold, so nesting
+// mistakes (e.g. a faculty inside a department) are caught at compile time.
+abstract class CompositeUnit&lt;TChild extends OrganizationUnit&gt; implements OrganizationUnit {
   constructor(
-    private readonly id: string,
-    private readonly units: Array&lt;BaseUnit&lt;T&gt;&gt; = [],
+    public readonly id: string,
+    private readonly children: ReadonlyArray&lt;TChild&gt; = [],
   ) {}
 
-  getUnit(unitId: string): BaseUnit&lt;T&gt; | null {
-    return this.units.find((unit) =&gt; unit.id === unitId) ?? null;
+  getUnit(unitId: string): TChild | null {
+    return this.children.find((child) =&gt; child.id === unitId) ?? null;
   }
 
   getSalary(): number {
-    return this.units.reduce((acc, unit) =&gt; acc + unit.getSalary(), 0);
+    return this.children.reduce((total, child) =&gt; total + child.getSalary(), 0);
   }
 
   increaseSalary(percentage: number): void {
-    this.units.forEach((unit) =&gt; unit.increaseSalary(percentage));
+    for (const child of this.children) {
+      child.increaseSalary(percentage);
+    }
   }
 }
 
-class Employee extends BaseUnit&lt;null&gt; {
-  private salary: number;
+// The leaf of the tree: it has no children, but exposes the same operations.
+class Employee implements OrganizationUnit {
+  constructor(
+    public readonly id: string,
+    private salary: number,
+  ) {}
 
-  constructor(id: string, salary: number) {
-    super(id);
-    this.salary = salary;
-  }
-
-  getUnit(): never {
-    throw new Error(&quot;Employee cannot have sub-units&quot;);
-  }
-
-  getSalary() {
+  getSalary(): number {
     return this.salary;
   }
 
-  increaseSalary(percentage: number) {
+  increaseSalary(percentage: number): void {
     this.salary = this.salary + (this.salary * percentage) / 100;
   }
 }
 
-class Department extends BaseUnit&lt;Employee&gt; {}
+class Department extends CompositeUnit&lt;Employee&gt; {}
 
-class Faculty extends BaseUnit&lt;Department&gt; {}
+class Faculty extends CompositeUnit&lt;Department&gt; {}
 
-class University extends BaseUnit&lt;Faculty&gt; {}
+class University extends CompositeUnit&lt;Faculty&gt; {}
 
 // Usage
 
@@ -1564,32 +1578,28 @@ const harvardUniversity = new University(&quot;Harvard&quot;, [
   ]),
 ]);
 
-console.log(harvardUniversity.getSalary());
+// A whole subtree and a single employee are treated exactly the same way.
+console.log(harvardUniversity.getSalary()); // Output: 51600
 harvardUniversity.increaseSalary(10);
-console.log(harvardUniversity.getSalary());
+console.log(harvardUniversity.getSalary()); // Output: 56760
 
-const engineeringFaculty = harvardUniversity.getUnit(&quot;Engineering&quot;) as Faculty;
+// `getUnit` returns the precise child type, so no type assertion is needed.
+const engineeringFaculty = harvardUniversity.getUnit(&quot;Engineering&quot;);
 
-console.log(engineeringFaculty.getSalary());
-engineeringFaculty.increaseSalary(10);
-console.log(engineeringFaculty.getSalary());
+if (engineeringFaculty != null) {
+  const computerDepartment = engineeringFaculty.getUnit(&quot;Computer&quot;);
 
-const computerDepartment = engineeringFaculty.getUnit(&quot;Computer&quot;) as Department;
-
-console.log(computerDepartment.getSalary());
-computerDepartment.increaseSalary(10);
-console.log(computerDepartment.getSalary());
-
-const employee = computerDepartment.getUnit(&quot;C1&quot;) as Employee;
-
-console.log(employee.getSalary());
-employee.increaseSalary(10);
-console.log(employee.getSalary());
+  if (computerDepartment != null) {
+    console.log(computerDepartment.getSalary()); // Output: 18920
+    computerDepartment.increaseSalary(10);
+    console.log(computerDepartment.getSalary()); // Output: 20812
+  }
+}
 </code></pre>
 <p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
 <h3 id="decorator-wrapper">Decorator (Wrapper)</h3>
 <blockquote>
-<p>Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate.</p>
+<p>Decorator is a structural design pattern that lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.</p>
 </blockquote>
 <img src="https://user-images.githubusercontent.com/37804060/165858382-6ece64aa-4c9f-4e4e-944e-f7a67fcdd162.png"/>
 
@@ -1610,11 +1620,13 @@ class ImageFile implements ImageProcessor {
   }
 }
 
+// Every decorator wraps another `ImageProcessor` (not a raw `File`), so decorators
+// can be stacked on top of each other in any order and any number of times.
 abstract class ImageDecorator implements ImageProcessor {
-  protected image: File;
+  protected wrapped: ImageProcessor;
 
-  constructor(image: File) {
-    this.image = image;
+  constructor(wrapped: ImageProcessor) {
+    this.wrapped = wrapped;
   }
 
   abstract processImage(): File;
@@ -1622,31 +1634,42 @@ abstract class ImageDecorator implements ImageProcessor {
 
 class ImageCompressor extends ImageDecorator {
   processImage(): File {
+    const image = this.wrapped.processImage();
+
     // Compresses image size
-    return this.image;
+
+    return image;
   }
 }
 
 class ImageEnhancer extends ImageDecorator {
   processImage(): File {
+    const image = this.wrapped.processImage();
+
     // Enhances image quality
-    return this.image;
+
+    return image;
   }
 }
 
 class ImageResizer extends ImageDecorator {
-  processImage() {
+  processImage(): File {
+    const image = this.wrapped.processImage();
+
     // Changes image width and height
-    return this.image;
+
+    return image;
   }
 }
 
 // Usage
 
-const image = new ImageFile([], &quot;Picture.jpg&quot;).processImage();
-const compressedImage = new ImageCompressor(image).processImage();
-const enhancedImage = new ImageCompressor(compressedImage).processImage();
-const resizedImage = new ImageResizer(enhancedImage).processImage();
+const image = new ImageFile([], &quot;Picture.jpg&quot;);
+
+// Decorators are composed, then the whole stack runs with a single call.
+const processedImage = new ImageResizer(new ImageEnhancer(new ImageCompressor(image)));
+
+const result: File = processedImage.processImage();
 </code></pre>
 <p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
 <h3 id="facade">Facade</h3>
@@ -1667,7 +1690,7 @@ const resizedImage = new ImageResizer(enhancedImage).processImage();
   }
 
   analyzeUnmergedBranches() {
-    // Checks the
+    // Checks the branches that are not merged into the main branch yet
   }
 }
 
@@ -1754,22 +1777,24 @@ codebaseAnalyzer.analyze();
 </blockquote>
 <img src="https://user-images.githubusercontent.com/37804060/165858370-1ec33962-9bad-4f5d-8078-132bf7d9da29.png"/>
 
-<pre><code class="language-typescript">interface IRequest {
-  readonly method: &quot;GET&quot; | &quot;POST&quot; | &quot;PUT&quot; | &quot;DELETE&quot;;
+<pre><code class="language-typescript">type HttpMethod = &quot;GET&quot; | &quot;POST&quot; | &quot;PUT&quot; | &quot;DELETE&quot;;
+
+interface IRequest {
+  readonly method: HttpMethod;
   readonly url: string;
-  readonly body: Record&lt;string, string&gt;;
-  send(): Promise&lt;unknown&gt;;
+  // The body is extrinsic state: it is passed in on every call instead of being
+  // stored, so a single flyweight can serve any number of different payloads.
+  send(body?: Record&lt;string, string&gt;): Promise&lt;unknown&gt;;
 }
 
 class MinimalRequest implements IRequest {
   constructor(
-    public readonly method: &quot;GET&quot; | &quot;POST&quot; | &quot;PUT&quot; | &quot;DELETE&quot;,
+    public readonly method: HttpMethod,
     public readonly url: string,
-    public readonly body: Record&lt;string, string&gt; = {},
   ) {}
 
-  public async send(): Promise&lt;unknown&gt; {
-    const options = { method: this.method, body: JSON.stringify(this.body) };
+  public async send(body: Record&lt;string, string&gt; = {}): Promise&lt;unknown&gt; {
+    const options = { method: this.method, body: JSON.stringify(body) };
 
     const response = await fetch(this.url, options);
 
@@ -1780,20 +1805,21 @@ class MinimalRequest implements IRequest {
 class RequestFactory {
   private requests: Map&lt;string, IRequest&gt; = new Map();
 
-  public createRequest(
-    method: &quot;GET&quot; | &quot;POST&quot; | &quot;PUT&quot; | &quot;DELETE&quot;,
-    url: string,
-    body: Record&lt;string, string&gt; = {},
-  ): IRequest {
+  // Only the intrinsic state (method + url) identifies a flyweight, so the same
+  // endpoint is represented by exactly one shared object.
+  public createRequest(method: HttpMethod, url: string): IRequest {
     const key = `${method}-${url}`;
+    const cachedRequest = this.requests.get(key);
 
-    if (!this.requests.has(key)) {
-      const request = new MinimalRequest(method, url, body);
-
-      this.requests.set(key, request);
+    if (cachedRequest != null) {
+      return cachedRequest;
     }
 
-    return this.requests.get(key)!; // Type assertion for clarity
+    const request = new MinimalRequest(method, url);
+
+    this.requests.set(key, request);
+
+    return request;
   }
 }
 
@@ -1806,15 +1832,16 @@ class ParallelRequestsHandler {
 
   public async sendAll(
     requestsInfo: Array&lt;{
-      method: &quot;GET&quot; | &quot;POST&quot; | &quot;PUT&quot; | &quot;DELETE&quot;;
+      method: HttpMethod;
       url: string;
       body?: Record&lt;string, string&gt;;
     }&gt;,
   ): Promise&lt;Array&lt;unknown&gt;&gt; {
-    const requests = requestsInfo.map((requestInfo) =&gt;
-      this.factory.createRequest(requestInfo.method, requestInfo.url, requestInfo.body),
+    const responses = await Promise.all(
+      requestsInfo.map((requestInfo) =&gt;
+        this.factory.createRequest(requestInfo.method, requestInfo.url).send(requestInfo.body),
+      ),
     );
-    const responses = await Promise.all(requests.map((request) =&gt; request.send()));
 
     return responses;
   }
@@ -1833,19 +1860,19 @@ class ParallelRequestsHandler {
 
 class RequestHandler implements IRequestHandler {
   sendRequest(method: string, url: string, body?: string): void {
-    console.log(`Request sent: ${method} ${url} ${body}`);
+    console.log(`Request sent: ${method} ${url} ${body ?? &quot;(no body)&quot;}`);
   }
 }
 
 class RequestHandlerProxy implements IRequestHandler {
-  private realApi: RequestHandler;
+  private realApi: IRequestHandler;
 
-  constructor(realApi: RequestHandler) {
+  constructor(realApi: IRequestHandler) {
     this.realApi = realApi;
   }
 
   private logRequest(method: string, url: string, body?: string): void {
-    console.log(`Request logged: ${method} ${url} ${body}`);
+    console.log(`Request logged: ${method} ${url} ${body ?? &quot;(no body)&quot;}`);
   }
 
   private validateRequestUrl(url: string): boolean {
@@ -1866,6 +1893,12 @@ const realRequestHandler = new RequestHandler();
 const proxyRequestHandler = new RequestHandlerProxy(realRequestHandler);
 
 proxyRequestHandler.sendRequest(&quot;GET&quot;, &quot;/api/users&quot;);
+// Output:
+// Request sent: GET /api/users (no body)
+// Request logged: GET /api/users (no body)
+
+// Blocked by the proxy: nothing reaches the real handler.
+proxyRequestHandler.sendRequest(&quot;GET&quot;, &quot;/internal/users&quot;);
 </code></pre>
 <p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
 <h3 id="chain-of-responsibility">Chain of Responsibility</h3>
@@ -1888,10 +1921,10 @@ class ResponseHandler {
     return response;
   }
 
-  public setNext(ResponseHandler: ResponseHandler): ResponseHandler {
-    this.nextHandler = ResponseHandler;
+  public setNext(handler: ResponseHandler): ResponseHandler {
+    this.nextHandler = handler;
 
-    return ResponseHandler;
+    return handler;
   }
 
   public handle(response: IResponse): IResponse {
@@ -2292,9 +2325,11 @@ class BookShelfIterator implements MyIterator&lt;Book&gt; {
   }
 
   next() {
+    const book = this.bookShelf.getBookAt(this.currentIndex);
+
     this.currentIndex += 1;
 
-    return this.bookShelf.getBookAt(this.currentIndex);
+    return book;
   }
 
   previous() {
@@ -2311,13 +2346,18 @@ shelf.addBook(new Book(&quot;Design Patterns&quot;, &quot;Gang of Four&quot;));
 shelf.addBook(new Book(&quot;Clean Code&quot;, &quot;Robert C. Martin&quot;));
 shelf.addBook(new Book(&quot;You Don&#39;t Know JS&quot;, &quot;Kyle Simpson&quot;));
 
-const MyIterator = shelf.createIterator();
+const iterator = shelf.createIterator();
 
-while (MyIterator.hasNext()) {
-  const book = MyIterator.next();
+while (iterator.hasNext()) {
+  const book = iterator.next();
 
   console.log(`${book.title} by ${book.author}`);
 }
+
+// Output:
+// Design Patterns by Gang of Four
+// Clean Code by Robert C. Martin
+// You Don&#39;t Know JS by Kyle Simpson
 </code></pre>
 <p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
 <h3 id="mediator">Mediator</h3>
@@ -2327,7 +2367,7 @@ while (MyIterator.hasNext()) {
 <img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/e898a7aa-a40e-4679-af89-e41d26d77cfb"/>
 
 <pre><code class="language-typescript">interface ChatMediator {
-  sendMessage(receiver: User, message: string): void;
+  sendMessage(sender: User, message: string): void;
 }
 
 class ConcreteChatMediator implements ChatMediator {
@@ -2337,10 +2377,10 @@ class ConcreteChatMediator implements ChatMediator {
     this.users.push(user);
   }
 
-  sendMessage(receiver: User, message: string): void {
+  sendMessage(sender: User, message: string): void {
     for (const user of this.users) {
-      // Don&#39;t send the message to the user who sent it
-      if (user !== receiver) {
+      // Don&#39;t send the message back to the user who sent it
+      if (user !== sender) {
         user.receiveMessage(message);
       }
     }
@@ -2671,18 +2711,18 @@ pipeline.fail(); // Output: Testing failed.
 
 pipeline.setState(new BuildingState());
 pipeline.start(); // Output: Pipeline is already building.
+pipeline.complete(); // Output: Build complete. Testing...
 pipeline.complete(); // Output: Testing complete. Deploying...
-pipeline.complete(); // Output: Deployment successful!
 
 pipeline.setState(new TestingState());
 pipeline.start(); // Output: Pipeline is already in progress.
 pipeline.fail(); // Output: Testing failed.
-pipeline.complete(); // Output: Deployment successful!
+pipeline.complete(); // Output: Cannot complete. The pipeline has failed.
 
 pipeline.setState(new DeployingState());
 pipeline.start(); // Output: Pipeline is already deploying.
 pipeline.fail(); // Output: Deployment failed.
-pipeline.complete(); // Output: Deployment successful!
+pipeline.complete(); // Output: Cannot complete. The pipeline has failed.
 
 pipeline.setState(new FailedState());
 pipeline.start(); // Output: Fix the issues and start the pipeline again.
@@ -2767,18 +2807,20 @@ circle.render();
     &quot;nasty&quot;,
   ];
 
-  preprocessData(data: string): Array&lt;string&gt; {
+  protected preprocessData(data: string): Array&lt;string&gt; {
     return data.split(&quot; &quot;).map((word) =&gt; word.replace(/[^a-zA-Z ]/g, &quot;&quot;).toLowerCase());
   }
 
-  analyze(data: Array&lt;string&gt;): Array&lt;string&gt; {
+  protected analyze(data: Array&lt;string&gt;): Array&lt;string&gt; {
     return data.filter((word) =&gt; this.HARMFUL_WORDS.includes(word));
   }
 
-  displayResults(data: Array&lt;string&gt;): void {
+  protected displayResults(data: Array&lt;string&gt;): void {
     console.log(`The number of harmful words in this post is ${data.length}, including ${data.join(&quot;, &quot;)}.`);
   }
 
+  // The template method: it fixes the skeleton of the algorithm, and subclasses
+  // only fill in `fetchData`.
   async analyzePosts(): Promise&lt;void&gt; {
     const data = await this.fetchData();
     const preprocessedData = this.preprocessData(data);
@@ -2787,19 +2829,19 @@ circle.render();
     this.displayResults(analyticsResult);
   }
 
-  abstract fetchData(): Promise&lt;string&gt;;
+  protected abstract fetchData(): Promise&lt;string&gt;;
 }
 
 class TwitterPostAnalyzer extends SocialMediaPostAnalyzer {
   // Fetches data from Twitter API and returns its data
-  async fetchData() {
+  protected override async fetchData() {
     return &quot;&quot;; // Dummy data
   }
 }
 
 class InstagramPostAnalyzer extends SocialMediaPostAnalyzer {
   // Fetches data from Instagram API and returns its data
-  async fetchData() {
+  protected override async fetchData() {
     return &quot;&quot;; // Dummy data
   }
 }
@@ -2821,7 +2863,7 @@ instagramAnalysis.analyzePosts();
 <img src="https://github.com/jafari-dev/oop-expert-with-typescript/assets/37804060/592e44d8-f8db-467d-89b1-fea1088820c2"/>
 
 <pre><code class="language-typescript">interface Visitor {
-  visitDesigner(manager: Designer): void;
+  visitDesigner(designer: Designer): void;
   visitDeveloper(developer: Developer): void;
 }
 
@@ -2862,8 +2904,8 @@ class Developer implements Employee {
 class SalaryCalculator implements Visitor {
   totalSalary: number = 0;
 
-  visitDesigner(manager: Designer): void {
-    this.totalSalary += manager.numberOfDesignedPages * 200;
+  visitDesigner(designer: Designer): void {
+    this.totalSalary += designer.numberOfDesignedPages * 200;
   }
 
   visitDeveloper(developer: Developer): void {
@@ -2885,7 +2927,7 @@ for (const employee of employees) {
   employee.accept(salaryCalculator);
 }
 
-console.log(&quot;Total salary:&quot;, salaryCalculator.totalSalary);
+console.log(&quot;Total salary:&quot;, salaryCalculator.totalSalary); // Output: Total salary: 15000
 </code></pre>
 <p><a href="#table-of-contents"><code>⬆ BACK TO TOP ⬆</code></a></p>
 <h2 id="references">References</h2>

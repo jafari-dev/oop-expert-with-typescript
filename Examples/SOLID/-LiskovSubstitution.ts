@@ -23,11 +23,11 @@ class LimitedAudioProcessor extends AudioProcessor {
     super(audioFile);
   }
 
-  override separateMusicAndVocal(): Error {
+  override separateMusicAndVocal(): never {
     throw Error("You have to buy the premium version to access this feature!");
   }
 
-  override enhanceQualityWithAI(): Error {
+  override enhanceQualityWithAI(): never {
     throw Error("You have to buy the premium version to access this feature!");
   }
 }

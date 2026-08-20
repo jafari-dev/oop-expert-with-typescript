@@ -1,19 +1,21 @@
+type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
+
 interface IRequest {
-  readonly method: "GET" | "POST" | "PUT" | "DELETE";
+  readonly method: HttpMethod;
   readonly url: string;
-  readonly body: Record<string, string>;
-  send(): Promise<unknown>;
+  // The body is extrinsic state: it is passed in on every call instead of being
+  // stored, so a single flyweight can serve any number of different payloads.
+  send(body?: Record<string, string>): Promise<unknown>;
 }
 
 class MinimalRequest implements IRequest {
   constructor(
-    public readonly method: "GET" | "POST" | "PUT" | "DELETE",
+    public readonly method: HttpMethod,
     public readonly url: string,
-    public readonly body: Record<string, string> = {},
   ) {}
 
-  public async send(): Promise<unknown> {
-    const options = { method: this.method, body: JSON.stringify(this.body) };
+  public async send(body: Record<string, string> = {}): Promise<unknown> {
+    const options = { method: this.method, body: JSON.stringify(body) };
 
     const response = await fetch(this.url, options);
 
@@ -24,20 +26,21 @@ class MinimalRequest implements IRequest {
 class RequestFactory {
   private requests: Map<string, IRequest> = new Map();
 
-  public createRequest(
-    method: "GET" | "POST" | "PUT" | "DELETE",
-    url: string,
-    body: Record<string, string> = {},
-  ): IRequest {
+  // Only the intrinsic state (method + url) identifies a flyweight, so the same
+  // endpoint is represented by exactly one shared object.
+  public createRequest(method: HttpMethod, url: string): IRequest {
     const key = `${method}-${url}`;
+    const cachedRequest = this.requests.get(key);
 
-    if (!this.requests.has(key)) {
-      const request = new MinimalRequest(method, url, body);
-
-      this.requests.set(key, request);
+    if (cachedRequest != null) {
+      return cachedRequest;
     }
 
-    return this.requests.get(key)!; // Type assertion for clarity
+    const request = new MinimalRequest(method, url);
+
+    this.requests.set(key, request);
+
+    return request;
   }
 }
 
@@ -50,15 +53,16 @@ class ParallelRequestsHandler {
 
   public async sendAll(
     requestsInfo: Array<{
-      method: "GET" | "POST" | "PUT" | "DELETE";
+      method: HttpMethod;
       url: string;
       body?: Record<string, string>;
     }>,
   ): Promise<Array<unknown>> {
-    const requests = requestsInfo.map((requestInfo) =>
-      this.factory.createRequest(requestInfo.method, requestInfo.url, requestInfo.body),
+    const responses = await Promise.all(
+      requestsInfo.map((requestInfo) =>
+        this.factory.createRequest(requestInfo.method, requestInfo.url).send(requestInfo.body),
+      ),
     );
-    const responses = await Promise.all(requests.map((request) => request.send()));
 
     return responses;
   }

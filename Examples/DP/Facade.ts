@@ -10,7 +10,7 @@ class GitChecker {
   }
 
   analyzeUnmergedBranches() {
-    // Checks the
+    // Checks the branches that are not merged into the main branch yet
   }
 }
 

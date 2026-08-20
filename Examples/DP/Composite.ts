@@ -1,48 +1,53 @@
-abstract class BaseUnit<T> {
+interface OrganizationUnit {
+  readonly id: string;
+  getSalary(): number;
+  increaseSalary(percentage: number): void;
+}
+
+// The type parameter names the kind of child a composite may hold, so nesting
+// mistakes (e.g. a faculty inside a department) are caught at compile time.
+abstract class CompositeUnit<TChild extends OrganizationUnit> implements OrganizationUnit {
   constructor(
-    private readonly id: string,
-    private readonly units: Array<BaseUnit<T>> = [],
+    public readonly id: string,
+    private readonly children: ReadonlyArray<TChild> = [],
   ) {}
 
-  getUnit(unitId: string): BaseUnit<T> | null {
-    return this.units.find((unit) => unit.id === unitId) ?? null;
+  getUnit(unitId: string): TChild | null {
+    return this.children.find((child) => child.id === unitId) ?? null;
   }
 
   getSalary(): number {
-    return this.units.reduce((acc, unit) => acc + unit.getSalary(), 0);
+    return this.children.reduce((total, child) => total + child.getSalary(), 0);
   }
 
   increaseSalary(percentage: number): void {
-    this.units.forEach((unit) => unit.increaseSalary(percentage));
+    for (const child of this.children) {
+      child.increaseSalary(percentage);
+    }
   }
 }
 
-class Employee extends BaseUnit<null> {
-  private salary: number;
+// The leaf of the tree: it has no children, but exposes the same operations.
+class Employee implements OrganizationUnit {
+  constructor(
+    public readonly id: string,
+    private salary: number,
+  ) {}
 
-  constructor(id: string, salary: number) {
-    super(id);
-    this.salary = salary;
-  }
-
-  getUnit(): never {
-    throw new Error("Employee cannot have sub-units");
-  }
-
-  getSalary() {
+  getSalary(): number {
     return this.salary;
   }
 
-  increaseSalary(percentage: number) {
+  increaseSalary(percentage: number): void {
     this.salary = this.salary + (this.salary * percentage) / 100;
   }
 }
 
-class Department extends BaseUnit<Employee> {}
+class Department extends CompositeUnit<Employee> {}
 
-class Faculty extends BaseUnit<Department> {}
+class Faculty extends CompositeUnit<Department> {}
 
-class University extends BaseUnit<Faculty> {}
+class University extends CompositeUnit<Faculty> {}
 
 // Usage
 
@@ -57,24 +62,20 @@ const harvardUniversity = new University("Harvard", [
   ]),
 ]);
 
-console.log(harvardUniversity.getSalary());
+// A whole subtree and a single employee are treated exactly the same way.
+console.log(harvardUniversity.getSalary()); // Output: 51600
 harvardUniversity.increaseSalary(10);
-console.log(harvardUniversity.getSalary());
+console.log(harvardUniversity.getSalary()); // Output: 56760
 
-const engineeringFaculty = harvardUniversity.getUnit("Engineering") as Faculty;
+// `getUnit` returns the precise child type, so no type assertion is needed.
+const engineeringFaculty = harvardUniversity.getUnit("Engineering");
 
-console.log(engineeringFaculty.getSalary());
-engineeringFaculty.increaseSalary(10);
-console.log(engineeringFaculty.getSalary());
+if (engineeringFaculty != null) {
+  const computerDepartment = engineeringFaculty.getUnit("Computer");
 
-const computerDepartment = engineeringFaculty.getUnit("Computer") as Department;
-
-console.log(computerDepartment.getSalary());
-computerDepartment.increaseSalary(10);
-console.log(computerDepartment.getSalary());
-
-const employee = computerDepartment.getUnit("C1") as Employee;
-
-console.log(employee.getSalary());
-employee.increaseSalary(10);
-console.log(employee.getSalary());
+  if (computerDepartment != null) {
+    console.log(computerDepartment.getSalary()); // Output: 18920
+    computerDepartment.increaseSalary(10);
+    console.log(computerDepartment.getSalary()); // Output: 20812
+  }
+}

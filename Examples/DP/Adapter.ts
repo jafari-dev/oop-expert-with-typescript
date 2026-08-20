@@ -8,9 +8,11 @@ interface StandardUser {
   };
 }
 
-abstract class ResumeServiceApi {
-  static generateResume(data: StandardUser) {
+// The third-party service we cannot change: it only understands `StandardUser`.
+class ResumeServiceApi {
+  static generateResume(data: StandardUser): string {
     /* Implementation */
+    return `Resume of ${data.fullName}`;
   }
 }
 
@@ -62,7 +64,14 @@ class UserAdapter implements StandardUser {
   }
 
   get age() {
-    return new Date().getFullYear() - this.user.birthday.getFullYear();
+    const today = new Date();
+    const birthday = this.user.birthday;
+    const age = today.getFullYear() - birthday.getFullYear();
+    const hasHadBirthdayThisYear =
+      today.getMonth() > birthday.getMonth() ||
+      (today.getMonth() === birthday.getMonth() && today.getDate() >= birthday.getDate());
+
+    return hasHadBirthdayThisYear ? age : age - 1;
   }
 
   get contact() {
@@ -85,3 +94,5 @@ const user = new User({
 
 const standardUser = new UserAdapter(user);
 const resume = ResumeServiceApi.generateResume(standardUser); // OK!
+
+console.log(resume); // Output: Resume of Ahmad Jafari

@@ -1,5 +1,5 @@
 interface Visitor {
-  visitDesigner(manager: Designer): void;
+  visitDesigner(designer: Designer): void;
   visitDeveloper(developer: Developer): void;
 }
 
@@ -40,8 +40,8 @@ class Developer implements Employee {
 class SalaryCalculator implements Visitor {
   totalSalary: number = 0;
 
-  visitDesigner(manager: Designer): void {
-    this.totalSalary += manager.numberOfDesignedPages * 200;
+  visitDesigner(designer: Designer): void {
+    this.totalSalary += designer.numberOfDesignedPages * 200;
   }
 
   visitDeveloper(developer: Developer): void {
@@ -63,4 +63,4 @@ for (const employee of employees) {
   employee.accept(salaryCalculator);
 }
 
-console.log("Total salary:", salaryCalculator.totalSalary);
+console.log("Total salary:", salaryCalculator.totalSalary); // Output: Total salary: 15000

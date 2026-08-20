@@ -1,6 +1,6 @@
+import fs from "node:fs";
 import { marked } from "marked";
 import { gfmHeadingId } from "marked-gfm-heading-id";
-import fs from "node:fs";
 
 marked.use(gfmHeadingId());
 

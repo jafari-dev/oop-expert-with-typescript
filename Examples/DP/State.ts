@@ -116,18 +116,18 @@ pipeline.fail(); // Output: Testing failed.
 
 pipeline.setState(new BuildingState());
 pipeline.start(); // Output: Pipeline is already building.
+pipeline.complete(); // Output: Build complete. Testing...
 pipeline.complete(); // Output: Testing complete. Deploying...
-pipeline.complete(); // Output: Deployment successful!
 
 pipeline.setState(new TestingState());
 pipeline.start(); // Output: Pipeline is already in progress.
 pipeline.fail(); // Output: Testing failed.
-pipeline.complete(); // Output: Deployment successful!
+pipeline.complete(); // Output: Cannot complete. The pipeline has failed.
 
 pipeline.setState(new DeployingState());
 pipeline.start(); // Output: Pipeline is already deploying.
 pipeline.fail(); // Output: Deployment failed.
-pipeline.complete(); // Output: Deployment successful!
+pipeline.complete(); // Output: Cannot complete. The pipeline has failed.
 
 pipeline.setState(new FailedState());
 pipeline.start(); // Output: Fix the issues and start the pipeline again.

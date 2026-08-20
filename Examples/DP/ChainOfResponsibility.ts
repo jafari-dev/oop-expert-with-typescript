@@ -12,10 +12,10 @@ class ResponseHandler {
     return response;
   }
 
-  public setNext(ResponseHandler: ResponseHandler): ResponseHandler {
-    this.nextHandler = ResponseHandler;
+  public setNext(handler: ResponseHandler): ResponseHandler {
+    this.nextHandler = handler;
 
-    return ResponseHandler;
+    return handler;
   }
 
   public handle(response: IResponse): IResponse {

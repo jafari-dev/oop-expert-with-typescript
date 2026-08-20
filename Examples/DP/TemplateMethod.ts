@@ -13,18 +13,20 @@ abstract class SocialMediaPostAnalyzer {
     "nasty",
   ];
 
-  preprocessData(data: string): Array<string> {
+  protected preprocessData(data: string): Array<string> {
     return data.split(" ").map((word) => word.replace(/[^a-zA-Z ]/g, "").toLowerCase());
   }
 
-  analyze(data: Array<string>): Array<string> {
+  protected analyze(data: Array<string>): Array<string> {
     return data.filter((word) => this.HARMFUL_WORDS.includes(word));
   }
 
-  displayResults(data: Array<string>): void {
+  protected displayResults(data: Array<string>): void {
     console.log(`The number of harmful words in this post is ${data.length}, including ${data.join(", ")}.`);
   }
 
+  // The template method: it fixes the skeleton of the algorithm, and subclasses
+  // only fill in `fetchData`.
   async analyzePosts(): Promise<void> {
     const data = await this.fetchData();
     const preprocessedData = this.preprocessData(data);
@@ -33,19 +35,19 @@ abstract class SocialMediaPostAnalyzer {
     this.displayResults(analyticsResult);
   }
 
-  abstract fetchData(): Promise<string>;
+  protected abstract fetchData(): Promise<string>;
 }
 
 class TwitterPostAnalyzer extends SocialMediaPostAnalyzer {
   // Fetches data from Twitter API and returns its data
-  async fetchData() {
+  protected override async fetchData() {
     return ""; // Dummy data
   }
 }
 
 class InstagramPostAnalyzer extends SocialMediaPostAnalyzer {
   // Fetches data from Instagram API and returns its data
-  async fetchData() {
+  protected override async fetchData() {
     return ""; // Dummy data
   }
 }

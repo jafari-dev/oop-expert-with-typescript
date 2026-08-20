@@ -21,7 +21,7 @@ interface MovieApi {
   searchByActors: (actors: Array<string>) => Array<Movie>;
   searchByAwards: (awards: Array<string>) => Array<Movie>;
   searchByDirector: (director: string) => Array<Movie>;
-  releaseYear: (releaseYear: Date) => Array<Movie>;
+  searchByReleaseYear: (releaseYear: number) => Array<Movie>;
 }
 
 interface AudioApi {
@@ -45,7 +45,7 @@ class NormalMovieApiProvider implements MovieApi {
   searchByDirector(director: string) {
     return [];
   }
-  releaseYear(releaseYear: Date) {
+  searchByReleaseYear(releaseYear: number) {
     return [];
   }
 }
@@ -81,7 +81,7 @@ class PremiumMovieApiProvider implements MovieApi {
   searchByDirector(director: string) {
     return [];
   }
-  releaseYear(releaseYear: Date) {
+  searchByReleaseYear(releaseYear: number) {
     return [];
   }
 }

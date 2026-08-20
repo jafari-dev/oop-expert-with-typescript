@@ -1,5 +1,5 @@
 interface ChatMediator {
-  sendMessage(receiver: User, message: string): void;
+  sendMessage(sender: User, message: string): void;
 }
 
 class ConcreteChatMediator implements ChatMediator {
@@ -9,10 +9,10 @@ class ConcreteChatMediator implements ChatMediator {
     this.users.push(user);
   }
 
-  sendMessage(receiver: User, message: string): void {
+  sendMessage(sender: User, message: string): void {
     for (const user of this.users) {
-      // Don't send the message to the user who sent it
-      if (user !== receiver) {
+      // Don't send the message back to the user who sent it
+      if (user !== sender) {
         user.receiveMessage(message);
       }
     }

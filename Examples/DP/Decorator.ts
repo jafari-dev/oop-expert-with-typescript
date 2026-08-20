@@ -15,11 +15,13 @@ class ImageFile implements ImageProcessor {
   }
 }
 
+// Every decorator wraps another `ImageProcessor` (not a raw `File`), so decorators
+// can be stacked on top of each other in any order and any number of times.
 abstract class ImageDecorator implements ImageProcessor {
-  protected image: File;
+  protected wrapped: ImageProcessor;
 
-  constructor(image: File) {
-    this.image = image;
+  constructor(wrapped: ImageProcessor) {
+    this.wrapped = wrapped;
   }
 
   abstract processImage(): File;
@@ -27,28 +29,39 @@ abstract class ImageDecorator implements ImageProcessor {
 
 class ImageCompressor extends ImageDecorator {
   processImage(): File {
+    const image = this.wrapped.processImage();
+
     // Compresses image size
-    return this.image;
+
+    return image;
   }
 }
 
 class ImageEnhancer extends ImageDecorator {
   processImage(): File {
+    const image = this.wrapped.processImage();
+
     // Enhances image quality
-    return this.image;
+
+    return image;
   }
 }
 
 class ImageResizer extends ImageDecorator {
-  processImage() {
+  processImage(): File {
+    const image = this.wrapped.processImage();
+
     // Changes image width and height
-    return this.image;
+
+    return image;
   }
 }
 
 // Usage
 
-const image = new ImageFile([], "Picture.jpg").processImage();
-const compressedImage = new ImageCompressor(image).processImage();
-const enhancedImage = new ImageCompressor(compressedImage).processImage();
-const resizedImage = new ImageResizer(enhancedImage).processImage();
+const image = new ImageFile([], "Picture.jpg");
+
+// Decorators are composed, then the whole stack runs with a single call.
+const processedImage = new ImageResizer(new ImageEnhancer(new ImageCompressor(image)));
+
+const result: File = processedImage.processImage();

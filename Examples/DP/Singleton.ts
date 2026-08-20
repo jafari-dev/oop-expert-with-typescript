@@ -1,18 +1,20 @@
+type CityStatus = {
+  city: string;
+  status: "SUNNY" | "CLOUDY" | "RAINY" | "SNOWY";
+};
+
 class Weather {
   private static instance: Weather | null = null;
 
-  private statusOfCities: Array<{
-    city: string;
-    status: "SUNNY" | "CLOUDY" | "RAINY" | "SNOWY";
-  }>;
+  private statusOfCities: Array<CityStatus>;
 
   private constructor() {
-    const data = []; // Get data from API
+    const data: Array<CityStatus> = []; // Get data from API
 
     this.statusOfCities = data;
   }
 
-  public getTemperatureByCity(city: string) {
+  public getStatusByCity(city: string): CityStatus | undefined {
     return this.statusOfCities.find((data) => data.city === city);
   }
 

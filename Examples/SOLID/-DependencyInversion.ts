@@ -3,7 +3,7 @@ class TelegramApi {
     console.log("You are connected to Telegram API!");
   }
 
-  messageTo(targetId: number, message: string) {
+  messageTo(targetId: string, message: string) {
     console.log(`${message} sent to ${targetId} by Telegram!`);
   }
 }
@@ -13,7 +13,7 @@ class WhatsappApi {
     console.log("You are connected to Whatsapp API!");
   }
 
-  pushMessage(message: string, targetId: number) {
+  pushMessage(message: string, targetId: string) {
     console.log(`${message} sent to ${targetId} by Whatsapp!`);
   }
 }
@@ -23,7 +23,7 @@ class SignalApi {
     console.log("You are connected to Signal API!");
   }
 
-  postMessage(params: { id: number; text: string }) {
+  postMessage(params: { id: string; text: string }) {
     console.log(`${params.text} sent to ${params.id} by Signal!`);
   }
 }
@@ -31,7 +31,7 @@ class SignalApi {
 class Messenger {
   constructor(private api: TelegramApi | WhatsappApi | SignalApi) {}
 
-  sendMessage(targetId: number, message: string) {
+  sendMessage(targetId: string, message: string) {
     if (this.api instanceof TelegramApi) {
       this.api.start();
       this.api.messageTo(targetId, message);
