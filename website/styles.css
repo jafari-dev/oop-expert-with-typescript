@@ -9,6 +9,7 @@
 :root {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "DankMono", "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-code: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   --bg: #ffffff;
   --bg-soft: #f5f6fb;
@@ -28,8 +29,8 @@
   --good: #059669;
   --bad: #e11d48;
 
-  --code-bg: #12162a;
-  --code-text: #e2e5f5;
+  --code-bg: #23272e;
+  --code-text: #abb2bf;
 
   --shadow-sm: 0 1px 2px rgb(15 23 42 / 6%), 0 4px 12px rgb(15 23 42 / 5%);
   --shadow-lg: 0 24px 60px rgb(15 23 42 / 12%);
@@ -63,8 +64,8 @@
     --good: #34d399;
     --bad: #fb7185;
 
-    --code-bg: #0d1020;
-    --code-text: #e2e5f5;
+    --code-bg: #23272e;
+    --code-text: #abb2bf;
 
     --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%), 0 6px 20px rgb(0 0 0 / 30%);
     --shadow-lg: 0 30px 70px rgb(0 0 0 / 50%);
@@ -92,8 +93,8 @@
   --good: #34d399;
   --bad: #fb7185;
 
-  --code-bg: #0d1020;
-  --code-text: #e2e5f5;
+  --code-bg: #23272e;
+  --code-text: #abb2bf;
 
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%), 0 6px 20px rgb(0 0 0 / 30%);
   --shadow-lg: 0 30px 70px rgb(0 0 0 / 50%);
@@ -811,7 +812,8 @@ a:hover {
   border-radius: 6px;
   background: var(--surface-2);
   color: var(--pink);
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
+  font-weight: 500;
   font-size: 0.9em;
   word-break: break-word;
 }
@@ -854,11 +856,11 @@ a:hover {
   gap: 10px;
   padding: 8px 10px 8px 16px;
   border-bottom: 1px solid rgb(255 255 255 / 8%);
-  background: rgb(255 255 255 / 3%);
+  background: #1e2227;
 }
 
 .code-card__lang {
-  color: #9aa3c7;
+  color: #7f848e;
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.05em;
@@ -874,7 +876,7 @@ a:hover {
   border: 1px solid rgb(255 255 255 / 12%);
   border-radius: 8px;
   background: transparent;
-  color: #9aa3c7;
+  color: #7f848e;
   font: inherit;
   font-size: 12.5px;
   cursor: pointer;
@@ -905,50 +907,56 @@ a:hover {
 .code-card code {
   display: block;
   color: var(--code-text);
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1.72;
+  font-family: var(--font-code);
+  font-size: 14.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.75;
   tab-size: 2;
 }
 
-/* highlight.js theme, tuned to the palette above (identical in both themes
-   because the code surface is always dark). */
+/* highlight.js theme modeled on VS Code's One Dark Pro Darker
+   (identical in both site themes). */
 .hljs-comment,
 .hljs-quote {
-  color: #6b739b;
+  color: #7f848e;
   font-style: italic;
 }
 
 .hljs-keyword,
 .hljs-selector-tag,
-.hljs-literal,
 .hljs-doctag {
-  color: #c4a2fc;
+  color: #c678dd;
 }
 
 .hljs-string,
 .hljs-regexp,
 .hljs-addition {
-  color: #7ee2b8;
+  color: #98c379;
 }
 
 .hljs-number,
+.hljs-literal,
 .hljs-symbol,
 .hljs-bullet {
-  color: #f8a5c2;
+  color: #d19a66;
 }
 
 .hljs-title,
 .hljs-title.function_,
 .hljs-section {
-  color: #7cd4fd;
+  color: #61afef;
 }
 
 .hljs-title.class_,
 .hljs-type,
-.hljs-built_in,
 .hljs-class .hljs-title {
-  color: #fdba74;
+  color: #e5c07b;
+}
+
+.hljs-built_in,
+.hljs-operator {
+  color: #56b6c2;
 }
 
 .hljs-attr,
@@ -956,21 +964,21 @@ a:hover {
 .hljs-property,
 .hljs-variable,
 .hljs-template-variable {
-  color: #e2e5f5;
+  color: #e06c75;
 }
 
 .hljs-params {
-  color: #d5daf5;
+  color: #d19a66;
+  font-style: italic;
 }
 
 .hljs-meta,
-.hljs-operator,
 .hljs-punctuation {
-  color: #9aa3c7;
+  color: #abb2bf;
 }
 
 .hljs-deletion {
-  color: #fb7185;
+  color: #e06c75;
 }
 
 .hljs-emphasis {
